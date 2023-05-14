@@ -1,0 +1,333 @@
+////2023.4.30 docker構築はむずく一時的に諦める///////
+環境構築
+
+https://saunabouya.com/2022/07/25/laravel9-sail-react-typescript-vite/
+
+そのまま実行すれば構築できる。
+
+end
+
+ルーティング構築
+
+https://juno-engineer.com/article/laravel-react-vite-spa/
+
+そのまま実行すればいける。
+
+end
+
+立ち上げ
+
+docker-desktop起動
+
+"docker-compose up -d"でコンテイナー立ち上げ。
+おそらく全部立ち上がらない。ポート番号を調べ。
+'sudo lsof -i:80'実行。
+"sudo kill ??"
+これを何度か繰り返す。
+
+立ち上げ後、'$ docker-compose exec laravel.test bash'でコンテナ内へ入る
+https://qiita.com/tsuboyataiki/items/90dbe94553d3dea39b19
+
+npm run dev 実行
+
+end 
+
+
+
+
+tailwindcss導入
+
+https://zenn.dev/dem_1/articles/222a6bb3c622d4
+
+このままやればよし。
+
+ローカルを再度立ち上げる必要がある。
+
+end
+
+
+mysql立ち上げ
+
+docker-compose exec mysql bash
+
+mysql -u sail -p
+
+パスは'password'
+
+https://zenn.dev/ryouzi/articles/a4fdff3c18e32a
+
+end
+
+
+
+新規マイグレーションを作成したく
+
+php artisan make:migration create_movies_table
+
+実行するも
+
+Fatal error: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.8. in /Applications/MAMP/htdocs/leravel/test/vendor/composer/platform_check.php on line 24
+
+で壮大にツモる。
+
+原因はphpバージョンの違い。バージョンを上げれば解消される。
+
+php バージョンの上げかた。
+
+https://qiita.com/gyu_outputs/items/60b75e1acc98ca03c092
+
+conposerはフロントのpakage.jsonみたいなもの。
+
+end
+
+
+
+php artisan migrateの実行
+
+dockerのコンテナー内で実行すること。
+
+もしや、php artisan make:migration create_movies_tableも
+コンテナー内でやったら成功したのか？？？？？
+
+end
+
+
+/Users/takagifumiya/Desktop/laravel_react_app/storage/logsand its not buildable: Permission denied
+
+立ち上げちゅくごこうなる。
+
+php artisan config:clear
+
+で解消、
+
+https://qiita.com/ucan-lab/items/1ff680bb897fa11be85d
+
+end
+
+
+
+
+domの反映が遅い
+
+https://teratail.com/questions/321661
+
+end
+
+/////////////////////////////////////////////////////////
+
+
+
+
+
+Laravel v8 react typescript  構築
+
+
+基本、この通りやれば構築できる。 laravelのバージョンは　v８に指定すること。
+https://www.youtube.com/watch?v=hPjcbKtpTjY&list=PL3B2bjwrmhfQkcBEww0gN_kcRAHntAgxG&index=1
+
+        "@types/react": "^17.0.58",
+        "@types/react-dom": "^17.0.20",
+        "@types/react-router-dom": "^5.3.3",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-router-dom": "^5.2.0",
+
+上記のようにpackgeはバージョン指定した方が良い。
+
+
+tailwindcss導入
+
+基本この通りやれば良い。
+https://reffect.co.jp/laravel/laravel-tailwindcss
+
+
+
+end
+
+
+components/のファイル更新が反映されなかったが、
+npm run watch
+すれば、ファイルリロード時buildが走るので更新されるかも......
+
+end
+
+
+
+Seederの利用、
+factoryからSeederの利用がかなり手こずる。
+基本下記を参考にできた。
+
+https://morioh.com/p/26acdaee8db5
+https://codelikes.com/laravel-factory/
+
+しかしながら、なぜ
+
+ Class "Database\Factories\MovieFactory" not found
+  at vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factories/Factory.php:737
+
+や
+
+Class "app\Models\Movie" not found
+
+が解消されたのか謎、
+
+Class "app\Models\Movie" not foundは
+
+　protected $model = Post::class;
+
+の記述で消えたに違いない。
+
+おそらくのポイントは
+
+ use app\Models ではなく　use App\Models である。
+
+Modelファイルに
+  use HasFactory;
+は記述すること。
+
+Factoryファイルmake時のコマンドは
+　php artisan make:factory Movie --model=Movie
+とすることで、Movieモデルを使用するとなるのかもしれない。
+
+DatabaseSeederの記述は
+
+    public function run()
+    {
+        \App\Models\Movie::factory(1000)->create();
+    }
+
+相対パスでするほうが良いのかも。。。
+
+
+
+end
+
+
+
+
+ユニットテスト（単体テスト）DB
+
+基本てきにこれに準じて
+https://tenrakatsuno.com/programing-note/laravel-test-database/
+
+ユニットテストの場合、phpunit.xmlの中身が参照さてる。
+
+ポイントはdatabase.phpの編集
+
+          'movieApp' => [  //connection名
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'test_laravel_db',
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+上記の内容を、connection[]内に記述。
+
+ExampleTest.phpの
+
+    public function test_example()
+    {
+         dd(env('APP_ENV'), env('DB_DATABASE'), env('DB_CONNECTION'));
+    }
+
+とし、
+
+ php artisan config:clear
+
+ した後に、
+
+php artisan test --env=testing
+
+--env=testingとすることで、.env.testingが参照される、
+
+ PASS  Tests\Unit\ExampleTest
+  ✓ example
+"testing"
+"test_laravel_db"
+"movieApp"
+
+となれば、testDBの接続が成功しているのでOK.
+
+
+ExampleTest.phpに
+
+    public function test_example()
+    {
+        \App\Models\Movie::factory(10)->create();
+    }
+
+とし（factoryを作成してから行う）,
+
+ php artisan config:clear
+ php artisan test --env=testing
+
+ して、DB確認して成功しているか確認する。
+
+
+以下下記のとうり続きは行う。
+https://www.youtube.com/watch?v=Un3MAWph64M&list=PL3B2bjwrmhfQkcBEww0gN_kcRAHntAgxG&index=5
+
+
+テスト名変更
+
+publicの前に
+
+    /**
+     * @test
+     */
+を追加
+
+
+
+end
+
+
+ユニットテストupdate()でエラー解除できず。
+
+    public function 更新することができる()
+    {
+        $movie = Movie::factory()->count(5)->create();
+
+        $movie->title = 'MMM';
+
+        $response = $this->patchJson('api/movies/{movie->id}', $movie->toArray());
+        dd($response->json());
+
+        $response
+            ->assertCreated()
+            ->assertJsonFragment($data);
+    }
+
+
+
+"message" => "No query results for model [App\Models\Movie] {movie->id}".....
+
+このエラー解除できず。。。
+
+end
+
+
+バレデーションについて
+
+https://www.youtube.com/watch?v=Wx0WHlGtcWE&list=PL3B2bjwrmhfQkcBEww0gN_kcRAHntAgxG&index=7
+
+エラーの日本語化
+
+https://codelikes.com/laravel-validation-message-ja/
+
+どちらでもいいと思ったが、前者の方がわかりやすい。
+
+end
