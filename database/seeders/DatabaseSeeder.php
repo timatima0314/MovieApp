@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -17,5 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(100)->create();
         \App\Models\Movie::factory(5)->create();
+        $this->call(UserSeeder::class);
     }
 }

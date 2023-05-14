@@ -14,8 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('movies', 'MovieController');
-Route::patch('movies/update-done/{movie}', 'MovieController@updateDone');
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', 'LoginController@login');
+Route::post('logout', 'LoginController@logout');
+
+Route::group(['middlewarewe' => 'auth:sanctum'], function () {
+    Route::apiResource('movies', 'MovieController');
+    Route::patch('movies/update-done/{movie}', 'MovieController@updateDone');
+    Route::get('user', function (Request $request) {
+        return $request->user();
+    });
 });

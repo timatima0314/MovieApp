@@ -64,22 +64,22 @@ const useUpdateMovie = () => {
     })
 
 }
-// const useDeleteMovie = () => {
-//     const queryClient = useQueryClient()
+const useDeleteMovie = () => {
+    const queryClient = useQueryClient()
 
-//     return useMutation(api.deleteMovie, {
-//         onSuccess: () => {
-//             queryClient.invalidateQueries('movies')
-//             toast.success('削除に成功しました。')
-//         },
-//         onError: () => {
-//             toast.error('削除に失敗しました。')
+    return useMutation(api.deleteMovie, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('movies')
+            toast.success('削除に成功しました。')
+        },
+        onError: () => {
+            toast.error('削除に失敗しました。')
 
-//         }
-//     })
+        }
+    })
 
-// }
+}
 
 
 
-export { useMovies, useCreateMovie, useUpdateMovie }
+export { useMovies, useCreateMovie, useUpdateMovie, useDeleteMovie }

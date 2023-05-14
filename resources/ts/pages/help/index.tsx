@@ -6,8 +6,8 @@ import {
     // useDeleteMovie,
 } from "../../queries/MovieQuery";
 import { Movie } from "../../types/Movie";
-import MovieList from "./MovieList";
-import MoiveInput from "./MovieInput";
+import MovieList from "./components/MovieList";
+import MoiveInput from "./components/MovieInput";
 
 const HelpPage: React.VFC = () => {
     // const creatMovie = useCreateMovie();

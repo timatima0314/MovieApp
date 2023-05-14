@@ -2146,7 +2146,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.updateMovie = exports.createMovie = exports.getMovies = void 0;
+exports.deleteMovie = exports.updateMovie = exports.createMovie = exports.getMovies = void 0;
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 var getMovies = function getMovies() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -2216,6 +2216,26 @@ var updateMovie = function updateMovie(_ref) {
   }));
 };
 exports.updateMovie = updateMovie;
+var deleteMovie = function deleteMovie(id) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+    var _yield$axios_1$defaul4, data;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return axios_1["default"]["delete"]("api/movies/".concat(id));
+        case 2:
+          _yield$axios_1$defaul4 = _context4.sent;
+          data = _yield$axios_1$defaul4.data;
+          return _context4.abrupt("return", data);
+        case 5:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+};
+exports.deleteMovie = deleteMovie;
 
 /***/ }),
 
@@ -2531,58 +2551,166 @@ react_dom_1["default"].render((0, jsx_runtime_1.jsx)(App_1["default"], {}), docu
 
 /***/ }),
 
-/***/ "./resources/ts/pages/help/MovieInput.tsx":
-/*!************************************************!*\
-  !*** ./resources/ts/pages/help/MovieInput.tsx ***!
-  \************************************************/
+/***/ "./resources/ts/pages/help/components/MovieInput.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/pages/help/components/MovieInput.tsx ***!
+  \***********************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var MovieQuery_1 = __webpack_require__(/*! ../../../queries/MovieQuery */ "./resources/ts/queries/MovieQuery.ts");
 var MoiveInput = function MoiveInput() {
-  return (0, jsx_runtime_1.jsx)("form", {
-    children: (0, jsx_runtime_1.jsx)("input", {
-      placeholder: "\u30BF\u30A4\u30C8\u30EB\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
-      defaultValue: ""
-    })
+  var creatMovie = (0, MovieQuery_1.useCreateMovie)();
+  var _ref = (0, react_1.useState)(""),
+    _ref2 = _slicedToArray(_ref, 2),
+    title = _ref2[0],
+    setTitle = _ref2[1];
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    creatMovie.mutate(title);
+    setTitle("");
+  };
+  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+    children: (0, jsx_runtime_1.jsxs)("form", Object.assign({
+      onSubmit: handleSubmit
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("input", {
+        className: " shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+        type: "text",
+        placeholder: "\u30BF\u30A4\u30C8\u30EB\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
+        value: title,
+        onChange: function onChange(e) {
+          return setTitle(e.target.value);
+        }
+      }), (0, jsx_runtime_1.jsx)("button", Object.assign({
+        className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      }, {
+        children: "\u767B\u9332"
+      }))]
+    }))
   });
 };
 exports["default"] = MoiveInput;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/help/MovieItem.tsx":
-/*!***********************************************!*\
-  !*** ./resources/ts/pages/help/MovieItem.tsx ***!
-  \***********************************************/
+/***/ "./resources/ts/pages/help/components/MovieItem.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/ts/pages/help/components/MovieItem.tsx ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var MovieQuery_1 = __webpack_require__(/*! ../../../queries/MovieQuery */ "./resources/ts/queries/MovieQuery.ts");
+var react_toastify_1 = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.js");
 var MovieItem = function MovieItem(_ref) {
   var movie = _ref.movie;
-  return (0, jsx_runtime_1.jsx)("li", {
-    children: movie.title
-  }, movie.id);
+  var _ref2 = (0, react_1.useState)(undefined),
+    _ref3 = _slicedToArray(_ref2, 2),
+    editTitle = _ref3[0],
+    setEditTitle = _ref3[1];
+  var updateMovie = (0, MovieQuery_1.useUpdateMovie)();
+  var deletMovie = (0, MovieQuery_1.useDeleteMovie)();
+  var handleInputChange = function handleInputChange(e) {
+    setEditTitle(e.target.value);
+  };
+  var handleUpdate = function handleUpdate(e) {
+    e.preventDefault();
+    if (!editTitle) {
+      react_toastify_1.toast.error("タイトルを入力してください。");
+      return;
+    }
+    var newMovie = Object.assign({}, movie);
+    newMovie.title = editTitle;
+    updateMovie.mutate({
+      id: movie.id,
+      movie: newMovie
+    });
+    setEditTitle(undefined);
+  };
+  var handleToggleEdit = function handleToggleEdit() {
+    setEditTitle(movie.title);
+  };
+  var handleOnKey = function handleOnKey(e) {
+    if (["Escape", "Tab"].includes(e.key)) {
+      setEditTitle(undefined);
+    }
+  };
+  var itemInput = function itemInput() {
+    return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+      children: (0, jsx_runtime_1.jsxs)("form", {
+        children: [(0, jsx_runtime_1.jsx)("input", {
+          defaultValue: editTitle,
+          className: " shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+          onChange: handleInputChange,
+          onKeyDown: handleOnKey
+        }), (0, jsx_runtime_1.jsx)("button", Object.assign({
+          onClick: handleUpdate,
+          className: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        }, {
+          children: "\u66F4\u65B0"
+        }))]
+      })
+    });
+  };
+  var itemText = function itemText() {
+    return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+      children: (0, jsx_runtime_1.jsxs)("div", {
+        children: [(0, jsx_runtime_1.jsx)("span", Object.assign({
+          onClick: handleToggleEdit
+        }, {
+          children: movie.title
+        })), (0, jsx_runtime_1.jsx)("button", Object.assign({
+          onClick: function onClick() {
+            return deletMovie.mutate(movie.id);
+          },
+          className: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        }, {
+          children: "\u524A\u9664"
+        }))]
+      })
+    });
+  };
+  return (0, jsx_runtime_1.jsx)("li", Object.assign({
+    className: "mb-8"
+  }, {
+    children: editTitle === undefined ? itemText() : itemInput()
+  }), movie.id);
 };
 exports["default"] = MovieItem;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/help/MovieList.tsx":
-/*!***********************************************!*\
-  !*** ./resources/ts/pages/help/MovieList.tsx ***!
-  \***********************************************/
+/***/ "./resources/ts/pages/help/components/MovieList.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/ts/pages/help/components/MovieList.tsx ***!
+  \**********************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -2597,8 +2725,8 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var MovieQuery_1 = __webpack_require__(/*! ../../queries/MovieQuery */ "./resources/ts/queries/MovieQuery.ts");
-var MovieItem_1 = __importDefault(__webpack_require__(/*! ./MovieItem */ "./resources/ts/pages/help/MovieItem.tsx"));
+var MovieQuery_1 = __webpack_require__(/*! ../../../queries/MovieQuery */ "./resources/ts/queries/MovieQuery.ts");
+var MovieItem_1 = __importDefault(__webpack_require__(/*! ./MovieItem */ "./resources/ts/pages/help/components/MovieItem.tsx"));
 var MovieList = function MovieList() {
   var _ref = (0, MovieQuery_1.useMovies)(),
     movies = _ref.data,
@@ -2623,7 +2751,7 @@ var MovieList = function MovieList() {
     }));
   }
   return (0, jsx_runtime_1.jsx)("ul", Object.assign({
-    className: "movie-list"
+    className: "movie-list p-8"
   }, {
     children: movies.map(function (movie) {
       return (0, jsx_runtime_1.jsx)(MovieItem_1["default"], {
@@ -2657,8 +2785,8 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var MovieList_1 = __importDefault(__webpack_require__(/*! ./MovieList */ "./resources/ts/pages/help/MovieList.tsx"));
-var MovieInput_1 = __importDefault(__webpack_require__(/*! ./MovieInput */ "./resources/ts/pages/help/MovieInput.tsx"));
+var MovieList_1 = __importDefault(__webpack_require__(/*! ./components/MovieList */ "./resources/ts/pages/help/components/MovieList.tsx"));
+var MovieInput_1 = __importDefault(__webpack_require__(/*! ./components/MovieInput */ "./resources/ts/pages/help/components/MovieInput.tsx"));
 var HelpPage = function HelpPage() {
   // const creatMovie = useCreateMovie();
   // const [title, setTitle] = useState("");
@@ -2805,7 +2933,7 @@ var __importStar = this && this.__importStar || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.useUpdateMovie = exports.useCreateMovie = exports.useMovies = void 0;
+exports.useDeleteMovie = exports.useUpdateMovie = exports.useCreateMovie = exports.useMovies = void 0;
 var api = __importStar(__webpack_require__(/*! ../api/MovieAPI */ "./resources/ts/api/MovieAPI.ts"));
 var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
 var react_toastify_1 = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.js");
@@ -2867,6 +2995,19 @@ var useUpdateMovie = function useUpdateMovie() {
   });
 };
 exports.useUpdateMovie = useUpdateMovie;
+var useDeleteMovie = function useDeleteMovie() {
+  var queryClient = (0, react_query_1.useQueryClient)();
+  return (0, react_query_1.useMutation)(api.deleteMovie, {
+    onSuccess: function onSuccess() {
+      queryClient.invalidateQueries('movies');
+      react_toastify_1.toast.success('削除に成功しました。');
+    },
+    onError: function onError() {
+      react_toastify_1.toast.error('削除に失敗しました。');
+    }
+  });
+};
+exports.useDeleteMovie = useDeleteMovie;
 
 /***/ }),
 

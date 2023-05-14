@@ -20,9 +20,9 @@ const updateMovie = async ({ id, movie }: { id: number, movie: Movie }) => {
     const { data } = await axios.patch<Movie>(`api/movies/${id}`, movie);
     return data;
 }
-// const deleteMovie = async (id: number) => {
-//     const { data } = await axios.delete<Movie>(`api/movies/${id}`, movie);
-//     return data;
-// }
+const deleteMovie = async (id: number) => {
+    const { data } = await axios.delete<Movie>(`api/movies/${id}`;
+    return data;
+}
 
-export { getMovies, createMovie, updateMovie }
+export { getMovies, createMovie, updateMovie, deleteMovie }

@@ -4,7 +4,7 @@ import {
     useCreateMovie,
     useUpdateMovie,
     // useDeleteMovie,
-} from "../../queries/MovieQuery";
+} from "../../../queries/MovieQuery";
 import MovieItem from "./MovieItem";
 
 const MovieList: React.VFC = () => {
@@ -22,7 +22,7 @@ const MovieList: React.VFC = () => {
     }
 
     return (
-        <ul className="movie-list">
+        <ul className="movie-list p-8">
             {movies.map((movie) => {
                 return (
                     <MovieItem key={movie.id} movie={movie}/>
