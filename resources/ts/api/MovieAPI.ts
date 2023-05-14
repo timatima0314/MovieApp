@@ -21,7 +21,7 @@ const updateMovie = async ({ id, movie }: { id: number, movie: Movie }) => {
     return data;
 }
 const deleteMovie = async (id: number) => {
-    const { data } = await axios.delete<Movie>(`api/movies/${id}`;
+    const { data } = await axios.delete<Movie>(`api/movies/${id}`);
     return data;
 }
 
