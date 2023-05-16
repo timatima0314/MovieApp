@@ -20,7 +20,6 @@ const MovieItem: React.VFC<Props> = ({ movie }) => {
         }
         const newMovie = { ...movie };
         newMovie.title = editTitle;
-
         updateMovie.mutate({
             id: movie.id,
             movie: newMovie,
@@ -70,7 +69,6 @@ const MovieItem: React.VFC<Props> = ({ movie }) => {
             </>
         );
     };
-
     return (
         <li className="mb-8" key={movie.id}>
             {/* {movie.title} */}
@@ -78,4 +76,5 @@ const MovieItem: React.VFC<Props> = ({ movie }) => {
         </li>
     );
 };
+
 export default MovieItem;

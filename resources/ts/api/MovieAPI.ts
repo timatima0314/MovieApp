@@ -6,11 +6,6 @@ const getMovies = async () => {
     return data;
 }
 
-// const updateDoneMovie = async ({id}:Movie) => {
-//     const { data } = await axios.patch<Movie[]>(`api/movies/update-done/${id}`);
-//     return data;
-// }
-
 const createMovie = async (title: string) => {
     const { data } = await axios.post<Movie>(`api/movies`, { title: title });
     return data;

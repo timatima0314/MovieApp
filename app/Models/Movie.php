@@ -12,6 +12,9 @@ class Movie extends Model
     protected $table = 'movies';
 
     protected $fillable = [
-        'title'
+        'title', 'user_id'
+    ];
+    protected $casts = [
+        'user_id' => 'int'
     ];
 }

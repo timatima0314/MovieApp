@@ -3,22 +3,11 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { toast } from 'react-toastify';
 import { AxiosError } from "axios";
 const useMovies = () => {
-
     return useQuery("movies", () => api.getMovies()
     )
 }
-// const useUpdateDoneMovie = () => {
-//     const queryClient = useQueryClient()
-//     return useMutation(api.updateDoneMovie, {
-//         onSuccess: () => {
-//             queryClient.invalidateQueries('movies')
-//         }
-//     })
-
-// }
 const useCreateMovie = () => {
     const queryClient = useQueryClient()
-
     return useMutation(api.createMovie, {
         onSuccess: () => {
             queryClient.invalidateQueries('movies')
@@ -38,11 +27,9 @@ const useCreateMovie = () => {
             }
         }
     })
-
 }
 const useUpdateMovie = () => {
     const queryClient = useQueryClient()
-
     return useMutation(api.updateMovie, {
         onSuccess: () => {
             queryClient.invalidateQueries('movies')
@@ -62,11 +49,9 @@ const useUpdateMovie = () => {
             }
         }
     })
-
 }
 const useDeleteMovie = () => {
     const queryClient = useQueryClient()
-
     return useMutation(api.deleteMovie, {
         onSuccess: () => {
             queryClient.invalidateQueries('movies')
@@ -74,12 +59,8 @@ const useDeleteMovie = () => {
         },
         onError: () => {
             toast.error('削除に失敗しました。')
-
         }
     })
-
 }
-
-
 
 export { useMovies, useCreateMovie, useUpdateMovie, useDeleteMovie }

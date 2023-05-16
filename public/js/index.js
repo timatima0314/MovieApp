@@ -2287,10 +2287,6 @@ var getMovies = function getMovies() {
   }));
 };
 exports.getMovies = getMovies;
-// const updateDoneMovie = async ({id}:Movie) => {
-//     const { data } = await axios.patch<Movie[]>(`api/movies/update-done/${id}`);
-//     return data;
-// }
 var createMovie = function createMovie(title) {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     var _yield$axios_1$defaul2, data;
@@ -2878,13 +2874,10 @@ var MovieList = function MovieList() {
     children: movies.map(function (movie) {
       return (0, jsx_runtime_1.jsx)(MovieItem_1["default"], {
         movie: movie
-      }, movie.id)
-      //  <li key={movie.id}>{movie.title}</li>;
-      ;
+      }, movie.id);
     })
   }));
 };
-
 exports["default"] = MovieList;
 
 /***/ }),
@@ -3138,14 +3131,6 @@ var useMovies = function useMovies() {
   });
 };
 exports.useMovies = useMovies;
-// const useUpdateDoneMovie = () => {
-//     const queryClient = useQueryClient()
-//     return useMutation(api.updateDoneMovie, {
-//         onSuccess: () => {
-//             queryClient.invalidateQueries('movies')
-//         }
-//     })
-// }
 var useCreateMovie = function useCreateMovie() {
   var queryClient = (0, react_query_1.useQueryClient)();
   return (0, react_query_1.useMutation)(api.createMovie, {
@@ -3232,14 +3217,11 @@ var Header_1 = __importDefault(__webpack_require__(/*! ./components/Header */ ".
 var error_1 = __importDefault(__webpack_require__(/*! ./pages/error */ "./resources/ts/pages/error/index.tsx"));
 var AuthContext_1 = __webpack_require__(/*! ./hooke/AuthContext */ "./resources/ts/hooke/AuthContext.tsx");
 var AuthQuery_1 = __webpack_require__(/*! ./queries/AuthQuery */ "./resources/ts/queries/AuthQuery.ts");
-// import { useLogout } from "./queries/AuthQuery";
 var Router = function Router() {
-  // const logOut = useLogout();
   var _ref = (0, AuthContext_1.useAuth)(),
     isAuth = _ref.isAuth,
     setIsAuth = _ref.setIsAuth;
   var _ref2 = (0, AuthQuery_1.useUser)(),
-    isLoading = _ref2.isLoading,
     authUser = _ref2.data;
   (0, react_1.useEffect)(function () {
     if (authUser) {

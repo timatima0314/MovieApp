@@ -4,7 +4,6 @@ const LoginPage: React.VFC = () => {
     const login = useLogin();
     const [email, setEmail] = useState("admin@example.com");
     const [password, setPassword] = useState("123456789");
-
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         login.mutate({ email, password });

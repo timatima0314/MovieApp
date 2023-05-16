@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../hooke/AuthContext';
 
 const useUser = () => {
-
     return useQuery("users", () => api.getUser()
     )
 }
@@ -23,7 +22,6 @@ const useLogin = () => {
 }
 const useLogout = () => {
     const { setIsAuth } = useAuth()
-
     return useMutation(api.logout, {
         onSuccess: (user) => {
             if (user) {

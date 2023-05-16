@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Models\Movie;
+
 class MovieFactory extends Factory
 {
     protected $model = Movie::class;
@@ -15,8 +16,13 @@ class MovieFactory extends Factory
      */
     public function definition()
     {
+        $user_id = $this->faker->numberBetween(1, 3);
+
         return [
-            'title' => $this->faker->title,
+            'title' => $user_id . ':' . $this->faker->realText(rand(15, 40)),
+            'user_id' => $user_id,
+            'created_at' => now(),
+            'updated_at' => now()
         ];
     }
 }

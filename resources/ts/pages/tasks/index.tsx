@@ -1,11 +1,6 @@
 import React from "react";
-import axios from "axios";
 
 const TaskPage: React.VFC = () => {
-
-    // const getTasks = async()=>{
-    //     const data = await
-    // }
     return (
         <>
             <h1 className="text-blue-400 text-4xl">Task Page</h1>

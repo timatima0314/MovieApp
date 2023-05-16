@@ -1,24 +1,20 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
     BrowserRouter,
     Switch,
     Route,
-    Link,
     RouteProps,
     Redirect,
 } from "react-router-dom";
-import TaskPage from "./pages/tasks";
 import LoginPage from "./pages/login";
 import HomePage from "./pages/home";
 import Header from "./components/Header";
 import NotFoundPage from "./pages/error";
 import { useAuth } from "./hooke/AuthContext";
 import { useUser } from "./queries/AuthQuery";
-// import { useLogout } from "./queries/AuthQuery";
 const Router = () => {
-    // const logOut = useLogout();
     const { isAuth, setIsAuth } = useAuth();
-    const { isLoading, data: authUser } = useUser();
+    const { data: authUser } = useUser();
     useEffect(() => {
         if (authUser) {
             setIsAuth(true);
@@ -32,7 +28,6 @@ const Router = () => {
         if (isAuth) return <Redirect to="/" />;
         return <Route {...props} />;
     };
-
     return (
         <BrowserRouter>
             <Header />

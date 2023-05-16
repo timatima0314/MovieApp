@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Movie } from "../../../types/Movie";
 import { useCreateMovie } from "../../../queries/MovieQuery";
 const MoiveInput: React.VFC = () => {
     const creatMovie = useCreateMovie();
@@ -9,7 +8,6 @@ const MoiveInput: React.VFC = () => {
         creatMovie.mutate(title);
         setTitle("");
     };
-
     return (
         <>
             <form onSubmit={handleSubmit}>

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-    useMovies,
-    useCreateMovie,
-    useUpdateMovie,
-    // useDeleteMovie,
-} from "../../../queries/MovieQuery";
+import { useMovies } from "../../../queries/MovieQuery";
 import MovieItem from "./MovieItem";
 
 const MovieList: React.VFC = () => {
@@ -20,14 +15,10 @@ const MovieList: React.VFC = () => {
             <div className="text-center">登録されたデータはありません。</div>
         );
     }
-
     return (
         <ul className="movie-list p-8">
             {movies.map((movie) => {
-                return (
-                    <MovieItem key={movie.id} movie={movie}/>
-                    //  <li key={movie.id}>{movie.title}</li>;
-                );
+                return <MovieItem key={movie.id} movie={movie} />;
             })}
         </ul>
     );
