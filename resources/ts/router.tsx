@@ -12,6 +12,9 @@ import Header from "./components/Header";
 import NotFoundPage from "./pages/error";
 import { useAuth } from "./hooke/AuthContext";
 import { useUser } from "./queries/AuthQuery";
+import MyPage from "./pages/mypage";
+import SearchPage from "./pages/search";
+import DevHomePage from "./pages/dev_home";
 const Router = () => {
     const { isAuth, setIsAuth } = useAuth();
     const { data: authUser } = useUser();
@@ -39,6 +42,17 @@ const Router = () => {
                     <GuardRoute exact path="/">
                         <HomePage />
                     </GuardRoute>
+                    <GuardRoute path="/mypage">
+                        <MyPage />
+                    </GuardRoute>
+                    <GuardRoute path="/search">
+                        <SearchPage />
+                    </GuardRoute>
+                    <GuardRoute path="/dev-home">
+                        <DevHomePage />
+                    </GuardRoute>
+
+
                     <Route component={NotFoundPage} />
                 </Switch>
             </div>

@@ -26,10 +26,47 @@ const Header: React.VFC = () => {
                                     className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                     aria-current="page"
                                 >
-                                    Home
+                                    ホーム
                                 </Link>
                             </div>
                         </div>
+                        <div className="hidden md:block">
+                            <div className="ml-10 flex items-baseline space-x-4">
+                                {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
+                                <Link
+                                    to="/mypage"
+                                    className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                    aria-current="page"
+                                >
+                                    マイページ
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="hidden md:block">
+                            <div className="ml-10 flex items-baseline space-x-4">
+                                {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
+                                <Link
+                                    to="/search"
+                                    className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                    aria-current="page"
+                                >
+                                    検索
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="hidden md:block">
+                            <div className="ml-10 flex items-baseline space-x-4">
+                                {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
+                                <Link
+                                    to="/dev-home"
+                                    className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                    aria-current="page"
+                                >
+                                    仮ホーム
+                                </Link>
+                            </div>
+                        </div>
+
                     </div>
                     <div onClick={() => logOut.mutate()} className="text-white">
                         logout
