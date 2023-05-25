@@ -2400,7 +2400,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.getTmdbItem = void 0;
+exports.getTmdbDetails = exports.getTmdbItem = void 0;
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 var getTmdbItem = function getTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -2422,6 +2422,26 @@ var getTmdbItem = function getTmdbItem() {
   }));
 };
 exports.getTmdbItem = getTmdbItem;
+var getTmdbDetails = function getTmdbDetails(id) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var _yield$axios_1$defaul2, data;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return axios_1["default"].get("https://api.themoviedb.org/3/movie/".concat(id, "?api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&language=ja-JA&append_to_response=credits"));
+        case 2:
+          _yield$axios_1$defaul2 = _context2.sent;
+          data = _yield$axios_1$defaul2.data;
+          return _context2.abrupt("return", data);
+        case 5:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+};
+exports.getTmdbDetails = getTmdbDetails;
 
 /***/ }),
 
@@ -2756,10 +2776,10 @@ react_dom_1["default"].render((0, jsx_runtime_1.jsx)(App_1["default"], {}), docu
 
 /***/ }),
 
-/***/ "./resources/ts/pages/dev_home/index.tsx":
-/*!***********************************************!*\
-  !*** ./resources/ts/pages/dev_home/index.tsx ***!
-  \***********************************************/
+/***/ "./resources/ts/pages/dev_home/components/TmdbItem.tsx":
+/*!*************************************************************!*\
+  !*** ./resources/ts/pages/dev_home/components/TmdbItem.tsx ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2769,40 +2789,100 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var TmdbApi_1 = __webpack_require__(/*! ../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var TmdbItem = function TmdbItem(_ref) {
+  var movie = _ref.movie;
+  return (0, jsx_runtime_1.jsxs)("li", Object.assign({
+    className: "w-50 mr-2"
+  }, {
+    children: [(0, jsx_runtime_1.jsx)("img", {
+      src: "https://image.tmdb.org/t/p/w300/".concat(movie.poster_path)
+    }), (0, jsx_runtime_1.jsx)(react_router_dom_1.NavLink, Object.assign({
+      className: "truncate text-xs",
+      to: "/singl-page/".concat(movie.id)
+    }, {
+      children: movie.title
+    }))]
+  }), movie.id);
+};
+exports["default"] = TmdbItem;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/dev_home/components/TmdbList.tsx":
+/*!*************************************************************!*\
+  !*** ./resources/ts/pages/dev_home/components/TmdbList.tsx ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var TmdbApi_1 = __webpack_require__(/*! ../../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
 var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
-var DevHomePage = function DevHomePage() {
+var TmdbItem_1 = __importDefault(__webpack_require__(/*! ./TmdbItem */ "./resources/ts/pages/dev_home/components/TmdbItem.tsx"));
+var TmdbList = function TmdbList() {
   var _ref = (0, react_query_1.useQuery)("item", TmdbApi_1.getTmdbItem),
     data = _ref.data,
     isLoading = _ref.isLoading;
+  console.log(data);
   if (isLoading) {
     return (0, jsx_runtime_1.jsx)("span", {
       children: "Loading..."
     });
   }
+  return (0, jsx_runtime_1.jsx)("ul", Object.assign({
+    className: "flex flex-wrap "
+  }, {
+    children: data.map(function (movie) {
+      // console.log(movie.id);
+      return (0, jsx_runtime_1.jsx)(TmdbItem_1["default"], {
+        movie: movie
+      }, movie.id);
+    })
+  }));
+};
+exports["default"] = TmdbList;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/dev_home/index.tsx":
+/*!***********************************************!*\
+  !*** ./resources/ts/pages/dev_home/index.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var TmdbList_1 = __importDefault(__webpack_require__(/*! ./components/TmdbList */ "./resources/ts/pages/dev_home/components/TmdbList.tsx"));
+var DevHomePage = function DevHomePage() {
   return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
     children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
       className: "text-red-400 text-4xl"
     }, {
       children: "dev-Home Page"
-    })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
-      className: "flex flex-wrap "
-    }, {
-      children: data.map(function (e) {
-        console.log(e);
-        return (0, jsx_runtime_1.jsxs)("li", Object.assign({
-          className: "w-50 mr-2"
-        }, {
-          children: [(0, jsx_runtime_1.jsx)("img", {
-            src: "https://image.tmdb.org/t/p/w300/".concat(e.poster_path)
-          }), (0, jsx_runtime_1.jsx)("div", Object.assign({
-            className: "truncate text-xs"
-          }, {
-            children: e.title
-          }))]
-        }), e.id);
-      })
-    }))]
+    })), (0, jsx_runtime_1.jsx)("img", {
+      src: "https://image.tmdb.org/t/p/w300/yUsSJ0vO8AM9HnDQWuGKMSzCKOP.jpg"
+    }), (0, jsx_runtime_1.jsx)(TmdbList_1["default"], {})]
   });
 };
 exports["default"] = DevHomePage;
@@ -3170,7 +3250,10 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var MyPage = function MyPage() {
+var MyPage = function MyPage(props) {
+  console.log(props);
+  var id = props.match.params.id;
+  // console.log(id)
   return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
     children: (0, jsx_runtime_1.jsx)("h1", Object.assign({
       className: "text-red-400 text-4xl"
@@ -3204,6 +3287,135 @@ var SearchPage = function SearchPage() {
   }));
 };
 exports["default"] = SearchPage;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/single/index.tsx":
+/*!*********************************************!*\
+  !*** ./resources/ts/pages/single/index.tsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
+var TmdbApi_1 = __webpack_require__(/*! ../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
+var SinglePage = function SinglePage(props) {
+  var id = props.match.params.id;
+  var _ref = (0, react_query_1.useQuery)("single", function () {
+      return (0, TmdbApi_1.getTmdbDetails)(id);
+    }),
+    data = _ref.data,
+    status = _ref.status;
+  if (status === "loading") {
+    return (0, jsx_runtime_1.jsx)("h1", {
+      children: "Loading..."
+    });
+  } else if (status === "success") {
+    var i = data.credits.cast.slice(0, 10);
+    console.log(i);
+  }
+  // console.log(data);
+  return (0, jsx_runtime_1.jsxs)("main", Object.assign({
+    className: "w-10/12 m-auto"
+  }, {
+    children: [(0, jsx_runtime_1.jsx)("h1", {
+      children: "\u30B7\u30F3\u30B0\u30EB\u30DA\u30FC\u30B8"
+    }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+      className: "flex w-10/12 justify-center"
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+        className: "w-full flex justify-center"
+      }, {
+        children: (0, jsx_runtime_1.jsx)("img", {
+          className: "items-center max-w-none",
+          src: "https://image.tmdb.org/t/p/w300/".concat(data.poster_path)
+        })
+      })), (0, jsx_runtime_1.jsxs)("div", {
+        children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({
+          className: "title-box"
+        }, {
+          children: [(0, jsx_runtime_1.jsx)("h2", {
+            children: data.title
+          }), (0, jsx_runtime_1.jsx)("div", {
+            children: "\u30B8\u30E3\u30F3\u30EB"
+          })]
+        })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+          className: "summary-box"
+        }, {
+          children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+            className: "summary-title"
+          }, {
+            children: "\u6982\u8981"
+          })), (0, jsx_runtime_1.jsx)("p", Object.assign({
+            className: "summary-text"
+          }, {
+            children: "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes."
+          }))]
+        })), (0, jsx_runtime_1.jsx)("div", Object.assign({
+          className: "staff-box"
+        }, {
+          children: (0, jsx_runtime_1.jsxs)("ul", {
+            children: [(0, jsx_runtime_1.jsxs)("li", {
+              children: [(0, jsx_runtime_1.jsx)("div", {
+                children: "\u76E3\u7763"
+              }), (0, jsx_runtime_1.jsx)("p", {
+                children: "aaa aaaaa"
+              })]
+            }), (0, jsx_runtime_1.jsxs)("li", {
+              children: [(0, jsx_runtime_1.jsx)("div", {
+                children: "\u52A9\u76E3\u7763"
+              }), (0, jsx_runtime_1.jsx)("p", {
+                children: "aaa aaaaa"
+              })]
+            }), (0, jsx_runtime_1.jsxs)("li", {
+              children: [(0, jsx_runtime_1.jsx)("div", {
+                children: "\u30C7\u30A3\u30EC\u30AF\u30BF\u30FC"
+              }), (0, jsx_runtime_1.jsx)("p", {
+                children: "aaa aaaaa"
+              })]
+            }), (0, jsx_runtime_1.jsxs)("li", {
+              children: [(0, jsx_runtime_1.jsx)("div", {
+                children: "\u305D\u306E\u4ED6"
+              }), (0, jsx_runtime_1.jsx)("p", {
+                children: "aaa aaaaa"
+              })]
+            })]
+          })
+        }))]
+      })]
+    })), (0, jsx_runtime_1.jsx)("div", {}), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+      className: "flex flex-row w-full overflow-x-scroll"
+    }, {
+      children: data.credits.cast.slice(0, 10).map(function (v) {
+        return (0, jsx_runtime_1.jsxs)("li", Object.assign({
+          className: "max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 whitespace-wrap w-max"
+        }, {
+          children: [(0, jsx_runtime_1.jsx)("img", {
+            className: "max-w-none rounded-t-lg",
+            src: "https://image.tmdb.org/t/p/w154/".concat(v.profile_path)
+          }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "p-3 "
+          }, {
+            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+              className: "font-bold"
+            }, {
+              children: v.name
+            })), (0, jsx_runtime_1.jsx)("div", {
+              children: v.character
+            })]
+          }))]
+        }), v.id);
+      })
+    }))]
+  }));
+};
+exports["default"] = SinglePage;
 
 /***/ }),
 
@@ -3433,9 +3645,10 @@ var Header_1 = __importDefault(__webpack_require__(/*! ./components/Header */ ".
 var error_1 = __importDefault(__webpack_require__(/*! ./pages/error */ "./resources/ts/pages/error/index.tsx"));
 var AuthContext_1 = __webpack_require__(/*! ./hooke/AuthContext */ "./resources/ts/hooke/AuthContext.tsx");
 var AuthQuery_1 = __webpack_require__(/*! ./queries/AuthQuery */ "./resources/ts/queries/AuthQuery.ts");
-var mypage_1 = __importDefault(__webpack_require__(/*! ./pages/mypage */ "./resources/ts/pages/mypage/index.tsx"));
 var search_1 = __importDefault(__webpack_require__(/*! ./pages/search */ "./resources/ts/pages/search/index.tsx"));
 var dev_home_1 = __importDefault(__webpack_require__(/*! ./pages/dev_home */ "./resources/ts/pages/dev_home/index.tsx"));
+var index_1 = __importDefault(__webpack_require__(/*! ./pages/mypage/index */ "./resources/ts/pages/mypage/index.tsx"));
+var single_1 = __importDefault(__webpack_require__(/*! ./pages/single */ "./resources/ts/pages/single/index.tsx"));
 var Router = function Router() {
   var _ref = (0, AuthContext_1.useAuth)(),
     isAuth = _ref.isAuth,
@@ -3471,19 +3684,24 @@ var Router = function Router() {
           path: "/"
         }, {
           children: (0, jsx_runtime_1.jsx)(home_1["default"], {})
-        })), (0, jsx_runtime_1.jsx)(GuardRoute, Object.assign({
-          path: "/mypage"
-        }, {
-          children: (0, jsx_runtime_1.jsx)(mypage_1["default"], {})
-        })), (0, jsx_runtime_1.jsx)(GuardRoute, Object.assign({
+        })), (0, jsx_runtime_1.jsx)(GuardRoute, {
+          exact: true,
+          path: "/mypage",
+          component: index_1["default"]
+        }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, {
+          path: "/singl-page/:id",
+          component: single_1["default"]
+        }), (0, jsx_runtime_1.jsx)(GuardRoute, Object.assign({
           path: "/search"
         }, {
           children: (0, jsx_runtime_1.jsx)(search_1["default"], {})
-        })), (0, jsx_runtime_1.jsx)(GuardRoute, Object.assign({
-          path: "/dev-home"
-        }, {
-          children: (0, jsx_runtime_1.jsx)(dev_home_1["default"], {})
-        })), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, {
+        })), (0, jsx_runtime_1.jsx)(GuardRoute, {
+          path: "/dev-home",
+          component: dev_home_1["default"]
+        }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, {
+          path: "/mypage",
+          component: index_1["default"]
+        }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, {
           component: error_1["default"]
         })]
       })
