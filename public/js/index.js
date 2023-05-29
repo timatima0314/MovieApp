@@ -3317,103 +3317,173 @@ var SinglePage = function SinglePage(props) {
       children: "Loading..."
     });
   } else if (status === "success") {
-    var i = data.credits.cast.slice(0, 10);
+    // const i = data.credits.cast.slice(0, 10);
+    var i = data;
     console.log(i);
   }
-  // console.log(data);
-  return (0, jsx_runtime_1.jsxs)("main", Object.assign({
-    className: "w-10/12 m-auto"
-  }, {
-    children: [(0, jsx_runtime_1.jsx)("h1", {
-      children: "\u30B7\u30F3\u30B0\u30EB\u30DA\u30FC\u30B8"
-    }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-      className: "flex w-10/12 justify-center"
+  var x = data.vote_average / 2;
+  // let x = 5;
+  switch (true) {
+    case x < 0.5:
+      console.log(0);
+      x = 0;
+      break;
+    case x >= 0.5 && x < 1:
+      console.log(0.5);
+      break;
+    case x >= 1 && x < 1.5:
+      console.log(1);
+      break;
+    case x >= 1.5 && x < 2:
+      console.log(1.5);
+      break;
+    case x >= 2 && x < 2.5:
+      console.log(2);
+      break;
+    case x >= 2.5 && x < 3:
+      console.log(2.5);
+      break;
+    case x >= 3 && x < 3.5:
+      console.log(3);
+      break;
+    case x > 3.5 && x < 4:
+      console.log(3.5);
+      x = 3.5;
+      break;
+    case x >= 4 && x < 4.5:
+      console.log(4);
+      x = 4;
+      break;
+    case x >= 4.5 && x < 5:
+      console.log(4.5);
+      break;
+    case x === 5:
+      console.log(5);
+      break;
+  }
+  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+    children: (0, jsx_runtime_1.jsxs)("main", Object.assign({
+      className: "w-10/12 m-auto"
     }, {
-      children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-        className: "w-full flex justify-center"
+      children: [(0, jsx_runtime_1.jsx)("h1", {
+        children: "\u30B7\u30F3\u30B0\u30EB\u30DA\u30FC\u30B8"
+      }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+        className: "flex w-10/12 justify-center"
       }, {
-        children: (0, jsx_runtime_1.jsx)("img", {
-          className: "items-center max-w-none",
-          src: "https://image.tmdb.org/t/p/w300/".concat(data.poster_path)
-        })
-      })), (0, jsx_runtime_1.jsxs)("div", {
-        children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({
-          className: "title-box"
+        children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+          className: "w-full flex justify-center"
         }, {
-          children: [(0, jsx_runtime_1.jsx)("h2", {
-            children: data.title
-          }), (0, jsx_runtime_1.jsx)("div", {
-            children: "\u30B8\u30E3\u30F3\u30EB"
-          })]
-        })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-          className: "summary-box"
-        }, {
-          children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-            className: "summary-title"
-          }, {
-            children: "\u6982\u8981"
-          })), (0, jsx_runtime_1.jsx)("p", Object.assign({
-            className: "summary-text"
-          }, {
-            children: "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes."
-          }))]
-        })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-          className: "staff-box"
-        }, {
-          children: (0, jsx_runtime_1.jsxs)("ul", {
-            children: [(0, jsx_runtime_1.jsxs)("li", {
-              children: [(0, jsx_runtime_1.jsx)("div", {
-                children: "\u76E3\u7763"
-              }), (0, jsx_runtime_1.jsx)("p", {
-                children: "aaa aaaaa"
-              })]
-            }), (0, jsx_runtime_1.jsxs)("li", {
-              children: [(0, jsx_runtime_1.jsx)("div", {
-                children: "\u52A9\u76E3\u7763"
-              }), (0, jsx_runtime_1.jsx)("p", {
-                children: "aaa aaaaa"
-              })]
-            }), (0, jsx_runtime_1.jsxs)("li", {
-              children: [(0, jsx_runtime_1.jsx)("div", {
-                children: "\u30C7\u30A3\u30EC\u30AF\u30BF\u30FC"
-              }), (0, jsx_runtime_1.jsx)("p", {
-                children: "aaa aaaaa"
-              })]
-            }), (0, jsx_runtime_1.jsxs)("li", {
-              children: [(0, jsx_runtime_1.jsx)("div", {
-                children: "\u305D\u306E\u4ED6"
-              }), (0, jsx_runtime_1.jsx)("p", {
-                children: "aaa aaaaa"
-              })]
-            })]
+          children: (0, jsx_runtime_1.jsx)("img", {
+            className: "items-center max-w-none",
+            src: "https://image.tmdb.org/t/p/w300/".concat(data.poster_path)
           })
-        }))]
-      })]
-    })), (0, jsx_runtime_1.jsx)("div", {}), (0, jsx_runtime_1.jsx)("ul", Object.assign({
-      className: "flex flex-row w-full overflow-x-scroll"
-    }, {
-      children: data.credits.cast.slice(0, 10).map(function (v) {
-        return (0, jsx_runtime_1.jsxs)("li", Object.assign({
-          className: "max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 whitespace-wrap w-max"
-        }, {
-          children: [(0, jsx_runtime_1.jsx)("img", {
-            className: "max-w-none rounded-t-lg",
-            src: "https://image.tmdb.org/t/p/w154/".concat(v.profile_path)
-          }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-            className: "p-3 "
+        })), (0, jsx_runtime_1.jsxs)("div", {
+          children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "title-box"
+          }, {
+            children: [(0, jsx_runtime_1.jsx)("h2", {
+              children: data.title
+            }), (0, jsx_runtime_1.jsx)("div", {
+              children: "\u30B8\u30E3\u30F3\u30EB"
+            })]
+          })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "summary-box"
           }, {
             children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-              className: "font-bold"
+              className: "summary-title"
             }, {
-              children: v.name
-            })), (0, jsx_runtime_1.jsx)("div", {
-              children: v.character
-            })]
+              children: "\u6982\u8981"
+            })), (0, jsx_runtime_1.jsx)("p", Object.assign({
+              className: "summary-text"
+            }, {
+              children: "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes."
+            }))]
+          })), (0, jsx_runtime_1.jsx)("img", {
+            src: "/images/icon_star_edge.png"
+          }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "review-container"
+          }, {
+            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+              className: "score"
+            }, {
+              children: x
+            })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+              className: "star-rating star-rating-".concat(x * 10)
+            }, {
+              children: [(0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+                className: "star-rating-front"
+              }, {
+                children: [(0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {})]
+              }))]
+            })), (0, jsx_runtime_1.jsx)("p", Object.assign({
+              className: "review-number"
+            }, {
+              children: (0, jsx_runtime_1.jsx)("a", Object.assign({
+                href: ""
+              }, {
+                children: "\u30AF\u30C1\u30B3\u30DF 10\u4EF6"
+              }))
+            })), "i"]
+          })), (0, jsx_runtime_1.jsx)("div", Object.assign({
+            className: "staff-box"
+          }, {
+            children: (0, jsx_runtime_1.jsxs)("ul", {
+              children: [(0, jsx_runtime_1.jsxs)("li", {
+                children: [(0, jsx_runtime_1.jsx)("div", {
+                  children: "\u76E3\u7763"
+                }), (0, jsx_runtime_1.jsx)("p", {
+                  children: "aaa aaaaa"
+                })]
+              }), (0, jsx_runtime_1.jsxs)("li", {
+                children: [(0, jsx_runtime_1.jsx)("div", {
+                  children: "\u52A9\u76E3\u7763"
+                }), (0, jsx_runtime_1.jsx)("p", {
+                  children: "aaa aaaaa"
+                })]
+              }), (0, jsx_runtime_1.jsxs)("li", {
+                children: [(0, jsx_runtime_1.jsx)("div", {
+                  children: "\u30C7\u30A3\u30EC\u30AF\u30BF\u30FC"
+                }), (0, jsx_runtime_1.jsx)("p", {
+                  children: "aaa aaaaa"
+                })]
+              }), (0, jsx_runtime_1.jsxs)("li", {
+                children: [(0, jsx_runtime_1.jsx)("div", {
+                  children: "\u305D\u306E\u4ED6"
+                }), (0, jsx_runtime_1.jsx)("p", {
+                  children: "aaa aaaaa"
+                })]
+              })]
+            })
           }))]
-        }), v.id);
-      })
-    }))]
-  }));
+        })]
+      })), (0, jsx_runtime_1.jsx)("div", {
+        children: "\u4E3B\u306A\u51FA\u6F14\u8005"
+      }), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+        className: "flex flex-row w-full overflow-x-scroll"
+      }, {
+        children: data.credits.cast.slice(0, 10).map(function (v) {
+          return (0, jsx_runtime_1.jsxs)("li", Object.assign({
+            className: "max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 whitespace-wrap w-max"
+          }, {
+            children: [(0, jsx_runtime_1.jsx)("img", {
+              className: "max-w-none rounded-t-lg",
+              src: "https://image.tmdb.org/t/p/w154/".concat(v.profile_path)
+            }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+              className: "p-3 "
+            }, {
+              children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+                className: "font-bold"
+              }, {
+                children: v.name
+              })), (0, jsx_runtime_1.jsx)("div", {
+                children: v.character
+              })]
+            }))]
+          }), v.id);
+        })
+      }))]
+    }))
+  });
 };
 exports["default"] = SinglePage;
 

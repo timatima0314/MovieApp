@@ -1,85 +1,91 @@
+@charset "UTF-8";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 .star-rating {
-    display: flex;
-    position: relative;
-    height: 24px;
-    line-height: 1;
+  display: flex;
+  position: relative;
+  height: 24px;
+  line-height: 1;
 }
 
 .star-rating span {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
 }
 
 .star-rating span:not(:first-child) {
-    margin-left: 2px;
+  margin-left: 2px;
 }
 
 .star-rating > span {
-    background: url(/images/icon_star_edge.png) no-repeat;
-    background-size: 24px 24px;
+  background: url(/images/icon_star_edge.png) no-repeat;
+  background-size: 24px 24px;
 }
+
 .star-rating-front {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 24px;
-    overflow: hidden;
-    white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .star-rating-front > span {
-    background: url(/images/icon_star_.png) no-repeat 0 0;
-    background-size: 24px 24px;
+  background: url(/images/icon_star_.png) no-repeat 0 0;
+  background-size: 24px 24px;
 }
+
 /*評価0の時*/
 .star-rating-0 .star-rating-front {
-    width: 0px;
+  width: 0px;
 }
 
 /*評価0.5の時*/
 .star-rating-05 .star-rating-front {
-    width: 12px;
+  width: 12px;
 }
 
 /*評価1の時*/
 .star-rating-1 .star-rating-front {
-    width: 24px;
+  width: 24px;
 }
+
 /*評価1.5の時*/
 .star-rating-15 .star-rating-front {
-    width: 38px;
+  width: 38px;
 }
+
 /*評価2の時*/
 .star-rating-2 .star-rating-front {
-    width: 50px;
+  width: 50px;
 }
+
 /*評価2.5の時*/
 .star-rating-25 .star-rating-front {
-    width: 64px;
+  width: 64px;
 }
 
 /*評価3の時*/
 .star-rating-30 .star-rating-front {
-    width: 80px;
+  width: 80px;
 }
 
 /*評価3.5の時*/
 .star-rating-35 .star-rating-front {
-    width: 90px;
+  width: 90px;
 }
 
 /*評価4の時*/
 .star-rating-40 .star-rating-front {
-    width: 100px;
+  width: 100px;
 }
 
 /*評価4.5の時*/
 .star-rating-45 .star-rating-front {
-    width: 116px;
+  width: 116px;
 }
 
+/*# sourceMappingURL=app.css.map */
