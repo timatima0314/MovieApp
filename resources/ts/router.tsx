@@ -8,13 +8,12 @@ import {
     NavLink,
 } from "react-router-dom";
 import LoginPage from "./pages/login";
-import HomePage from "./pages/home";
 import Header from "./components/Header";
 import NotFoundPage from "./pages/error";
 import { useAuth } from "./hooke/AuthContext";
 import { useUser } from "./queries/AuthQuery";
 import SearchPage from "./pages/search";
-import DevHomePage from "./pages/dev_home";
+import HomePage from "./pages/home";
 import MyPage from "./pages/mypage/index";
 import SinglePage from "./pages/single";
 const Router = () => {
@@ -41,16 +40,16 @@ const Router = () => {
                     <LoginRoute path="/login">
                         <LoginPage />
                     </LoginRoute>
-                    <GuardRoute exact path="/">
+                    {/* <GuardRoute exact path="/">
                         <HomePage />
-                    </GuardRoute>
+                    </GuardRoute> */}
                     <GuardRoute exact path="/mypage" component={MyPage} />
                     <Route path="/singl-page/:id" component={SinglePage} />
 
                     <GuardRoute path="/search">
                         <SearchPage />
                     </GuardRoute>
-                    <GuardRoute path="/dev-home" component={DevHomePage}/>
+                    <GuardRoute path="/" component={HomePage}/>
 
                     {/* <ul>
                         <li>
