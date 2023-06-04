@@ -1,12 +1,17 @@
 import React from "react";
-import TmdbList from "./components/TmdbList";
+import PopularTmdbList from "./components/popular/PopularTmdbList";
+import TopRatedTmdbList from "./components/topRatede/TopRatedTmdList";
+import NowPlayingTmdbList from "./components/nowPlaying/NowPlayingTmdbList";
 const DevHomePage: React.VFC = () => {
     return (
-        <>
-            <h1 className="text-red-400 text-4xl">dev-Home Page</h1>
-            <img src="https://image.tmdb.org/t/p/w300/yUsSJ0vO8AM9HnDQWuGKMSzCKOP.jpg" />
-            <TmdbList />
-        </>
+        <main className="w-10/12 m-auto">
+            <h2 className="font-bold text-xl">人気の映画</h2>
+            <PopularTmdbList />
+            <h2 className="font-bold text-xl">評価の高い映画</h2>
+            <TopRatedTmdbList />
+            <h2 className="font-bold text-xl">上映中の映画</h2>
+            <NowPlayingTmdbList />
+        </main>
     );
 };
 

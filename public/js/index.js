@@ -2400,9 +2400,10 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.getTmdbDetails = exports.getTmdbItem = void 0;
+exports.getNowPlayingTmdbItem = exports.getTmdbDetails = exports.getTmdbDetailsJa = exports.getTopRatedTmdbItem = exports.getPopularTmdbItem = void 0;
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
-var getTmdbItem = function getTmdbItem() {
+// 人気の映画
+var getPopularTmdbItem = function getPopularTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var _yield$axios_1$defaul, data;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -2421,24 +2422,88 @@ var getTmdbItem = function getTmdbItem() {
     }, _callee);
   }));
 };
-exports.getTmdbItem = getTmdbItem;
-var getTmdbDetails = function getTmdbDetails(id) {
+exports.getPopularTmdbItem = getPopularTmdbItem;
+// 評価の高い映画
+var getTopRatedTmdbItem = function getTopRatedTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     var _yield$axios_1$defaul2, data;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
-          return axios_1["default"].get("https://api.themoviedb.org/3/movie/".concat(id, "?api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&language=ja-JA&append_to_response=credits"));
+          return axios_1["default"].get("".concat("https://api.themoviedb.org/3/", "movie/top_rated?api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&language=ja-JA&page=1"));
         case 2:
           _yield$axios_1$defaul2 = _context2.sent;
           data = _yield$axios_1$defaul2.data;
-          return _context2.abrupt("return", data);
+          return _context2.abrupt("return", data.results);
         case 5:
         case "end":
           return _context2.stop();
       }
     }, _callee2);
+  }));
+};
+exports.getTopRatedTmdbItem = getTopRatedTmdbItem;
+// 上映中の映画
+var getNowPlayingTmdbItem = function getNowPlayingTmdbItem() {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var _yield$axios_1$defaul3, data;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return axios_1["default"].get("".concat("https://api.themoviedb.org/3/", "movie/now_playing?api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&language=ja-JA&page=1"));
+        case 2:
+          _yield$axios_1$defaul3 = _context3.sent;
+          data = _yield$axios_1$defaul3.data;
+          return _context3.abrupt("return", data.results);
+        case 5:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+};
+exports.getNowPlayingTmdbItem = getNowPlayingTmdbItem;
+// 詳細データ,日本語訳対応しているが、overviewなどは日本語訳がない場合がありその場合nullになる。
+var getTmdbDetailsJa = function getTmdbDetailsJa(id) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+    var _yield$axios_1$defaul4, data;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return axios_1["default"].get("https://api.themoviedb.org/3/movie/".concat(id, "?api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&language=ja-JA&append_to_response=credits"));
+        case 2:
+          _yield$axios_1$defaul4 = _context4.sent;
+          data = _yield$axios_1$defaul4.data;
+          return _context4.abrupt("return", data);
+        case 5:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+};
+exports.getTmdbDetailsJa = getTmdbDetailsJa;
+// 詳細データの英語バージョン。overview参照に用いる。
+var getTmdbDetails = function getTmdbDetails(id) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+    var _yield$axios_1$defaul5, data;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return axios_1["default"].get("https://api.themoviedb.org/3/movie/".concat(id, "?api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&append_to_response=credits"));
+        case 2:
+          _yield$axios_1$defaul5 = _context5.sent;
+          data = _yield$axios_1$defaul5.data;
+          return _context5.abrupt("return", data);
+        case 5:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5);
   }));
 };
 exports.getTmdbDetails = getTmdbDetails;
@@ -2776,10 +2841,10 @@ react_dom_1["default"].render((0, jsx_runtime_1.jsx)(App_1["default"], {}), docu
 
 /***/ }),
 
-/***/ "./resources/ts/pages/dev_home/components/TmdbItem.tsx":
-/*!*************************************************************!*\
-  !*** ./resources/ts/pages/dev_home/components/TmdbItem.tsx ***!
-  \*************************************************************/
+/***/ "./resources/ts/pages/dev_home/components/nowPlaying/NowPlayingTmdbItem.tsx":
+/*!**********************************************************************************!*\
+  !*** ./resources/ts/pages/dev_home/components/nowPlaying/NowPlayingTmdbItem.tsx ***!
+  \**********************************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2790,29 +2855,42 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-var TmdbItem = function TmdbItem(_ref) {
+var NowPlayingTmdbItem = function NowPlayingTmdbItem(_ref) {
   var movie = _ref.movie;
-  return (0, jsx_runtime_1.jsxs)("li", Object.assign({
-    className: "w-50 mr-2"
+  return (0, jsx_runtime_1.jsx)("li", Object.assign({
+    className: "mr-4",
+    style: {
+      width: 185
+    }
   }, {
-    children: [(0, jsx_runtime_1.jsx)("img", {
-      src: "https://image.tmdb.org/t/p/w300/".concat(movie.poster_path)
-    }), (0, jsx_runtime_1.jsx)(react_router_dom_1.NavLink, Object.assign({
+    children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.NavLink, Object.assign({
       className: "truncate text-xs",
       to: "/singl-page/".concat(movie.id)
     }, {
-      children: movie.title
-    }))]
+      children: [(0, jsx_runtime_1.jsx)("img", {
+        width: 185,
+        height: 278,
+        style: {
+          width: 185,
+          height: 278
+        },
+        src: "https://image.tmdb.org/t/p/w185/".concat(movie.poster_path)
+      }), (0, jsx_runtime_1.jsx)("div", Object.assign({
+        className: "text-base h-20 whitespace-normal my-auto"
+      }, {
+        children: movie.title
+      }))]
+    }))
   }), movie.id);
 };
-exports["default"] = TmdbItem;
+exports["default"] = NowPlayingTmdbItem;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/dev_home/components/TmdbList.tsx":
-/*!*************************************************************!*\
-  !*** ./resources/ts/pages/dev_home/components/TmdbList.tsx ***!
-  \*************************************************************/
+/***/ "./resources/ts/pages/dev_home/components/nowPlaying/NowPlayingTmdbList.tsx":
+/*!**********************************************************************************!*\
+  !*** ./resources/ts/pages/dev_home/components/nowPlaying/NowPlayingTmdbList.tsx ***!
+  \**********************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -2827,11 +2905,11 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var TmdbApi_1 = __webpack_require__(/*! ../../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
+var TmdbApi_1 = __webpack_require__(/*! ../../../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
 var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
-var TmdbItem_1 = __importDefault(__webpack_require__(/*! ./TmdbItem */ "./resources/ts/pages/dev_home/components/TmdbItem.tsx"));
-var TmdbList = function TmdbList() {
-  var _ref = (0, react_query_1.useQuery)("item", TmdbApi_1.getTmdbItem),
+var NowPlayingTmdbItem_1 = __importDefault(__webpack_require__(/*! ./NowPlayingTmdbItem */ "./resources/ts/pages/dev_home/components/nowPlaying/NowPlayingTmdbItem.tsx"));
+var NowPlayingTmdbList = function NowPlayingTmdbList() {
+  var _ref = (0, react_query_1.useQuery)("nowPlayingItem", TmdbApi_1.getNowPlayingTmdbItem),
     data = _ref.data,
     isLoading = _ref.isLoading;
   console.log(data);
@@ -2841,17 +2919,201 @@ var TmdbList = function TmdbList() {
     });
   }
   return (0, jsx_runtime_1.jsx)("ul", Object.assign({
-    className: "flex flex-wrap "
+    className: "flex flex-row w-full overflow-x-scroll mb-5 "
   }, {
     children: data.map(function (movie) {
       // console.log(movie.id);
-      return (0, jsx_runtime_1.jsx)(TmdbItem_1["default"], {
+      return (0, jsx_runtime_1.jsx)(NowPlayingTmdbItem_1["default"], {
         movie: movie
       }, movie.id);
     })
   }));
 };
-exports["default"] = TmdbList;
+exports["default"] = NowPlayingTmdbList;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/dev_home/components/popular/PopularTmdbItem.tsx":
+/*!****************************************************************************!*\
+  !*** ./resources/ts/pages/dev_home/components/popular/PopularTmdbItem.tsx ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var PopularTmdbItem = function PopularTmdbItem(_ref) {
+  var movie = _ref.movie;
+  return (0, jsx_runtime_1.jsx)("li", Object.assign({
+    className: "mr-4",
+    style: {
+      width: 185
+    }
+  }, {
+    children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.NavLink, Object.assign({
+      className: "truncate text-xs",
+      to: "/singl-page/".concat(movie.id)
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("img", {
+        width: 185,
+        height: 278,
+        style: {
+          width: 185,
+          height: 278
+        },
+        src: "https://image.tmdb.org/t/p/w185/".concat(movie.poster_path)
+      }), (0, jsx_runtime_1.jsx)("div", Object.assign({
+        className: "text-base h-20 whitespace-normal my-auto"
+      }, {
+        children: movie.title
+      }))]
+    }))
+  }), movie.id);
+};
+exports["default"] = PopularTmdbItem;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/dev_home/components/popular/PopularTmdbList.tsx":
+/*!****************************************************************************!*\
+  !*** ./resources/ts/pages/dev_home/components/popular/PopularTmdbList.tsx ***!
+  \****************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var TmdbApi_1 = __webpack_require__(/*! ../../../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
+var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
+var PopularTmdbItem_1 = __importDefault(__webpack_require__(/*! ./PopularTmdbItem */ "./resources/ts/pages/dev_home/components/popular/PopularTmdbItem.tsx"));
+var PopularTmdbList = function PopularTmdbList() {
+  var _ref = (0, react_query_1.useQuery)("popularItem", TmdbApi_1.getPopularTmdbItem),
+    data = _ref.data,
+    isLoading = _ref.isLoading;
+  console.log(data);
+  if (isLoading) {
+    return (0, jsx_runtime_1.jsx)("span", {
+      children: "Loading..."
+    });
+  }
+  return (0, jsx_runtime_1.jsx)("ul", Object.assign({
+    className: "flex flex-row w-full overflow-x-scroll mb-5 "
+  }, {
+    children: data.map(function (movie) {
+      // console.log(movie.id);
+      return (0, jsx_runtime_1.jsx)(PopularTmdbItem_1["default"], {
+        movie: movie
+      }, movie.id);
+    })
+  }));
+};
+exports["default"] = PopularTmdbList;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/dev_home/components/topRatede/TopRatedTmdItem.tsx":
+/*!******************************************************************************!*\
+  !*** ./resources/ts/pages/dev_home/components/topRatede/TopRatedTmdItem.tsx ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var TopRatedTmdbItem = function TopRatedTmdbItem(_ref) {
+  var movie = _ref.movie;
+  return (0, jsx_runtime_1.jsx)("li", Object.assign({
+    className: "mr-4",
+    style: {
+      width: 185
+    }
+  }, {
+    children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.NavLink, Object.assign({
+      className: "truncate text-xs",
+      to: "/singl-page/".concat(movie.id)
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("img", {
+        width: 185,
+        height: 278,
+        style: {
+          width: 185,
+          height: 278
+        },
+        src: "https://image.tmdb.org/t/p/w185/".concat(movie.poster_path)
+      }), (0, jsx_runtime_1.jsx)("div", Object.assign({
+        className: "text-base h-20 whitespace-normal my-auto"
+      }, {
+        children: movie.title
+      }))]
+    }))
+  }), movie.id);
+};
+exports["default"] = TopRatedTmdbItem;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/dev_home/components/topRatede/TopRatedTmdList.tsx":
+/*!******************************************************************************!*\
+  !*** ./resources/ts/pages/dev_home/components/topRatede/TopRatedTmdList.tsx ***!
+  \******************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var TmdbApi_1 = __webpack_require__(/*! ../../../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
+var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
+var TopRatedTmdItem_1 = __importDefault(__webpack_require__(/*! ./TopRatedTmdItem */ "./resources/ts/pages/dev_home/components/topRatede/TopRatedTmdItem.tsx"));
+var TopRatedTmdbList = function TopRatedTmdbList() {
+  var _ref = (0, react_query_1.useQuery)("topRatedItem", TmdbApi_1.getTopRatedTmdbItem),
+    data = _ref.data,
+    isLoading = _ref.isLoading;
+  console.log(data);
+  if (isLoading) {
+    return (0, jsx_runtime_1.jsx)("span", {
+      children: "Loading..."
+    });
+  }
+  return (0, jsx_runtime_1.jsx)("ul", Object.assign({
+    className: "flex flex-row w-full overflow-x-scroll mb-5 "
+  }, {
+    children: data.map(function (movie) {
+      // console.log(movie.id);
+      return (0, jsx_runtime_1.jsx)(TopRatedTmdItem_1["default"], {
+        movie: movie
+      }, movie.id);
+    })
+  }));
+};
+exports["default"] = TopRatedTmdbList;
 
 /***/ }),
 
@@ -2873,17 +3135,27 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var TmdbList_1 = __importDefault(__webpack_require__(/*! ./components/TmdbList */ "./resources/ts/pages/dev_home/components/TmdbList.tsx"));
+var PopularTmdbList_1 = __importDefault(__webpack_require__(/*! ./components/popular/PopularTmdbList */ "./resources/ts/pages/dev_home/components/popular/PopularTmdbList.tsx"));
+var TopRatedTmdList_1 = __importDefault(__webpack_require__(/*! ./components/topRatede/TopRatedTmdList */ "./resources/ts/pages/dev_home/components/topRatede/TopRatedTmdList.tsx"));
+var NowPlayingTmdbList_1 = __importDefault(__webpack_require__(/*! ./components/nowPlaying/NowPlayingTmdbList */ "./resources/ts/pages/dev_home/components/nowPlaying/NowPlayingTmdbList.tsx"));
 var DevHomePage = function DevHomePage() {
-  return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
-    children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
-      className: "text-red-400 text-4xl"
+  return (0, jsx_runtime_1.jsxs)("main", Object.assign({
+    className: "w-10/12 m-auto"
+  }, {
+    children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
+      className: "font-bold text-xl"
     }, {
-      children: "dev-Home Page"
-    })), (0, jsx_runtime_1.jsx)("img", {
-      src: "https://image.tmdb.org/t/p/w300/yUsSJ0vO8AM9HnDQWuGKMSzCKOP.jpg"
-    }), (0, jsx_runtime_1.jsx)(TmdbList_1["default"], {})]
-  });
+      children: "\u4EBA\u6C17\u306E\u6620\u753B"
+    })), (0, jsx_runtime_1.jsx)(PopularTmdbList_1["default"], {}), (0, jsx_runtime_1.jsx)("h2", Object.assign({
+      className: "font-bold text-xl"
+    }, {
+      children: "\u8A55\u4FA1\u306E\u9AD8\u3044\u6620\u753B"
+    })), (0, jsx_runtime_1.jsx)(TopRatedTmdList_1["default"], {}), (0, jsx_runtime_1.jsx)("h2", Object.assign({
+      className: "font-bold text-xl"
+    }, {
+      children: "\u4E0A\u6620\u4E2D\u306E\u6620\u753B"
+    })), (0, jsx_runtime_1.jsx)(NowPlayingTmdbList_1["default"], {})]
+  }));
 };
 exports["default"] = DevHomePage;
 
@@ -3290,10 +3562,10 @@ exports["default"] = SearchPage;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/single/index.tsx":
-/*!*********************************************!*\
-  !*** ./resources/ts/pages/single/index.tsx ***!
-  \*********************************************/
+/***/ "./resources/ts/pages/single/components/DetailPageCast.tsx":
+/*!*****************************************************************!*\
+  !*** ./resources/ts/pages/single/components/DetailPageCast.tsx ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -3303,185 +3575,329 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
-var TmdbApi_1 = __webpack_require__(/*! ../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
-var SinglePage = function SinglePage(props) {
-  var id = props.match.params.id;
-  var _ref = (0, react_query_1.useQuery)("single", function () {
-      return (0, TmdbApi_1.getTmdbDetails)(id);
-    }),
-    data = _ref.data,
-    status = _ref.status;
-  if (status === "loading") {
-    return (0, jsx_runtime_1.jsx)("h1", {
-      children: "Loading..."
-    });
-  } else if (status === "success") {
-    // const i = data.credits.cast.slice(0, 10);
-    var i = data;
-    console.log(i);
-  }
-  var x = data.vote_average / 2;
-  // let x = 5;
+var DetailPageCast = function DetailPageCast(_ref) {
+  var dataJa = _ref.dataJa;
+  /**
+   *@param {Any} credits クレジット、出演者などのデータ
+   */
+  var credits = dataJa.credits;
+  return (0, jsx_runtime_1.jsxs)("div", Object.assign({
+    className: "w-10/12 m-auto"
+  }, {
+    children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+      className: "font-bold text-xl "
+    }, {
+      children: "\u4E3B\u306A\u51FA\u6F14\u8005"
+    })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+      className: "flex flex-row w-full overflow-x-scroll"
+    }, {
+      children: credits.cast.slice(0, 10).map(function (item) {
+        return (0, jsx_runtime_1.jsxs)("li", Object.assign({
+          className: "max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 whitespace-wrap w-max"
+        }, {
+          children: [item.profile_path ? (0, jsx_runtime_1.jsx)("img", {
+            width: 154,
+            height: 231,
+            className: "max-w-none rounded-t-lg m-auto",
+            src: "https://image.tmdb.org/t/p/w154/".concat(item.profile_path)
+          }) : (0, jsx_runtime_1.jsx)("img", {
+            width: 154,
+            height: 231,
+            className: "max-w-none rounded-t-lg m-auto",
+            src: "/images/no_images.png"
+          }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "p-3 "
+          }, {
+            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+              className: "font-bold"
+            }, {
+              children: item.name
+            })), (0, jsx_runtime_1.jsx)("div", {
+              children: item.character
+            })]
+          }))]
+        }), item.id);
+      })
+    }))]
+  }));
+};
+exports["default"] = DetailPageCast;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/single/components/DetailPageFirstView.tsx":
+/*!**********************************************************************!*\
+  !*** ./resources/ts/pages/single/components/DetailPageFirstView.tsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var DetailPageFirstView = function DetailPageFirstView(_ref) {
+  var dataJa = _ref.dataJa,
+    dataEn = _ref.dataEn;
+  console.log(dataJa);
+  /**
+   *@param {String} title タイトル
+   *@param {Array[]} genres  ジャンル
+   *@param {Any} poster_path ポスター画像のパス
+   *@param {Number} vote_average TmdbAPIの総合評価
+   *@param {string} overview 日本語訳された概要
+   *@param {string} original_title オリジナルタイトル
+   *@param {string} status 公開されたかどうか
+   */
+  var title = dataJa.title,
+    genres = dataJa.genres,
+    poster_path = dataJa.poster_path,
+    backdrop_path = dataJa.backdrop_path,
+    vote_average = dataJa.vote_average,
+    overview = dataJa.overview,
+    original_title = dataJa.original_title,
+    status = dataJa.status;
+  /**
+   * @param {string} overviewEn 英語の概要
+   */
+  var overviewEn = dataEn.overview;
+  // TmdbAPIの評価が10段階のため2でわる
+  var evaluation = vote_average / 2;
+  // 総合評価
+  var comprehensive_evaluation = 0;
+  // 総合評価は('0','0.5','1','1.5','2','2.5','3','3.5','4','4.5','5')とする
   switch (true) {
-    case x < 0.5:
-      console.log(0);
-      x = 0;
+    case evaluation < 0.5:
+      comprehensive_evaluation = 0;
       break;
-    case x >= 0.5 && x < 1:
-      console.log(0.5);
+    case evaluation >= 0.5 && evaluation < 1:
+      comprehensive_evaluation = 0.5;
       break;
-    case x >= 1 && x < 1.5:
-      console.log(1);
+    case evaluation >= 1 && evaluation < 1.5:
+      comprehensive_evaluation = 1;
       break;
-    case x >= 1.5 && x < 2:
-      console.log(1.5);
+    case evaluation >= 1.5 && evaluation < 2:
+      comprehensive_evaluation = 1.5;
       break;
-    case x >= 2 && x < 2.5:
-      console.log(2);
+    case evaluation >= 2 && evaluation < 2.5:
+      comprehensive_evaluation = 2;
       break;
-    case x >= 2.5 && x < 3:
-      console.log(2.5);
+    case evaluation >= 2.5 && evaluation < 3:
+      comprehensive_evaluation = 2.5;
       break;
-    case x >= 3 && x < 3.5:
-      console.log(3);
+    case evaluation >= 3 && evaluation < 3.5:
+      comprehensive_evaluation = 3;
       break;
-    case x > 3.5 && x < 4:
-      console.log(3.5);
-      x = 3.5;
+    case evaluation > 3.5 && evaluation < 4:
+      comprehensive_evaluation = 3.5;
       break;
-    case x >= 4 && x < 4.5:
-      console.log(4);
-      x = 4;
+    case evaluation >= 4 && evaluation < 4.5:
+      comprehensive_evaluation = 4;
       break;
-    case x >= 4.5 && x < 5:
-      console.log(4.5);
+    case evaluation >= 4.5 && evaluation < 5:
+      comprehensive_evaluation = 4.5;
       break;
-    case x === 5:
-      console.log(5);
+    case evaluation === 5:
+      comprehensive_evaluation = 5;
       break;
   }
   return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
-    children: (0, jsx_runtime_1.jsxs)("main", Object.assign({
-      className: "w-10/12 m-auto"
+    children: (0, jsx_runtime_1.jsx)("div", Object.assign({
+      className: "first-view ",
+      style: {
+        backgroundImage: "url(https://image.tmdb.org/t/p/w1280".concat(backdrop_path, ")")
+      }
     }, {
-      children: [(0, jsx_runtime_1.jsx)("h1", {
-        children: "\u30B7\u30F3\u30B0\u30EB\u30DA\u30FC\u30B8"
-      }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-        className: "flex w-10/12 justify-center"
+      children: (0, jsx_runtime_1.jsxs)("div", Object.assign({
+        className: "flex w-10/12 first-view__content text-white"
       }, {
         children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-          className: "w-full flex justify-center"
+          className: "mr-8 my-auto",
+          style: {
+            width: 300
+          }
         }, {
           children: (0, jsx_runtime_1.jsx)("img", {
+            width: "300",
+            height: "450",
             className: "items-center max-w-none",
-            src: "https://image.tmdb.org/t/p/w300/".concat(data.poster_path)
+            src: "https://image.tmdb.org/t/p/w300/".concat(poster_path)
           })
-        })), (0, jsx_runtime_1.jsxs)("div", {
+        })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+          className: "w-full flex flex-col justify-center "
+        }, {
           children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({
             className: "title-box"
           }, {
-            children: [(0, jsx_runtime_1.jsx)("h2", {
-              children: data.title
-            }), (0, jsx_runtime_1.jsx)("div", {
-              children: "\u30B8\u30E3\u30F3\u30EB"
-            })]
+            children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
+              className: "text-4xl font-bold mb-2"
+            }, {
+              children: title
+            })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+              className: "flex mb-2"
+            }, {
+              children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+                className: "font-bold mr-3 text-xl \t"
+              }, {
+                children: "\u30B8\u30E3\u30F3\u30EB"
+              })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+                className: "flex items-center flex-wrap text-gray-300"
+              }, {
+                children: genres.map(function (item) {
+                  return (0, jsx_runtime_1.jsx)("li", Object.assign({
+                    className: "mr-3"
+                  }, {
+                    children: item.name
+                  }), item.name);
+                })
+              }))]
+            }))]
           })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-            className: "summary-box"
+            className: "summary-box mb-2"
           }, {
             children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-              className: "summary-title"
+              className: "summary-title font-bold text-xl\t"
             }, {
               children: "\u6982\u8981"
             })), (0, jsx_runtime_1.jsx)("p", Object.assign({
-              className: "summary-text"
+              className: "summary-text text-gray-300"
             }, {
-              children: "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes."
+              children: overview ? overview : overviewEn
             }))]
-          })), (0, jsx_runtime_1.jsx)("img", {
-            src: "/images/icon_star_edge.png"
-          }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-            className: "review-container"
+          })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "review-container flex items-center mb-2"
           }, {
             children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-              className: "score"
+              className: "font-bold text-xl mr-2"
             }, {
-              children: x
+              children: "\u8A55\u4FA1"
             })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-              className: "star-rating star-rating-".concat(x * 10)
+              className: "star-rating star-rating-".concat(comprehensive_evaluation * 10)
             }, {
               children: [(0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsxs)("div", Object.assign({
                 className: "star-rating-front"
               }, {
                 children: [(0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {})]
-              }))]
-            })), (0, jsx_runtime_1.jsx)("p", Object.assign({
-              className: "review-number"
-            }, {
-              children: (0, jsx_runtime_1.jsx)("a", Object.assign({
-                href: ""
+              })), (0, jsx_runtime_1.jsx)("div", Object.assign({
+                className: "score text-gray-300"
               }, {
-                children: "\u30AF\u30C1\u30B3\u30DF 10\u4EF6"
-              }))
-            })), "i"]
+                children: comprehensive_evaluation
+              }))]
+            }))]
           })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-            className: "staff-box"
+            className: "other-box"
           }, {
             children: (0, jsx_runtime_1.jsxs)("ul", {
-              children: [(0, jsx_runtime_1.jsxs)("li", {
-                children: [(0, jsx_runtime_1.jsx)("div", {
-                  children: "\u76E3\u7763"
-                }), (0, jsx_runtime_1.jsx)("p", {
-                  children: "aaa aaaaa"
-                })]
-              }), (0, jsx_runtime_1.jsxs)("li", {
-                children: [(0, jsx_runtime_1.jsx)("div", {
-                  children: "\u52A9\u76E3\u7763"
-                }), (0, jsx_runtime_1.jsx)("p", {
-                  children: "aaa aaaaa"
-                })]
-              }), (0, jsx_runtime_1.jsxs)("li", {
-                children: [(0, jsx_runtime_1.jsx)("div", {
-                  children: "\u30C7\u30A3\u30EC\u30AF\u30BF\u30FC"
-                }), (0, jsx_runtime_1.jsx)("p", {
-                  children: "aaa aaaaa"
-                })]
-              }), (0, jsx_runtime_1.jsxs)("li", {
-                children: [(0, jsx_runtime_1.jsx)("div", {
-                  children: "\u305D\u306E\u4ED6"
-                }), (0, jsx_runtime_1.jsx)("p", {
-                  children: "aaa aaaaa"
-                })]
-              })]
+              children: [(0, jsx_runtime_1.jsxs)("li", Object.assign({
+                className: "flex items-center mb-2"
+              }, {
+                children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+                  className: "font-bold text-xl mr-2"
+                }, {
+                  children: "\u539F\u984C"
+                })), (0, jsx_runtime_1.jsx)("p", Object.assign({
+                  className: "text-gray-300"
+                }, {
+                  children: original_title
+                }))]
+              })), (0, jsx_runtime_1.jsxs)("li", Object.assign({
+                className: "flex items-center mb-2"
+              }, {
+                children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+                  className: "font-bold text-xl mr-2"
+                }, {
+                  children: "\u72B6\u614B"
+                })), (0, jsx_runtime_1.jsx)("p", Object.assign({
+                  className: "text-gray-300"
+                }, {
+                  children: function () {
+                    if (status === "Released") {
+                      return "公開";
+                    } else {
+                      return "不明";
+                    }
+                  }()
+                }))]
+              }))]
             })
           }))]
-        })]
-      })), (0, jsx_runtime_1.jsx)("div", {
-        children: "\u4E3B\u306A\u51FA\u6F14\u8005"
-      }), (0, jsx_runtime_1.jsx)("ul", Object.assign({
-        className: "flex flex-row w-full overflow-x-scroll"
+        }))]
+      }))
+    }))
+  });
+};
+exports["default"] = DetailPageFirstView;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/single/index.tsx":
+/*!*********************************************!*\
+  !*** ./resources/ts/pages/single/index.tsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
+var TmdbApi_1 = __webpack_require__(/*! ../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
+var DetailPageFirstView_1 = __importDefault(__webpack_require__(/*! ./components/DetailPageFirstView */ "./resources/ts/pages/single/components/DetailPageFirstView.tsx"));
+var DetailPageCast_1 = __importDefault(__webpack_require__(/*! ./components/DetailPageCast */ "./resources/ts/pages/single/components/DetailPageCast.tsx"));
+var SinglePage = function SinglePage(props) {
+  var id = props.match.params.id;
+  /**
+   * @param dataJa 日本語訳された詳細データ
+   * @param dataEn 日本語訳されてない詳細データ
+   */
+  var _ref = (0, react_query_1.useQuery)("detailsJa", function () {
+      return (0, TmdbApi_1.getTmdbDetailsJa)(id);
+    }),
+    dataJa = _ref.data,
+    statusJa = _ref.status;
+  var _ref2 = (0, react_query_1.useQuery)("detailsEn", function () {
+      return (0, TmdbApi_1.getTmdbDetails)(id);
+    }),
+    dataEn = _ref2.data,
+    statusEn = _ref2.status;
+  if (statusJa === "loading") {
+    return (0, jsx_runtime_1.jsx)("h1", Object.assign({
+      className: "text-4xl font-bold"
+    }, {
+      children: "Loading..."
+    }));
+  }
+  if (statusEn === "loading") {
+    return (0, jsx_runtime_1.jsx)("h1", Object.assign({
+      className: "text-4xl font-bold"
+    }, {
+      children: "Loading..."
+    }));
+  }
+  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+    children: (0, jsx_runtime_1.jsxs)("main", Object.assign({
+      className: "main"
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
+        className: "font-bold text-xl leading-tight w-10/12 m-auto"
       }, {
-        children: data.credits.cast.slice(0, 10).map(function (v) {
-          return (0, jsx_runtime_1.jsxs)("li", Object.assign({
-            className: "max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 whitespace-wrap w-max"
-          }, {
-            children: [(0, jsx_runtime_1.jsx)("img", {
-              className: "max-w-none rounded-t-lg",
-              src: "https://image.tmdb.org/t/p/w154/".concat(v.profile_path)
-            }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-              className: "p-3 "
-            }, {
-              children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-                className: "font-bold"
-              }, {
-                children: v.name
-              })), (0, jsx_runtime_1.jsx)("div", {
-                children: v.character
-              })]
-            }))]
-          }), v.id);
-        })
-      }))]
+        children: "\u8A73\u7D30\u30DA\u30FC\u30B8"
+      })), (0, jsx_runtime_1.jsx)(DetailPageFirstView_1["default"], {
+        dataJa: dataJa,
+        dataEn: dataEn
+      }), (0, jsx_runtime_1.jsx)(DetailPageCast_1["default"], {
+        dataJa: dataJa
+      })]
     }))
   });
 };
