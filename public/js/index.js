@@ -2753,7 +2753,7 @@ var NowPlayingTmdbItem = function NowPlayingTmdbItem(_ref) {
         },
         src: "https://image.tmdb.org/t/p/w185/".concat(movie.poster_path)
       }), (0, jsx_runtime_1.jsx)("div", Object.assign({
-        className: "text-base h-20 whitespace-normal my-auto"
+        className: "text-base whitespace-normal my-auto"
       }, {
         children: movie.title
       }))]
@@ -2789,7 +2789,6 @@ var NowPlayingTmdbList = function NowPlayingTmdbList() {
   var _ref = (0, react_query_1.useQuery)("nowPlayingItem", TmdbApi_1.getNowPlayingTmdbItem),
     data = _ref.data,
     isLoading = _ref.isLoading;
-  console.log(data);
   if (isLoading) {
     return (0, jsx_runtime_1.jsx)("span", {
       children: "Loading..."
@@ -2845,7 +2844,7 @@ var PopularTmdbItem = function PopularTmdbItem(_ref) {
         },
         src: "https://image.tmdb.org/t/p/w185/".concat(movie.poster_path)
       }), (0, jsx_runtime_1.jsx)("div", Object.assign({
-        className: "text-base h-20 whitespace-normal my-auto"
+        className: "text-base whitespace-normal my-auto "
       }, {
         children: movie.title
       }))]
@@ -2881,7 +2880,6 @@ var PopularTmdbList = function PopularTmdbList() {
   var _ref = (0, react_query_1.useQuery)("popularItem", TmdbApi_1.getPopularTmdbItem),
     data = _ref.data,
     isLoading = _ref.isLoading;
-  console.log(data);
   if (isLoading) {
     return (0, jsx_runtime_1.jsx)("span", {
       children: "Loading..."
@@ -2973,7 +2971,6 @@ var TopRatedTmdbList = function TopRatedTmdbList() {
   var _ref = (0, react_query_1.useQuery)("topRatedItem", TmdbApi_1.getTopRatedTmdbItem),
     data = _ref.data,
     isLoading = _ref.isLoading;
-  console.log(data);
   if (isLoading) {
     return (0, jsx_runtime_1.jsx)("span", {
       children: "Loading..."
@@ -2991,6 +2988,58 @@ var TopRatedTmdbList = function TopRatedTmdbList() {
   }));
 };
 exports["default"] = TopRatedTmdbList;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/home/components/welcomeView/WelcomeView.tsx":
+/*!************************************************************************!*\
+  !*** ./resources/ts/pages/home/components/welcomeView/WelcomeView.tsx ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
+var TmdbApi_1 = __webpack_require__(/*! ../../../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
+var WelcomeView = function WelcomeView() {
+  var _ref = (0, react_query_1.useQuery)("getItem", TmdbApi_1.getPopularTmdbItem),
+    data = _ref.data,
+    isLoading = _ref.isLoading;
+  if (isLoading) {
+    return (0, jsx_runtime_1.jsx)("span", {
+      children: "Loading..."
+    });
+  }
+  // ランダムな整数をdataに入れ毎回welcome-viewの画像を変更する
+  var randomIndex = Math.floor(Math.random() * 20);
+  var backdrop_path = data[randomIndex].backdrop_path;
+  return (0, jsx_runtime_1.jsx)("div", Object.assign({
+    className: "welcome-view ",
+    style: {
+      backgroundImage: "url(https://image.tmdb.org/t/p/w1280".concat(backdrop_path, ")")
+    }
+  }, {
+    children: (0, jsx_runtime_1.jsxs)("div", Object.assign({
+      className: "welcome-view__content flex w-10/12 m-auto text-center flex-col font-bold justify-center text-white h-full"
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+        className: "text-4xl mb-2"
+      }, {
+        children: "\u3088\u3046\u3053\u305D\uFF01"
+      })), (0, jsx_runtime_1.jsx)("div", Object.assign({
+        className: "text-2xl"
+      }, {
+        children: "\u4F55\u767E\u4E07\u3082\u306E\u6620\u753B\u306E\u4E2D\u304B\u3089\u3042\u306A\u305F\u304C\u898B\u305F\u6620\u753B\u3092\u767B\u9332\u3057\u3088\u3046\uFF01"
+      }))]
+    }))
+  }));
+};
+exports["default"] = WelcomeView;
 
 /***/ }),
 
@@ -3015,24 +3064,27 @@ var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules
 var PopularTmdbList_1 = __importDefault(__webpack_require__(/*! ./components/popular/PopularTmdbList */ "./resources/ts/pages/home/components/popular/PopularTmdbList.tsx"));
 var TopRatedTmdList_1 = __importDefault(__webpack_require__(/*! ./components/topRatede/TopRatedTmdList */ "./resources/ts/pages/home/components/topRatede/TopRatedTmdList.tsx"));
 var NowPlayingTmdbList_1 = __importDefault(__webpack_require__(/*! ./components/nowPlaying/NowPlayingTmdbList */ "./resources/ts/pages/home/components/nowPlaying/NowPlayingTmdbList.tsx"));
+var WelcomeView_1 = __importDefault(__webpack_require__(/*! ./components/welcomeView/WelcomeView */ "./resources/ts/pages/home/components/welcomeView/WelcomeView.tsx"));
 var HomePage = function HomePage() {
-  return (0, jsx_runtime_1.jsxs)("main", Object.assign({
-    className: "w-10/12 m-auto"
-  }, {
-    children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
-      className: "font-bold text-xl"
+  return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
+    children: [(0, jsx_runtime_1.jsx)(WelcomeView_1["default"], {}), (0, jsx_runtime_1.jsxs)("main", Object.assign({
+      className: "w-10/12 m-auto"
     }, {
-      children: "\u4EBA\u6C17\u306E\u6620\u753B"
-    })), (0, jsx_runtime_1.jsx)(PopularTmdbList_1["default"], {}), (0, jsx_runtime_1.jsx)("h2", Object.assign({
-      className: "font-bold text-xl"
-    }, {
-      children: "\u8A55\u4FA1\u306E\u9AD8\u3044\u6620\u753B"
-    })), (0, jsx_runtime_1.jsx)(TopRatedTmdList_1["default"], {}), (0, jsx_runtime_1.jsx)("h2", Object.assign({
-      className: "font-bold text-xl"
-    }, {
-      children: "\u4E0A\u6620\u4E2D\u306E\u6620\u753B"
-    })), (0, jsx_runtime_1.jsx)(NowPlayingTmdbList_1["default"], {})]
-  }));
+      children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
+        className: "font-bold text-xl"
+      }, {
+        children: "\u4EBA\u6C17\u306E\u6620\u753B"
+      })), (0, jsx_runtime_1.jsx)(PopularTmdbList_1["default"], {}), (0, jsx_runtime_1.jsx)("h2", Object.assign({
+        className: "font-bold text-xl"
+      }, {
+        children: "\u8A55\u4FA1\u306E\u9AD8\u3044\u6620\u753B"
+      })), (0, jsx_runtime_1.jsx)(TopRatedTmdList_1["default"], {}), (0, jsx_runtime_1.jsx)("h2", Object.assign({
+        className: "font-bold text-xl"
+      }, {
+        children: "\u4E0A\u6620\u4E2D\u306E\u6620\u753B"
+      })), (0, jsx_runtime_1.jsx)(NowPlayingTmdbList_1["default"], {})]
+    }))]
+  });
 };
 exports["default"] = HomePage;
 

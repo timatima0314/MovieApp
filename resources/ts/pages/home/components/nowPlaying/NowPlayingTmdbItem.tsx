@@ -13,7 +13,7 @@ const NowPlayingTmdbItem: React.VFC<any> = ({ movie }) => {
                     style={{ width: 185 ,height:278}}
                     src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
                 />
-                <div className="text-base h-20 whitespace-normal my-auto">
+                <div className="text-base whitespace-normal my-auto">
                     {movie.title}
                 </div>
             </NavLink>

@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import TopRatedTmdbItem from "./TopRatedTmdItem";
 const TopRatedTmdbList: React.VFC = () => {
     const { data, isLoading } = useQuery("topRatedItem", getTopRatedTmdbItem);
-    console.log(data);
     if (isLoading) {
         return <span>Loading...</span>;
     }

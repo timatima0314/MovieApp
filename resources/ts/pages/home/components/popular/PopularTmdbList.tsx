@@ -5,7 +5,6 @@ import PopularTmdbItem from "./PopularTmdbItem";
 
 const PopularTmdbList: React.VFC = () => {
     const { data, isLoading } = useQuery("popularItem", getPopularTmdbItem);
-    console.log(data);
     if (isLoading) {
         return <span>Loading...</span>;
     }

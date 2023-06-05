@@ -8,7 +8,6 @@ const NowPlayingTmdbList: React.VFC = () => {
         "nowPlayingItem",
         getNowPlayingTmdbItem
     );
-    console.log(data);
     if (isLoading) {
         return <span>Loading...</span>;
     }
