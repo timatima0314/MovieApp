@@ -2265,7 +2265,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.getNowPlayingTmdbItem = exports.getTmdbDetails = exports.getTmdbDetailsJa = exports.getTopRatedTmdbItem = exports.getPopularTmdbItem = void 0;
+exports.getTmdbSearch = exports.getNowPlayingTmdbItem = exports.getTmdbDetails = exports.getTmdbDetailsJa = exports.getTopRatedTmdbItem = exports.getPopularTmdbItem = void 0;
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 // 人気の映画
 var getPopularTmdbItem = function getPopularTmdbItem() {
@@ -2372,6 +2372,27 @@ var getTmdbDetails = function getTmdbDetails(id) {
   }));
 };
 exports.getTmdbDetails = getTmdbDetails;
+var getTmdbSearch = function getTmdbSearch(searchTitle) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+    var _yield$axios_1$defaul6, data;
+    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.next = 2;
+          return axios_1["default"].get("https://api.themoviedb.org/3/search/movie?query=".concat(searchTitle, "&api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&language=ja-JA"));
+        case 2:
+          _yield$axios_1$defaul6 = _context6.sent;
+          data = _yield$axios_1$defaul6.data;
+          console.log(data.results);
+          return _context6.abrupt("return", data.results);
+        case 6:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6);
+  }));
+};
+exports.getTmdbSearch = getTmdbSearch;
 
 /***/ }),
 
@@ -3007,7 +3028,7 @@ var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules
 var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
 var TmdbApi_1 = __webpack_require__(/*! ../../../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
 var WelcomeView = function WelcomeView() {
-  var _ref = (0, react_query_1.useQuery)("getItem", TmdbApi_1.getPopularTmdbItem),
+  var _ref = (0, react_query_1.useQuery)("getWelcomeViewImg", TmdbApi_1.getPopularTmdbItem),
     data = _ref.data,
     isLoading = _ref.isLoading;
   if (isLoading) {
@@ -3204,15 +3225,110 @@ exports["default"] = MyPage;
 "use strict";
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+// import { useQuery } from "react-query";
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var TmdbApi_1 = __webpack_require__(/*! ../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
 var SearchPage = function SearchPage() {
-  return (0, jsx_runtime_1.jsx)("h1", Object.assign({
-    className: "text-red-400 text-4xl"
+  var _ref = (0, react_1.useState)(""),
+    _ref2 = _slicedToArray(_ref, 2),
+    item = _ref2[0],
+    setItem = _ref2[1];
+  var _ref3 = (0, react_1.useState)([]),
+    _ref4 = _slicedToArray(_ref3, 2),
+    xxxx = _ref4[0],
+    yyyy = _ref4[1];
+  var search = function search(e) {
+    e.preventDefault();
+    (0, TmdbApi_1.getTmdbSearch)(item).then(function (i) {
+      yyyy(i);
+    })
+    // todo エラー記述
+    ["catch"](function () {});
+  };
+  console.log(xxxx);
+  return (0, jsx_runtime_1.jsxs)("main", Object.assign({
+    className: "w-10/12 m-auto"
   }, {
-    children: "SearchPage"
+    children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
+      className: "text-red-400 text-4xl"
+    }, {
+      children: "SearchPage"
+    })), (0, jsx_runtime_1.jsxs)("form", Object.assign({
+      onSubmit: search
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("input", {
+        className: "shadow appearance-none border rounded w-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+        type: "text",
+        value: item,
+        onChange: function onChange(e) {
+          return setItem(e.target.value);
+        }
+      }), (0, jsx_runtime_1.jsx)("button", {
+        children: "search"
+      })]
+    })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+      className: "flex  w-full mb-5 flex-col  "
+    }, {
+      children: xxxx.map(function (item) {
+        return (0, jsx_runtime_1.jsx)("li", Object.assign({
+          className: "w-full mb-4",
+          style: {
+            height: 132
+          }
+        }, {
+          children: (0, jsx_runtime_1.jsx)(react_router_dom_1.NavLink, Object.assign({
+            to: "/singl-page/".concat(item.id)
+          }, {
+            children: (0, jsx_runtime_1.jsxs)("div", Object.assign({
+              className: "flex w-full bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            }, {
+              children: [(0, jsx_runtime_1.jsx)("img", {
+                style: {
+                  width: 92,
+                  height: 132
+                },
+                className: "mr-4 search-poster-img",
+                src: "https://image.tmdb.org/t/p/w92/".concat(item.poster_path)
+              }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+                className: "py-2 pr-2"
+              }, {
+                children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+                  className: "font-bold text-xl"
+                }, {
+                  children: item.title
+                })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+                  className: "text-gray-400 mb-4"
+                }, {
+                  children: ["\u516C\u958B\u65E5:", item.release_date]
+                })), (0, jsx_runtime_1.jsx)("div", Object.assign({
+                  className: ""
+                }, {
+                  children: function () {
+                    if (item.overview.length > 100) {
+                      var modStr = item.overview.substr(0, 100) + "...";
+                      return modStr;
+                    } else {
+                      return item.overview;
+                    }
+                  }()
+                }))]
+              }))]
+            }))
+          }))
+        }), item.id);
+      })
+    }))]
   }));
 };
 exports["default"] = SearchPage;

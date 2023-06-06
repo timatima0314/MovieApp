@@ -146,4 +146,8 @@ img {
   width: 116px;
 }
 
+.search-poster-img {
+  border-radius: 5px 0 0 5px;
+}
+
 /*# sourceMappingURL=app.css.map */

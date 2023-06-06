@@ -38,7 +38,7 @@ img {
         );
     }
 }
-.welcome-view__content{
+.welcome-view__content {
     position: sticky;
 }
 .first-view {
@@ -152,4 +152,7 @@ img {
 /*評価4.5の時*/
 .star-rating-45 .star-rating-front {
     width: 116px;
+}
+.search-poster-img {
+    border-radius: 5px 0 0 5px;
 }

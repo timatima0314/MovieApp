@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { getPopularTmdbItem } from "../../../../api/TmdbApi";
 const WelcomeView: React.VFC = () => {
-    const { data, isLoading } = useQuery("getItem", getPopularTmdbItem);
+    const { data, isLoading } = useQuery("getWelcomeViewImg", getPopularTmdbItem);
     if (isLoading) {
         return <span>Loading...</span>;
     }
