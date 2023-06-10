@@ -28,7 +28,6 @@ const getTmdbDetails = async (id: any) => {
 
 const getTmdbSearch= async(searchTitle:string)=>{
     const {data}=await axios.get(`https://api.themoviedb.org/3/search/movie?query=${searchTitle}&api_key=${process.env.MIX_TMDB_APP_KEY}&language=ja-JA`)
-    console.log(data.results)
     return data.results
 }
 export { getPopularTmdbItem, getTopRatedTmdbItem, getTmdbDetailsJa, getTmdbDetails, getNowPlayingTmdbItem ,getTmdbSearch}

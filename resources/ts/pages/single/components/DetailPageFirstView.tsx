@@ -94,12 +94,21 @@ const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
             >
                 <div className="flex w-10/12 first-view__content text-white">
                     <div className="mr-8 my-auto" style={{ width: 300 }}>
-                        <img
-                            width="300"
-                            height="450"
-                            className="items-center max-w-none"
-                            src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
-                        />
+                        {poster_path ? (
+                            <img
+                                width="300"
+                                height="450"
+                                className="items-center max-w-none"
+                                src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
+                            />
+                        ) : (
+                            <img
+                                width="300"
+                                height="450"
+                                className="items-center max-w-none"
+                                src={"/images/title_no_image.png"}
+                            />
+                        )}
                     </div>
                     <div className="w-full flex flex-col justify-center ">
                         <div className="title-box">
@@ -127,7 +136,18 @@ const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
                                 概要
                             </div>
                             <p className="summary-text text-gray-300">
-                                {overview ? overview : overviewEn}
+                                {overview
+                                    ? (() => {
+                                          if (overview.length > 400) {
+                                              const modStr =
+                                                  overview.substr(0, 400) +
+                                                  "...";
+                                              return modStr;
+                                          } else {
+                                              return overview;
+                                          }
+                                      })()
+                                    : overviewEn}
                             </p>
                         </div>
                         <div className="review-container flex items-center mb-2">

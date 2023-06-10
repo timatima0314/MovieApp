@@ -60,6 +60,11 @@ img {
   z-index: 100;
 }
 
+.search__first-view {
+  background-image: linear-gradient(90deg, rgb(74, 55, 196), rgba(74, 14, 255, 0.35));
+  height: 450px;
+}
+
 .star-rating {
   display: flex;
   position: relative;

@@ -30,7 +30,7 @@ const DetailPageCast: React.VFC<Props> = ({ dataJa }) => {
                                     width={154}
                                     height={231}
                                     className="max-w-none rounded-t-lg m-auto"
-                                    src={"/images/no_images.png"}
+                                    src={"/images/person_no_images.png"}
                                 />
                             )}
                             <div className="p-3 ">

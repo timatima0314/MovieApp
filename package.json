@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@types/lodash": "^4.14.195",
         "@types/react": "^17.0.58",
         "@types/react-dom": "^17.0.20",
         "@types/react-router-dom": "^5.3.3",
