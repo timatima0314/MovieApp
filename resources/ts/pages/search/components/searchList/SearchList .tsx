@@ -24,7 +24,7 @@ const SearchList: React.VFC<Props> = (props) => {
                             key={item.id}
                             style={{ height: 132 }}
                         >
-                            <NavLink to={`/singl-page/${item.id}`}>
+                            <NavLink to={`/detail-page/${item.id}`}>
                                 <div className="flex w-full bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                                     {item.poster_path ? (
                                         <img

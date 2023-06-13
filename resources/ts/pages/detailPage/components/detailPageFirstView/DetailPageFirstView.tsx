@@ -1,4 +1,6 @@
 import React from "react";
+import { useCreateMovie } from "../../../../queries/MovieQuery";
+import axios from "axios";
 interface Props {
     dataJa: any;
     dataEn: any;
@@ -8,7 +10,8 @@ const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
         id: number;
         name: string;
     }
-    console.log(dataJa);
+    const creatMovie = useCreateMovie();
+
     /**
      *@param {String} title タイトル
      *@param {Array[]} genres  ジャンル
@@ -83,6 +86,12 @@ const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
             comprehensive_evaluation = 5;
             break;
     }
+    const handleSubmit = () => {
+        console.log(title);
+        creatMovie.mutate(title);
+        // setTitle("");
+    };
+    
 
     return (
         <>
@@ -199,6 +208,12 @@ const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
                                         })()}
                                     </p>
                                 </li>
+                                <button
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                                    onClick={handleSubmit}
+                                >
+                                    登録する
+                                </button>
                             </ul>
                         </div>
                     </div>

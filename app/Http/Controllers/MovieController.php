@@ -26,7 +26,6 @@ class MovieController extends Controller
             'user_id' => Auth::id()
         ]);
         $movie = Movie::create($request->all());
-
         return $movie
             ? response()->json($movie, 201)
             : response()->json([], 500);

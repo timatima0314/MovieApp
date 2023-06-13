@@ -15,7 +15,7 @@ import { useUser } from "./queries/AuthQuery";
 import SearchPage from "./pages/search";
 import HomePage from "./pages/home";
 import MyPage from "./pages/mypage/index";
-import SinglePage from "./pages/single";
+import DetailPage from "./pages/detailPage";
 const Router = () => {
     const { isAuth, setIsAuth } = useAuth();
     const { data: authUser } = useUser();
@@ -43,8 +43,8 @@ const Router = () => {
                     {/* <GuardRoute exact path="/">
                         <HomePage />
                     </GuardRoute> */}
-                    <GuardRoute exact path="/mypage" component={MyPage} />
-                    <Route path="/singl-page/:id" component={SinglePage} />
+                    <GuardRoute path="/mypage" component={MyPage} />
+                    <GuardRoute path="/detail-page/:id" component={DetailPage} />
 
                     <GuardRoute path="/search">
                         <SearchPage />

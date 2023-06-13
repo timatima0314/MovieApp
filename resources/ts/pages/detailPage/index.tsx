@@ -2,9 +2,9 @@ import React from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { getTmdbDetailsJa, getTmdbDetails } from "../../api/TmdbApi";
-import DetailPageFirstView from "./components/DetailPageFirstView";
-import DetailPageCast from "./components/DetailPageCast";
-const SinglePage: React.VFC = (props: any) => {
+import DetailPageFirstView from "./components/detailPageFirstView/DetailPageFirstView";
+import DetailPageCast from "./components/detailPageCast/DetailPageCast";
+const DetailPage: React.VFC = (props: any) => {
     const id = props.match.params.id;
 
     /**
@@ -23,6 +23,7 @@ const SinglePage: React.VFC = (props: any) => {
     if (statusEn === "loading") {
         return <h1 className="text-4xl font-bold">Loading...</h1>;
     }
+
     return (
         <>
             <main className="main">
@@ -35,4 +36,4 @@ const SinglePage: React.VFC = (props: any) => {
         </>
     );
 };
-export default SinglePage;
+export default DetailPage;

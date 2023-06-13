@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import SearchFirstView from "./components/searchFirstView/SearchFirstView";
 import SearchList from "./components/searchList/SearchList ";
 const SearchPage: React.VFC = () => {

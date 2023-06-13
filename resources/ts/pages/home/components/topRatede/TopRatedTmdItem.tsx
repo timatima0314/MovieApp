@@ -5,7 +5,7 @@ const TopRatedTmdbItem: React.VFC<any> = ({ movie }) => {
         <li className="mr-4" key={movie.id} style={{ width: 185 }}>
             <NavLink
                 className="truncate text-xs"
-                to={`/singl-page/${movie.id}`}
+                to={`detail-page/${movie.id}`}
             >
                 <img
                     width={185}

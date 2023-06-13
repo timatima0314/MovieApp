@@ -3,11 +3,12 @@ import { Movie } from "../types/Movie";
 
 const getMovies = async () => {
     const { data } = await axios.get<Movie[]>("api/movies");
+    console.log(data)
     return data;
 }
 
 const createMovie = async (title: string) => {
-    const { data } = await axios.post<Movie>(`api/movies`, { title: title });
+    const { data } = await axios.post<Movie>(`/api/movies`, { title: title });
     return data;
 }
 

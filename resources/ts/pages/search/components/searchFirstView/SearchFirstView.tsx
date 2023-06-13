@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 import { getTmdbSearch } from "../../../../api/TmdbApi";
 import { pick } from "lodash";
 interface Props {
@@ -9,7 +11,7 @@ const SearchFirstView: React.VFC<Props> = (props) => {
 
     const newItem: any = [];
 
-    const search = (e: any) => {
+    const search = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (keywordSearch === "") {
             alert("何か入力しましょう。");
@@ -34,14 +36,18 @@ const SearchFirstView: React.VFC<Props> = (props) => {
             .catch(() => {});
         // console.log(movies);
     };
+    const createMovie = async () => {
+        const { data } = await axios.post<any>(`api/movies`, { title: "ffff" });
+        return data;
+    };
+
 
     return (
         <div className="search__first-view flex flex-col justify-center mb-4">
             <h1 className="text-4xl text-white text-center mb-4">
                 お探しのタイトルを入力しましよう！
             </h1>
-
-            <form onSubmit={search} className=" text-center">
+Ï            <form onSubmit={search} className=" text-center">
                 <input
                     className="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     type="text"

@@ -2219,6 +2219,142 @@ exports.logout = logout;
 
 /***/ }),
 
+/***/ "./resources/ts/api/MovieAPI.ts":
+/*!**************************************!*\
+  !*** ./resources/ts/api/MovieAPI.ts ***!
+  \**************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.deleteMovie = exports.updateMovie = exports.createMovie = exports.getMovies = void 0;
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+var getMovies = function getMovies() {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _yield$axios_1$defaul, data;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return axios_1["default"].get("api/movies");
+        case 2:
+          _yield$axios_1$defaul = _context.sent;
+          data = _yield$axios_1$defaul.data;
+          console.log(data);
+          return _context.abrupt("return", data);
+        case 6:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+};
+exports.getMovies = getMovies;
+var createMovie = function createMovie(title) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var _yield$axios_1$defaul2, data;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return axios_1["default"].post("/api/movies", {
+            title: title
+          });
+        case 2:
+          _yield$axios_1$defaul2 = _context2.sent;
+          data = _yield$axios_1$defaul2.data;
+          return _context2.abrupt("return", data);
+        case 5:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+};
+exports.createMovie = createMovie;
+var updateMovie = function updateMovie(_ref) {
+  var id = _ref.id,
+    movie = _ref.movie;
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var _yield$axios_1$defaul3, data;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return axios_1["default"].patch("api/movies/".concat(id), movie);
+        case 2:
+          _yield$axios_1$defaul3 = _context3.sent;
+          data = _yield$axios_1$defaul3.data;
+          return _context3.abrupt("return", data);
+        case 5:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+};
+exports.updateMovie = updateMovie;
+var deleteMovie = function deleteMovie(id) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+    var _yield$axios_1$defaul4, data;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return axios_1["default"]["delete"]("api/movies/".concat(id));
+        case 2:
+          _yield$axios_1$defaul4 = _context4.sent;
+          data = _yield$axios_1$defaul4.data;
+          return _context4.abrupt("return", data);
+        case 5:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+};
+exports.deleteMovie = deleteMovie;
+
+/***/ }),
+
 /***/ "./resources/ts/api/TmdbApi.ts":
 /*!*************************************!*\
   !*** ./resources/ts/api/TmdbApi.ts ***!
@@ -2712,6 +2848,373 @@ react_dom_1["default"].render((0, jsx_runtime_1.jsx)(App_1["default"], {}), docu
 
 /***/ }),
 
+/***/ "./resources/ts/pages/detailPage/components/detailPageCast/DetailPageCast.tsx":
+/*!************************************************************************************!*\
+  !*** ./resources/ts/pages/detailPage/components/detailPageCast/DetailPageCast.tsx ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var DetailPageCast = function DetailPageCast(_ref) {
+  var dataJa = _ref.dataJa;
+  /**
+   *@param {Any} credits クレジット、出演者などのデータ
+   */
+  var credits = dataJa.credits;
+  return (0, jsx_runtime_1.jsxs)("div", Object.assign({
+    className: "w-10/12 m-auto"
+  }, {
+    children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+      className: "font-bold text-xl "
+    }, {
+      children: "\u4E3B\u306A\u51FA\u6F14\u8005"
+    })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+      className: "flex flex-row w-full overflow-x-scroll"
+    }, {
+      children: credits.cast.slice(0, 10).map(function (item) {
+        return (0, jsx_runtime_1.jsxs)("li", Object.assign({
+          className: "max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 whitespace-wrap w-max"
+        }, {
+          children: [item.profile_path ? (0, jsx_runtime_1.jsx)("img", {
+            width: 154,
+            height: 231,
+            className: "max-w-none rounded-t-lg m-auto",
+            src: "https://image.tmdb.org/t/p/w154/".concat(item.profile_path)
+          }) : (0, jsx_runtime_1.jsx)("img", {
+            width: 154,
+            height: 231,
+            className: "max-w-none rounded-t-lg m-auto",
+            src: "/images/person_no_images.png"
+          }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "p-3 "
+          }, {
+            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+              className: "font-bold"
+            }, {
+              children: item.name
+            })), (0, jsx_runtime_1.jsx)("div", {
+              children: item.character
+            })]
+          }))]
+        }), item.id);
+      })
+    }))]
+  }));
+};
+exports["default"] = DetailPageCast;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/detailPage/components/detailPageFirstView/DetailPageFirstView.tsx":
+/*!**********************************************************************************************!*\
+  !*** ./resources/ts/pages/detailPage/components/detailPageFirstView/DetailPageFirstView.tsx ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var MovieQuery_1 = __webpack_require__(/*! ../../../../queries/MovieQuery */ "./resources/ts/queries/MovieQuery.ts");
+var DetailPageFirstView = function DetailPageFirstView(_ref) {
+  var dataJa = _ref.dataJa,
+    dataEn = _ref.dataEn;
+  var creatMovie = (0, MovieQuery_1.useCreateMovie)();
+  /**
+   *@param {String} title タイトル
+   *@param {Array[]} genres  ジャンル
+   *@param {Any} poster_path ポスター画像のパス
+   *@param {Number} vote_average TmdbAPIの総合評価
+   *@param {string} overview 日本語訳された概要
+   *@param {string} original_title オリジナルタイトル
+   *@param {string} status 公開されたかどうか
+   */
+  var title = dataJa.title,
+    genres = dataJa.genres,
+    poster_path = dataJa.poster_path,
+    backdrop_path = dataJa.backdrop_path,
+    vote_average = dataJa.vote_average,
+    overview = dataJa.overview,
+    original_title = dataJa.original_title,
+    status = dataJa.status;
+  /**
+   * @param {string} overviewEn 英語の概要
+   */
+  var overviewEn = dataEn.overview;
+  // TmdbAPIの評価が10段階のため2でわる
+  var evaluation = vote_average / 2;
+  // 総合評価
+  var comprehensive_evaluation = 0;
+  // 総合評価は('0','0.5','1','1.5','2','2.5','3','3.5','4','4.5','5')とする
+  switch (true) {
+    case evaluation < 0.5:
+      comprehensive_evaluation = 0;
+      break;
+    case evaluation >= 0.5 && evaluation < 1:
+      comprehensive_evaluation = 0.5;
+      break;
+    case evaluation >= 1 && evaluation < 1.5:
+      comprehensive_evaluation = 1;
+      break;
+    case evaluation >= 1.5 && evaluation < 2:
+      comprehensive_evaluation = 1.5;
+      break;
+    case evaluation >= 2 && evaluation < 2.5:
+      comprehensive_evaluation = 2;
+      break;
+    case evaluation >= 2.5 && evaluation < 3:
+      comprehensive_evaluation = 2.5;
+      break;
+    case evaluation >= 3 && evaluation < 3.5:
+      comprehensive_evaluation = 3;
+      break;
+    case evaluation > 3.5 && evaluation < 4:
+      comprehensive_evaluation = 3.5;
+      break;
+    case evaluation >= 4 && evaluation < 4.5:
+      comprehensive_evaluation = 4;
+      break;
+    case evaluation >= 4.5 && evaluation < 5:
+      comprehensive_evaluation = 4.5;
+      break;
+    case evaluation === 5:
+      comprehensive_evaluation = 5;
+      break;
+  }
+  var handleSubmit = function handleSubmit() {
+    console.log(title);
+    creatMovie.mutate(title);
+    // setTitle("");
+  };
+
+  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+    children: (0, jsx_runtime_1.jsx)("div", Object.assign({
+      className: "first-view ",
+      style: {
+        backgroundImage: "url(https://image.tmdb.org/t/p/w1280".concat(backdrop_path, ")")
+      }
+    }, {
+      children: (0, jsx_runtime_1.jsxs)("div", Object.assign({
+        className: "flex w-10/12 first-view__content text-white"
+      }, {
+        children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+          className: "mr-8 my-auto",
+          style: {
+            width: 300
+          }
+        }, {
+          children: poster_path ? (0, jsx_runtime_1.jsx)("img", {
+            width: "300",
+            height: "450",
+            className: "items-center max-w-none",
+            src: "https://image.tmdb.org/t/p/w300/".concat(poster_path)
+          }) : (0, jsx_runtime_1.jsx)("img", {
+            width: "300",
+            height: "450",
+            className: "items-center max-w-none",
+            src: "/images/title_no_image.png"
+          })
+        })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+          className: "w-full flex flex-col justify-center "
+        }, {
+          children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "title-box"
+          }, {
+            children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
+              className: "text-4xl font-bold mb-2"
+            }, {
+              children: title
+            })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+              className: "flex mb-2"
+            }, {
+              children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+                className: "font-bold mr-3 text-xl \t"
+              }, {
+                children: "\u30B8\u30E3\u30F3\u30EB"
+              })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+                className: "flex items-center flex-wrap text-gray-300"
+              }, {
+                children: genres.map(function (item) {
+                  return (0, jsx_runtime_1.jsx)("li", Object.assign({
+                    className: "mr-3"
+                  }, {
+                    children: item.name
+                  }), item.name);
+                })
+              }))]
+            }))]
+          })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "summary-box mb-2"
+          }, {
+            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+              className: "summary-title font-bold text-xl\t"
+            }, {
+              children: "\u6982\u8981"
+            })), (0, jsx_runtime_1.jsx)("p", Object.assign({
+              className: "summary-text text-gray-300"
+            }, {
+              children: overview ? function () {
+                if (overview.length > 400) {
+                  var modStr = overview.substr(0, 400) + "...";
+                  return modStr;
+                } else {
+                  return overview;
+                }
+              }() : overviewEn
+            }))]
+          })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+            className: "review-container flex items-center mb-2"
+          }, {
+            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+              className: "font-bold text-xl mr-2"
+            }, {
+              children: "\u8A55\u4FA1"
+            })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+              className: "star-rating star-rating-".concat(comprehensive_evaluation * 10)
+            }, {
+              children: [(0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsxs)("div", Object.assign({
+                className: "star-rating-front"
+              }, {
+                children: [(0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {})]
+              })), (0, jsx_runtime_1.jsx)("div", Object.assign({
+                className: "score text-gray-300"
+              }, {
+                children: comprehensive_evaluation
+              }))]
+            }))]
+          })), (0, jsx_runtime_1.jsx)("div", Object.assign({
+            className: "other-box"
+          }, {
+            children: (0, jsx_runtime_1.jsxs)("ul", {
+              children: [(0, jsx_runtime_1.jsxs)("li", Object.assign({
+                className: "flex items-center mb-2"
+              }, {
+                children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+                  className: "font-bold text-xl mr-2"
+                }, {
+                  children: "\u539F\u984C"
+                })), (0, jsx_runtime_1.jsx)("p", Object.assign({
+                  className: "text-gray-300"
+                }, {
+                  children: original_title
+                }))]
+              })), (0, jsx_runtime_1.jsxs)("li", Object.assign({
+                className: "flex items-center mb-2"
+              }, {
+                children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+                  className: "font-bold text-xl mr-2"
+                }, {
+                  children: "\u72B6\u614B"
+                })), (0, jsx_runtime_1.jsx)("p", Object.assign({
+                  className: "text-gray-300"
+                }, {
+                  children: function () {
+                    if (status === "Released") {
+                      return "公開";
+                    } else {
+                      return "不明";
+                    }
+                  }()
+                }))]
+              })), (0, jsx_runtime_1.jsx)("button", Object.assign({
+                className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
+                onClick: handleSubmit
+              }, {
+                children: "\u767B\u9332\u3059\u308B"
+              }))]
+            })
+          }))]
+        }))]
+      }))
+    }))
+  });
+};
+exports["default"] = DetailPageFirstView;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/detailPage/index.tsx":
+/*!*************************************************!*\
+  !*** ./resources/ts/pages/detailPage/index.tsx ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
+var TmdbApi_1 = __webpack_require__(/*! ../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
+var DetailPageFirstView_1 = __importDefault(__webpack_require__(/*! ./components/detailPageFirstView/DetailPageFirstView */ "./resources/ts/pages/detailPage/components/detailPageFirstView/DetailPageFirstView.tsx"));
+var DetailPageCast_1 = __importDefault(__webpack_require__(/*! ./components/detailPageCast/DetailPageCast */ "./resources/ts/pages/detailPage/components/detailPageCast/DetailPageCast.tsx"));
+var DetailPage = function DetailPage(props) {
+  var id = props.match.params.id;
+  /**
+   * @param dataJa 日本語訳された詳細データ
+   * @param dataEn 日本語訳されてない詳細データ
+   */
+  var _ref = (0, react_query_1.useQuery)("detailsJa", function () {
+      return (0, TmdbApi_1.getTmdbDetailsJa)(id);
+    }),
+    dataJa = _ref.data,
+    statusJa = _ref.status;
+  var _ref2 = (0, react_query_1.useQuery)("detailsEn", function () {
+      return (0, TmdbApi_1.getTmdbDetails)(id);
+    }),
+    dataEn = _ref2.data,
+    statusEn = _ref2.status;
+  if (statusJa === "loading") {
+    return (0, jsx_runtime_1.jsx)("h1", Object.assign({
+      className: "text-4xl font-bold"
+    }, {
+      children: "Loading..."
+    }));
+  }
+  if (statusEn === "loading") {
+    return (0, jsx_runtime_1.jsx)("h1", Object.assign({
+      className: "text-4xl font-bold"
+    }, {
+      children: "Loading..."
+    }));
+  }
+  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+    children: (0, jsx_runtime_1.jsxs)("main", Object.assign({
+      className: "main"
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
+        className: "font-bold text-xl leading-tight w-10/12 m-auto"
+      }, {
+        children: "\u8A73\u7D30\u30DA\u30FC\u30B8"
+      })), (0, jsx_runtime_1.jsx)(DetailPageFirstView_1["default"], {
+        dataJa: dataJa,
+        dataEn: dataEn
+      }), (0, jsx_runtime_1.jsx)(DetailPageCast_1["default"], {
+        dataJa: dataJa
+      })]
+    }))
+  });
+};
+exports["default"] = DetailPage;
+
+/***/ }),
+
 /***/ "./resources/ts/pages/error/index.tsx":
 /*!********************************************!*\
   !*** ./resources/ts/pages/error/index.tsx ***!
@@ -2762,7 +3265,7 @@ var NowPlayingTmdbItem = function NowPlayingTmdbItem(_ref) {
   }, {
     children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.NavLink, Object.assign({
       className: "truncate text-xs",
-      to: "/singl-page/".concat(movie.id)
+      to: "/detail-page/".concat(movie.id)
     }, {
       children: [(0, jsx_runtime_1.jsx)("img", {
         width: 185,
@@ -2853,7 +3356,7 @@ var PopularTmdbItem = function PopularTmdbItem(_ref) {
   }, {
     children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.NavLink, Object.assign({
       className: "truncate text-xs",
-      to: "/singl-page/".concat(movie.id)
+      to: "/detail-page/".concat(movie.id)
     }, {
       children: [(0, jsx_runtime_1.jsx)("img", {
         width: 185,
@@ -2944,7 +3447,7 @@ var TopRatedTmdbItem = function TopRatedTmdbItem(_ref) {
   }, {
     children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.NavLink, Object.assign({
       className: "truncate text-xs",
-      to: "/singl-page/".concat(movie.id)
+      to: "detail-page/".concat(movie.id)
     }, {
       children: [(0, jsx_runtime_1.jsx)("img", {
         width: 185,
@@ -3199,15 +3702,79 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var MyPage = function MyPage(props) {
-  console.log(props);
-  var id = props.match.params.id;
-  // console.log(id)
-  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
-    children: (0, jsx_runtime_1.jsx)("h1", Object.assign({
-      className: "text-red-400 text-4xl"
+var MovieQuery_1 = __webpack_require__(/*! ../../queries/MovieQuery */ "./resources/ts/queries/MovieQuery.ts");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var MyPage = function MyPage() {
+  var _ref = (0, MovieQuery_1.useMovies)(),
+    movies = _ref.data,
+    status = _ref.status;
+  if (status === "loading") {
+    return (0, jsx_runtime_1.jsx)("div", Object.assign({
+      className: "text-center"
     }, {
-      children: "MyPage"
+      children: "\u8AAD\u307F\u8FBC\u307F\u4E2D"
+    }));
+  } else if (status === "error") {
+    return (0, jsx_runtime_1.jsx)("div", Object.assign({
+      className: "text-center"
+    }, {
+      children: "\u30C7\u30FC\u30BF\u306E\u8AAD\u307F\u8FBC\u307F\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002"
+    }));
+  } else if (!movies || movies.length <= 0) {
+    return (0, jsx_runtime_1.jsx)("div", Object.assign({
+      className: "text-center"
+    }, {
+      children: "\u767B\u9332\u3055\u308C\u305F\u30C7\u30FC\u30BF\u306F\u3042\u308A\u307E\u305B\u3093\u3002"
+    }));
+  }
+  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+    children: (0, jsx_runtime_1.jsxs)("main", Object.assign({
+      className: "w-10/12 m-auto"
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
+        className: "text-red-400 text-4xl"
+      }, {
+        children: "\u3042\u306A\u305F\u304C\u767B\u9332\u3057\u305F\u4F5C\u54C1"
+      })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+        className: "flex flex-row flex-wrap w-full mb-5 "
+      }, {
+        children: movies.map(function (movie) {
+          // console.log(movie.id);
+          return (0, jsx_runtime_1.jsx)("li", Object.assign({
+            className: "block mb-2 max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mr-2",
+            style: {
+              width: 204
+            }
+          }, {
+            children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.NavLink, Object.assign({
+              className: "truncate text-xs",
+              to: "/detail-page/".concat(movie.id)
+            }, {
+              children: [movie.poster_path ? (0, jsx_runtime_1.jsx)("img", {
+                width: 185,
+                height: 278,
+                style: {
+                  width: 185,
+                  height: 278
+                },
+                src: "https://image.tmdb.org/t/p/w185/".concat(movie.poster_path)
+              }) : (0, jsx_runtime_1.jsx)("img", {
+                width: 185,
+                height: 278,
+                style: {
+                  width: 185,
+                  height: 278
+                },
+                src: "/images/title_no_image.png"
+              }), (0, jsx_runtime_1.jsx)("div", Object.assign({
+                className: "text-base whitespace-normal my-auto"
+              }, {
+                children: movie.title
+              }))]
+            }))
+          }), movie.id);
+        })
+      }))]
     }))
   });
 };
@@ -3219,22 +3786,57 @@ exports["default"] = MyPage;
 /*!**********************************************************************************!*\
   !*** ./resources/ts/pages/search/components/searchFirstView/SearchFirstView.tsx ***!
   \**********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 var TmdbApi_1 = __webpack_require__(/*! ../../../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
 var lodash_1 = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 var SearchFirstView = function SearchFirstView(props) {
@@ -3261,6 +3863,27 @@ var SearchFirstView = function SearchFirstView(props) {
     // console.log(movies);
   };
 
+  var createMovie = function createMovie() {
+    return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _yield$axios_1$defaul, data;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return axios_1["default"].post("api/movies", {
+              title: "ffff"
+            });
+          case 2:
+            _yield$axios_1$defaul = _context.sent;
+            data = _yield$axios_1$defaul.data;
+            return _context.abrupt("return", data);
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+  };
   return (0, jsx_runtime_1.jsxs)("div", Object.assign({
     className: "search__first-view flex flex-col justify-center mb-4"
   }, {
@@ -3268,7 +3891,7 @@ var SearchFirstView = function SearchFirstView(props) {
       className: "text-4xl text-white text-center mb-4"
     }, {
       children: "\u304A\u63A2\u3057\u306E\u30BF\u30A4\u30C8\u30EB\u3092\u5165\u529B\u3057\u307E\u3057\u3088\u3046\uFF01"
-    })), (0, jsx_runtime_1.jsxs)("form", Object.assign({
+    })), "\xCF            ", (0, jsx_runtime_1.jsxs)("form", Object.assign({
       onSubmit: search,
       className: " text-center"
     }, {
@@ -3317,7 +3940,7 @@ var SearchList = function SearchList(props) {
         }
       }, {
         children: (0, jsx_runtime_1.jsx)(react_router_dom_1.NavLink, Object.assign({
-          to: "/singl-page/".concat(item.id)
+          to: "/detail-page/".concat(item.id)
         }, {
           children: (0, jsx_runtime_1.jsxs)("div", Object.assign({
             className: "flex w-full bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
@@ -3423,361 +4046,6 @@ exports["default"] = SearchPage;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/single/components/DetailPageCast.tsx":
-/*!*****************************************************************!*\
-  !*** ./resources/ts/pages/single/components/DetailPageCast.tsx ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var DetailPageCast = function DetailPageCast(_ref) {
-  var dataJa = _ref.dataJa;
-  /**
-   *@param {Any} credits クレジット、出演者などのデータ
-   */
-  var credits = dataJa.credits;
-  return (0, jsx_runtime_1.jsxs)("div", Object.assign({
-    className: "w-10/12 m-auto"
-  }, {
-    children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-      className: "font-bold text-xl "
-    }, {
-      children: "\u4E3B\u306A\u51FA\u6F14\u8005"
-    })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
-      className: "flex flex-row w-full overflow-x-scroll"
-    }, {
-      children: credits.cast.slice(0, 10).map(function (item) {
-        return (0, jsx_runtime_1.jsxs)("li", Object.assign({
-          className: "max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 whitespace-wrap w-max"
-        }, {
-          children: [item.profile_path ? (0, jsx_runtime_1.jsx)("img", {
-            width: 154,
-            height: 231,
-            className: "max-w-none rounded-t-lg m-auto",
-            src: "https://image.tmdb.org/t/p/w154/".concat(item.profile_path)
-          }) : (0, jsx_runtime_1.jsx)("img", {
-            width: 154,
-            height: 231,
-            className: "max-w-none rounded-t-lg m-auto",
-            src: "/images/person_no_images.png"
-          }), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-            className: "p-3 "
-          }, {
-            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-              className: "font-bold"
-            }, {
-              children: item.name
-            })), (0, jsx_runtime_1.jsx)("div", {
-              children: item.character
-            })]
-          }))]
-        }), item.id);
-      })
-    }))]
-  }));
-};
-exports["default"] = DetailPageCast;
-
-/***/ }),
-
-/***/ "./resources/ts/pages/single/components/DetailPageFirstView.tsx":
-/*!**********************************************************************!*\
-  !*** ./resources/ts/pages/single/components/DetailPageFirstView.tsx ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var DetailPageFirstView = function DetailPageFirstView(_ref) {
-  var dataJa = _ref.dataJa,
-    dataEn = _ref.dataEn;
-  console.log(dataJa);
-  /**
-   *@param {String} title タイトル
-   *@param {Array[]} genres  ジャンル
-   *@param {Any} poster_path ポスター画像のパス
-   *@param {Number} vote_average TmdbAPIの総合評価
-   *@param {string} overview 日本語訳された概要
-   *@param {string} original_title オリジナルタイトル
-   *@param {string} status 公開されたかどうか
-   */
-  var title = dataJa.title,
-    genres = dataJa.genres,
-    poster_path = dataJa.poster_path,
-    backdrop_path = dataJa.backdrop_path,
-    vote_average = dataJa.vote_average,
-    overview = dataJa.overview,
-    original_title = dataJa.original_title,
-    status = dataJa.status;
-  /**
-   * @param {string} overviewEn 英語の概要
-   */
-  var overviewEn = dataEn.overview;
-  // TmdbAPIの評価が10段階のため2でわる
-  var evaluation = vote_average / 2;
-  // 総合評価
-  var comprehensive_evaluation = 0;
-  // 総合評価は('0','0.5','1','1.5','2','2.5','3','3.5','4','4.5','5')とする
-  switch (true) {
-    case evaluation < 0.5:
-      comprehensive_evaluation = 0;
-      break;
-    case evaluation >= 0.5 && evaluation < 1:
-      comprehensive_evaluation = 0.5;
-      break;
-    case evaluation >= 1 && evaluation < 1.5:
-      comprehensive_evaluation = 1;
-      break;
-    case evaluation >= 1.5 && evaluation < 2:
-      comprehensive_evaluation = 1.5;
-      break;
-    case evaluation >= 2 && evaluation < 2.5:
-      comprehensive_evaluation = 2;
-      break;
-    case evaluation >= 2.5 && evaluation < 3:
-      comprehensive_evaluation = 2.5;
-      break;
-    case evaluation >= 3 && evaluation < 3.5:
-      comprehensive_evaluation = 3;
-      break;
-    case evaluation > 3.5 && evaluation < 4:
-      comprehensive_evaluation = 3.5;
-      break;
-    case evaluation >= 4 && evaluation < 4.5:
-      comprehensive_evaluation = 4;
-      break;
-    case evaluation >= 4.5 && evaluation < 5:
-      comprehensive_evaluation = 4.5;
-      break;
-    case evaluation === 5:
-      comprehensive_evaluation = 5;
-      break;
-  }
-  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
-    children: (0, jsx_runtime_1.jsx)("div", Object.assign({
-      className: "first-view ",
-      style: {
-        backgroundImage: "url(https://image.tmdb.org/t/p/w1280".concat(backdrop_path, ")")
-      }
-    }, {
-      children: (0, jsx_runtime_1.jsxs)("div", Object.assign({
-        className: "flex w-10/12 first-view__content text-white"
-      }, {
-        children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-          className: "mr-8 my-auto",
-          style: {
-            width: 300
-          }
-        }, {
-          children: poster_path ? (0, jsx_runtime_1.jsx)("img", {
-            width: "300",
-            height: "450",
-            className: "items-center max-w-none",
-            src: "https://image.tmdb.org/t/p/w300/".concat(poster_path)
-          }) : (0, jsx_runtime_1.jsx)("img", {
-            width: "300",
-            height: "450",
-            className: "items-center max-w-none",
-            src: "/images/title_no_image.png"
-          })
-        })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-          className: "w-full flex flex-col justify-center "
-        }, {
-          children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({
-            className: "title-box"
-          }, {
-            children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
-              className: "text-4xl font-bold mb-2"
-            }, {
-              children: title
-            })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-              className: "flex mb-2"
-            }, {
-              children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-                className: "font-bold mr-3 text-xl \t"
-              }, {
-                children: "\u30B8\u30E3\u30F3\u30EB"
-              })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
-                className: "flex items-center flex-wrap text-gray-300"
-              }, {
-                children: genres.map(function (item) {
-                  return (0, jsx_runtime_1.jsx)("li", Object.assign({
-                    className: "mr-3"
-                  }, {
-                    children: item.name
-                  }), item.name);
-                })
-              }))]
-            }))]
-          })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-            className: "summary-box mb-2"
-          }, {
-            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-              className: "summary-title font-bold text-xl\t"
-            }, {
-              children: "\u6982\u8981"
-            })), (0, jsx_runtime_1.jsx)("p", Object.assign({
-              className: "summary-text text-gray-300"
-            }, {
-              children: overview ? function () {
-                if (overview.length > 400) {
-                  var modStr = overview.substr(0, 400) + "...";
-                  return modStr;
-                } else {
-                  return overview;
-                }
-              }() : overviewEn
-            }))]
-          })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-            className: "review-container flex items-center mb-2"
-          }, {
-            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-              className: "font-bold text-xl mr-2"
-            }, {
-              children: "\u8A55\u4FA1"
-            })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-              className: "star-rating star-rating-".concat(comprehensive_evaluation * 10)
-            }, {
-              children: [(0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-                className: "star-rating-front"
-              }, {
-                children: [(0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("span", {})]
-              })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-                className: "score text-gray-300"
-              }, {
-                children: comprehensive_evaluation
-              }))]
-            }))]
-          })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-            className: "other-box"
-          }, {
-            children: (0, jsx_runtime_1.jsxs)("ul", {
-              children: [(0, jsx_runtime_1.jsxs)("li", Object.assign({
-                className: "flex items-center mb-2"
-              }, {
-                children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-                  className: "font-bold text-xl mr-2"
-                }, {
-                  children: "\u539F\u984C"
-                })), (0, jsx_runtime_1.jsx)("p", Object.assign({
-                  className: "text-gray-300"
-                }, {
-                  children: original_title
-                }))]
-              })), (0, jsx_runtime_1.jsxs)("li", Object.assign({
-                className: "flex items-center mb-2"
-              }, {
-                children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-                  className: "font-bold text-xl mr-2"
-                }, {
-                  children: "\u72B6\u614B"
-                })), (0, jsx_runtime_1.jsx)("p", Object.assign({
-                  className: "text-gray-300"
-                }, {
-                  children: function () {
-                    if (status === "Released") {
-                      return "公開";
-                    } else {
-                      return "不明";
-                    }
-                  }()
-                }))]
-              }))]
-            })
-          }))]
-        }))]
-      }))
-    }))
-  });
-};
-exports["default"] = DetailPageFirstView;
-
-/***/ }),
-
-/***/ "./resources/ts/pages/single/index.tsx":
-/*!*********************************************!*\
-  !*** ./resources/ts/pages/single/index.tsx ***!
-  \*********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
-var TmdbApi_1 = __webpack_require__(/*! ../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
-var DetailPageFirstView_1 = __importDefault(__webpack_require__(/*! ./components/DetailPageFirstView */ "./resources/ts/pages/single/components/DetailPageFirstView.tsx"));
-var DetailPageCast_1 = __importDefault(__webpack_require__(/*! ./components/DetailPageCast */ "./resources/ts/pages/single/components/DetailPageCast.tsx"));
-var SinglePage = function SinglePage(props) {
-  var id = props.match.params.id;
-  /**
-   * @param dataJa 日本語訳された詳細データ
-   * @param dataEn 日本語訳されてない詳細データ
-   */
-  var _ref = (0, react_query_1.useQuery)("detailsJa", function () {
-      return (0, TmdbApi_1.getTmdbDetailsJa)(id);
-    }),
-    dataJa = _ref.data,
-    statusJa = _ref.status;
-  var _ref2 = (0, react_query_1.useQuery)("detailsEn", function () {
-      return (0, TmdbApi_1.getTmdbDetails)(id);
-    }),
-    dataEn = _ref2.data,
-    statusEn = _ref2.status;
-  if (statusJa === "loading") {
-    return (0, jsx_runtime_1.jsx)("h1", Object.assign({
-      className: "text-4xl font-bold"
-    }, {
-      children: "Loading..."
-    }));
-  }
-  if (statusEn === "loading") {
-    return (0, jsx_runtime_1.jsx)("h1", Object.assign({
-      className: "text-4xl font-bold"
-    }, {
-      children: "Loading..."
-    }));
-  }
-  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
-    children: (0, jsx_runtime_1.jsxs)("main", Object.assign({
-      className: "main"
-    }, {
-      children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
-        className: "font-bold text-xl leading-tight w-10/12 m-auto"
-      }, {
-        children: "\u8A73\u7D30\u30DA\u30FC\u30B8"
-      })), (0, jsx_runtime_1.jsx)(DetailPageFirstView_1["default"], {
-        dataJa: dataJa,
-        dataEn: dataEn
-      }), (0, jsx_runtime_1.jsx)(DetailPageCast_1["default"], {
-        dataJa: dataJa
-      })]
-    }))
-  });
-};
-exports["default"] = SinglePage;
-
-/***/ }),
-
 /***/ "./resources/ts/queries/AuthQuery.ts":
 /*!*******************************************!*\
   !*** ./resources/ts/queries/AuthQuery.ts ***!
@@ -3865,6 +4133,119 @@ exports.useLogout = useLogout;
 
 /***/ }),
 
+/***/ "./resources/ts/queries/MovieQuery.ts":
+/*!********************************************!*\
+  !*** ./resources/ts/queries/MovieQuery.ts ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.useDeleteMovie = exports.useUpdateMovie = exports.useCreateMovie = exports.useMovies = void 0;
+var api = __importStar(__webpack_require__(/*! ../api/MovieAPI */ "./resources/ts/api/MovieAPI.ts"));
+var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
+var react_toastify_1 = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.js");
+var useMovies = function useMovies() {
+  return (0, react_query_1.useQuery)("movies", function () {
+    return api.getMovies();
+  });
+};
+exports.useMovies = useMovies;
+var useCreateMovie = function useCreateMovie() {
+  var queryClient = (0, react_query_1.useQueryClient)();
+  return (0, react_query_1.useMutation)(api.createMovie, {
+    onSuccess: function onSuccess() {
+      queryClient.invalidateQueries('movies');
+      react_toastify_1.toast.success('登録に成功しました。');
+    },
+    onError: function onError(error) {
+      var _a, _b;
+      if ((_a = error.response) === null || _a === void 0 ? void 0 : _a.data.errors) {
+        Object.values((_b = error.response) === null || _b === void 0 ? void 0 : _b.data.errors).map(function (messages) {
+          messages.map(function (message) {
+            react_toastify_1.toast.error(message);
+          });
+        });
+      } else {
+        react_toastify_1.toast.error('登録に失敗しました。');
+      }
+    }
+  });
+};
+exports.useCreateMovie = useCreateMovie;
+var useUpdateMovie = function useUpdateMovie() {
+  var queryClient = (0, react_query_1.useQueryClient)();
+  return (0, react_query_1.useMutation)(api.updateMovie, {
+    onSuccess: function onSuccess() {
+      queryClient.invalidateQueries('movies');
+      react_toastify_1.toast.success('更新に成功しました。');
+    },
+    onError: function onError(error) {
+      var _a, _b;
+      if ((_a = error.response) === null || _a === void 0 ? void 0 : _a.data.errors) {
+        Object.values((_b = error.response) === null || _b === void 0 ? void 0 : _b.data.errors).map(function (messages) {
+          messages.map(function (message) {
+            react_toastify_1.toast.error(message);
+          });
+        });
+      } else {
+        react_toastify_1.toast.error('更新に失敗しました。');
+      }
+    }
+  });
+};
+exports.useUpdateMovie = useUpdateMovie;
+var useDeleteMovie = function useDeleteMovie() {
+  var queryClient = (0, react_query_1.useQueryClient)();
+  return (0, react_query_1.useMutation)(api.deleteMovie, {
+    onSuccess: function onSuccess() {
+      queryClient.invalidateQueries('movies');
+      react_toastify_1.toast.success('削除に成功しました。');
+    },
+    onError: function onError() {
+      react_toastify_1.toast.error('削除に失敗しました。');
+    }
+  });
+};
+exports.useDeleteMovie = useDeleteMovie;
+
+/***/ }),
+
 /***/ "./resources/ts/router.tsx":
 /*!*********************************!*\
   !*** ./resources/ts/router.tsx ***!
@@ -3893,7 +4274,7 @@ var AuthQuery_1 = __webpack_require__(/*! ./queries/AuthQuery */ "./resources/ts
 var search_1 = __importDefault(__webpack_require__(/*! ./pages/search */ "./resources/ts/pages/search/index.tsx"));
 var home_1 = __importDefault(__webpack_require__(/*! ./pages/home */ "./resources/ts/pages/home/index.tsx"));
 var index_1 = __importDefault(__webpack_require__(/*! ./pages/mypage/index */ "./resources/ts/pages/mypage/index.tsx"));
-var single_1 = __importDefault(__webpack_require__(/*! ./pages/single */ "./resources/ts/pages/single/index.tsx"));
+var detailPage_1 = __importDefault(__webpack_require__(/*! ./pages/detailPage */ "./resources/ts/pages/detailPage/index.tsx"));
 var Router = function Router() {
   var _ref = (0, AuthContext_1.useAuth)(),
     isAuth = _ref.isAuth,
@@ -3925,12 +4306,11 @@ var Router = function Router() {
         }, {
           children: (0, jsx_runtime_1.jsx)(login_1["default"], {})
         })), (0, jsx_runtime_1.jsx)(GuardRoute, {
-          exact: true,
           path: "/mypage",
           component: index_1["default"]
-        }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, {
-          path: "/singl-page/:id",
-          component: single_1["default"]
+        }), (0, jsx_runtime_1.jsx)(GuardRoute, {
+          path: "/detail-page/:id",
+          component: detailPage_1["default"]
         }), (0, jsx_runtime_1.jsx)(GuardRoute, Object.assign({
           path: "/search"
         }, {
