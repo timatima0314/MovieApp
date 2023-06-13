@@ -3,4 +3,5 @@ export type Movie = {
     title: string;
     created_at: Date;
     updated_at: Date;
+    poster_path:string
 };

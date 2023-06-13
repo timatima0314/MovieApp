@@ -2288,7 +2288,9 @@ var getMovies = function getMovies() {
   }));
 };
 exports.getMovies = getMovies;
-var createMovie = function createMovie(title) {
+var createMovie = function createMovie(_ref) {
+  var title = _ref.title,
+    poster_path = _ref.poster_path;
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     var _yield$axios_1$defaul2, data;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -2296,7 +2298,8 @@ var createMovie = function createMovie(title) {
         case 0:
           _context2.next = 2;
           return axios_1["default"].post("/api/movies", {
-            title: title
+            title: title,
+            poster_path: poster_path
           });
         case 2:
           _yield$axios_1$defaul2 = _context2.sent;
@@ -2310,9 +2313,9 @@ var createMovie = function createMovie(title) {
   }));
 };
 exports.createMovie = createMovie;
-var updateMovie = function updateMovie(_ref) {
-  var id = _ref.id,
-    movie = _ref.movie;
+var updateMovie = function updateMovie(_ref2) {
+  var id = _ref2.id,
+    movie = _ref2.movie;
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
     var _yield$axios_1$defaul3, data;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -2992,10 +2995,19 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
   }
   var handleSubmit = function handleSubmit() {
     console.log(title);
-    creatMovie.mutate(title);
+    creatMovie.mutate({
+      title: title,
+      poster_path: poster_path
+    });
     // setTitle("");
   };
-
+  // const createmovie = async (title: string, poster_path: any) => {
+  //     const { data } = await axios.post<any>(`/api/movies`, {
+  //         title: title,
+  //         poster_path: poster_path,
+  //     });
+  //     return data;
+  // };
   return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
     children: (0, jsx_runtime_1.jsx)("div", Object.assign({
       className: "first-view ",
@@ -3127,7 +3139,9 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
                 }))]
               })), (0, jsx_runtime_1.jsx)("button", Object.assign({
                 className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
-                onClick: handleSubmit
+                onClick: function onClick() {
+                  return handleSubmit();
+                }
               }, {
                 children: "\u767B\u9332\u3059\u308B"
               }))]

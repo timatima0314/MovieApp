@@ -7,8 +7,8 @@ const getMovies = async () => {
     return data;
 }
 
-const createMovie = async (title: string) => {
-    const { data } = await axios.post<Movie>(`/api/movies`, { title: title });
+const createMovie = async ({title, poster_path}:{title:any,poster_path:any}) => {
+    const { data } = await axios.post<any>(`/api/movies`, { title: title, poster_path: poster_path });
     return data;
 }
 

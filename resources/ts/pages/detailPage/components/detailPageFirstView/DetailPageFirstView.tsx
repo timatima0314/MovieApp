@@ -88,10 +88,17 @@ const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
     }
     const handleSubmit = () => {
         console.log(title);
-        creatMovie.mutate(title);
+        creatMovie.mutate({title, poster_path});
         // setTitle("");
     };
-    
+
+    // const createmovie = async (title: string, poster_path: any) => {
+    //     const { data } = await axios.post<any>(`/api/movies`, {
+    //         title: title,
+    //         poster_path: poster_path,
+    //     });
+    //     return data;
+    // };
 
     return (
         <>
@@ -210,7 +217,7 @@ const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
                                 </li>
                                 <button
                                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                                    onClick={handleSubmit}
+                                    onClick={()=>handleSubmit()}
                                 >
                                     登録する
                                 </button>
