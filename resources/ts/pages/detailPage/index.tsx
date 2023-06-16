@@ -1,11 +1,10 @@
 import React from "react";
-import axios from "axios";
 import { useQuery } from "react-query";
 import { getTmdbDetailsJa, getTmdbDetails } from "../../api/TmdbApi";
 import DetailPageFirstView from "./components/detailPageFirstView/DetailPageFirstView";
 import DetailPageCast from "./components/detailPageCast/DetailPageCast";
 const DetailPage: React.VFC = (props: any) => {
-    const id = props.match.params.id;
+    const id: number = props.match.params.id;
 
     /**
      * @param dataJa 日本語訳された詳細データ
@@ -30,7 +29,11 @@ const DetailPage: React.VFC = (props: any) => {
                 <h1 className="font-bold text-xl leading-tight w-10/12 m-auto">
                     詳細ページ
                 </h1>
-                <DetailPageFirstView dataJa={dataJa} dataEn={dataEn} />
+                <DetailPageFirstView
+                    dataJa={dataJa}
+                    dataEn={dataEn}
+                    title_id={id}
+                />
                 <DetailPageCast dataJa={dataJa} />
             </main>
         </>

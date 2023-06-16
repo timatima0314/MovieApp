@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTitleIdToMoviesTable extends Migration
+class AddTitleIdToMoviesTables extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddTitleIdToMoviesTable extends Migration
     public function up()
     {
         Schema::table('movies', function (Blueprint $table) {
-            $table->string('poster_path', 200);
+            $table->integer('title_id');
         });
     }
 

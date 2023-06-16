@@ -2274,13 +2274,12 @@ var getMovies = function getMovies() {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return axios_1["default"].get("api/movies");
+          return axios_1["default"].get("/api/movies");
         case 2:
           _yield$axios_1$defaul = _context.sent;
           data = _yield$axios_1$defaul.data;
-          console.log(data);
           return _context.abrupt("return", data);
-        case 6:
+        case 5:
         case "end":
           return _context.stop();
       }
@@ -2290,7 +2289,8 @@ var getMovies = function getMovies() {
 exports.getMovies = getMovies;
 var createMovie = function createMovie(_ref) {
   var title = _ref.title,
-    poster_path = _ref.poster_path;
+    poster_path = _ref.poster_path,
+    title_id = _ref.title_id;
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     var _yield$axios_1$defaul2, data;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -2299,7 +2299,8 @@ var createMovie = function createMovie(_ref) {
           _context2.next = 2;
           return axios_1["default"].post("/api/movies", {
             title: title,
-            poster_path: poster_path
+            poster_path: poster_path,
+            title_id: title_id
           });
         case 2:
           _yield$axios_1$defaul2 = _context2.sent;
@@ -2322,7 +2323,7 @@ var updateMovie = function updateMovie(_ref2) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return axios_1["default"].patch("api/movies/".concat(id), movie);
+          return axios_1["default"].patch("/api/movies/".concat(id), movie);
         case 2:
           _yield$axios_1$defaul3 = _context3.sent;
           data = _yield$axios_1$defaul3.data;
@@ -2342,7 +2343,7 @@ var deleteMovie = function deleteMovie(id) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
           _context4.next = 2;
-          return axios_1["default"]["delete"]("api/movies/".concat(id));
+          return axios_1["default"]["delete"]("/api/movies/".concat(id));
         case 2:
           _yield$axios_1$defaul4 = _context4.sent;
           data = _yield$axios_1$defaul4.data;
@@ -2930,8 +2931,39 @@ var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules
 var MovieQuery_1 = __webpack_require__(/*! ../../../../queries/MovieQuery */ "./resources/ts/queries/MovieQuery.ts");
 var DetailPageFirstView = function DetailPageFirstView(_ref) {
   var dataJa = _ref.dataJa,
-    dataEn = _ref.dataEn;
+    dataEn = _ref.dataEn,
+    title_id = _ref.title_id;
   var creatMovie = (0, MovieQuery_1.useCreateMovie)();
+  var _ref2 = (0, MovieQuery_1.useMovies)(),
+    movies = _ref2.data,
+    movStatus = _ref2.status;
+  if (movStatus === "loading") {
+    return null;
+  } else if (movStatus === "error") {
+    return (0, jsx_runtime_1.jsx)("h1", {
+      children: "error"
+    });
+  } else if (!movies || movies.length <= 0) {
+    return null;
+  }
+  //登録ボタンを切り替える
+  var changeRegister = function changeRegister() {
+    var result = movies.filter(function (item) {
+      return item.title_id == title_id;
+    });
+    return result.length ? (0, jsx_runtime_1.jsx)("button", Object.assign({
+      className: "bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+    }, {
+      children: "\u767B\u9332\u89E3\u9664"
+    })) : (0, jsx_runtime_1.jsx)("button", Object.assign({
+      className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
+      onClick: function onClick() {
+        return handleSubmit();
+      }
+    }, {
+      children: "\u767B\u9332\u3059\u308B"
+    }));
+  };
   /**
    *@param {String} title タイトル
    *@param {Array[]} genres  ジャンル
@@ -2994,20 +3026,18 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
       break;
   }
   var handleSubmit = function handleSubmit() {
-    console.log(title);
     creatMovie.mutate({
       title: title,
-      poster_path: poster_path
+      poster_path: poster_path,
+      title_id: title_id
     });
     // setTitle("");
   };
-  // const createmovie = async (title: string, poster_path: any) => {
-  //     const { data } = await axios.post<any>(`/api/movies`, {
-  //         title: title,
-  //         poster_path: poster_path,
-  //     });
+  // const deleteMovie = async (id: number) => {
+  //     const { data } = await axios.delete<any>(`/api/movies/${id}`);
+  //     console.log(title_id)
   //     return data;
-  // };
+  // }
   return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
     children: (0, jsx_runtime_1.jsx)("div", Object.assign({
       className: "first-view ",
@@ -3137,14 +3167,7 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
                     }
                   }()
                 }))]
-              })), (0, jsx_runtime_1.jsx)("button", Object.assign({
-                className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
-                onClick: function onClick() {
-                  return handleSubmit();
-                }
-              }, {
-                children: "\u767B\u9332\u3059\u308B"
-              }))]
+              })), changeRegister()]
             })
           }))]
         }))]
@@ -3218,7 +3241,8 @@ var DetailPage = function DetailPage(props) {
         children: "\u8A73\u7D30\u30DA\u30FC\u30B8"
       })), (0, jsx_runtime_1.jsx)(DetailPageFirstView_1["default"], {
         dataJa: dataJa,
-        dataEn: dataEn
+        dataEn: dataEn,
+        title_id: id
       }), (0, jsx_runtime_1.jsx)(DetailPageCast_1["default"], {
         dataJa: dataJa
       })]
@@ -3762,7 +3786,7 @@ var MyPage = function MyPage() {
           }, {
             children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.NavLink, Object.assign({
               className: "truncate text-xs",
-              to: "/detail-page/".concat(movie.id)
+              to: "/detail-page/".concat(movie.title_id)
             }, {
               children: [movie.poster_path ? (0, jsx_runtime_1.jsx)("img", {
                 width: 185,

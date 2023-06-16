@@ -14,6 +14,7 @@ const MyPage: React.VFC = () => {
             <div className="text-center">登録されたデータはありません。</div>
         );
     }
+
     return (
         <>
             <main className="w-10/12 m-auto">
@@ -29,7 +30,7 @@ const MyPage: React.VFC = () => {
                             >
                                 <NavLink
                                     className="truncate text-xs"
-                                    to={`/detail-page/${movie.id}`}
+                                    to={`/detail-page/${movie.title_id}`}
                                 >
                                     {movie.poster_path ? (
                                         <img

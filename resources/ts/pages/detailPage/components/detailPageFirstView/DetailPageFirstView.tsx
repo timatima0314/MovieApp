@@ -1,16 +1,51 @@
 import React from "react";
-import { useCreateMovie } from "../../../../queries/MovieQuery";
-import axios from "axios";
+import { useCreateMovie, useMovies } from "../../../../queries/MovieQuery";
 interface Props {
     dataJa: any;
     dataEn: any;
+    title_id: number;
 }
-const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
+const DetailPageFirstView: React.VFC<Props> = ({
+    dataJa,
+    dataEn,
+    title_id,
+}: {
+    dataJa: any;
+    dataEn: any;
+    title_id: number;
+}) => {
     interface Array {
         id: number;
         name: string;
     }
     const creatMovie = useCreateMovie();
+    const { data: movies, status: movStatus } = useMovies();
+    if (movStatus === "loading") {
+        return null;
+    } else if (movStatus === "error") {
+        return <h1>error</h1>;
+    } else if (!movies || movies.length <= 0) {
+        return null;
+    }
+
+    //登録ボタンを切り替える
+    const changeRegister = () => {
+        let result = movies.filter((item: any) => {
+            return item.title_id == title_id;
+        });
+        return result.length ? (
+            <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                登録解除
+            </button>
+        ) : (
+            <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                onClick={() => handleSubmit()}
+            >
+                登録する
+            </button>
+        );
+    };
 
     /**
      *@param {String} title タイトル
@@ -87,18 +122,14 @@ const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
             break;
     }
     const handleSubmit = () => {
-        console.log(title);
-        creatMovie.mutate({title, poster_path});
+        creatMovie.mutate({ title, poster_path, title_id });
         // setTitle("");
     };
-
-    // const createmovie = async (title: string, poster_path: any) => {
-    //     const { data } = await axios.post<any>(`/api/movies`, {
-    //         title: title,
-    //         poster_path: poster_path,
-    //     });
+    // const deleteMovie = async (id: number) => {
+    //     const { data } = await axios.delete<any>(`/api/movies/${id}`);
+    //     console.log(title_id)
     //     return data;
-    // };
+    // }
 
     return (
         <>
@@ -215,12 +246,7 @@ const DetailPageFirstView: React.VFC<Props> = ({ dataJa, dataEn }) => {
                                         })()}
                                     </p>
                                 </li>
-                                <button
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                                    onClick={()=>handleSubmit()}
-                                >
-                                    登録する
-                                </button>
+                                {changeRegister()}
                             </ul>
                         </div>
                     </div>
