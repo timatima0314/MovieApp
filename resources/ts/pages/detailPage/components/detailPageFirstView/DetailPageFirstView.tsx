@@ -1,5 +1,11 @@
 import React from "react";
-import { useCreateMovie, useMovies } from "../../../../queries/MovieQuery";
+import axios from "axios";
+import {
+    useCreateMovie,
+    useMovies,
+    useDeleteMovie,
+} from "../../../../queries/MovieQuery";
+import { Movie } from "../../../../types/Movie";
 interface Props {
     dataJa: any;
     dataEn: any;
@@ -19,13 +25,12 @@ const DetailPageFirstView: React.VFC<Props> = ({
         name: string;
     }
     const creatMovie = useCreateMovie();
+    const deleteMovieSamp = useDeleteMovie();
     const { data: movies, status: movStatus } = useMovies();
     if (movStatus === "loading") {
         return null;
     } else if (movStatus === "error") {
         return <h1>error</h1>;
-    } else if (!movies || movies.length <= 0) {
-        return null;
     }
 
     //登録ボタンを切り替える
@@ -34,7 +39,10 @@ const DetailPageFirstView: React.VFC<Props> = ({
             return item.title_id == title_id;
         });
         return result.length ? (
-            <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            <button
+                className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                onClick={() => handleSubmitDel()}
+            >
                 登録解除
             </button>
         ) : (
@@ -125,11 +133,15 @@ const DetailPageFirstView: React.VFC<Props> = ({
         creatMovie.mutate({ title, poster_path, title_id });
         // setTitle("");
     };
-    // const deleteMovie = async (id: number) => {
-    //     const { data } = await axios.delete<any>(`/api/movies/${id}`);
-    //     console.log(title_id)
-    //     return data;
-    // }
+    const handleSubmitDel = () => {
+        deleteMovieSamp.mutate(title_id);
+    };
+    const deleteMovie = async () => {
+        const { data } = await axios.delete<any>(
+            `/api/movies/delete/${title_id}`
+        );
+        return data;
+    };
 
     return (
         <>

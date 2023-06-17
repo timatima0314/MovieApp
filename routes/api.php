@@ -19,6 +19,7 @@ Route::post('logout', 'LoginController@logout');
 
 Route::group(['middlewarewe' => 'auth:sanctum'], function () {
     Route::apiResource('movies', 'MovieController');
+    Route::delete('movies/delete/{id}', 'MovieController@delete');
     Route::get('user', function (Request $request) {
         return $request->user();
     });
