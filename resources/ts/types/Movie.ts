@@ -4,4 +4,7 @@ export type Movie = {
     created_at: Date;
     updated_at: Date;
     poster_path:string
+    user_id:number
+    title_id: number
+
 };

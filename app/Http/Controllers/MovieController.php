@@ -37,15 +37,16 @@ class MovieController extends Controller
             ? response()->json($movie)
             : response()->json([], 500);
     }
-    public function destroy(Request $request, Movie $movie)
-    {
-        return $movie->delete()
-            ? dd(response()->json($movie))
-            : response()->json([], 500);
-    }
+    // public function destroy(Request $request, Movie $movie)
+    // {
+    //     return $movie->delete()
+    //         ? dd(response()->json($movie))
+    //         : response()->json([], 500);
+    // }
     public function delete($id, Movie $movie)
     {
-        return $movie->where('title_id', $id)->delete()
+        $logInUserId = Auth::id();
+        return $movie->where('title_id', $id)->where('user_id', $logInUserId)->delete()
             ? response()->json($movie)
             : response()->json([], 500);
     }

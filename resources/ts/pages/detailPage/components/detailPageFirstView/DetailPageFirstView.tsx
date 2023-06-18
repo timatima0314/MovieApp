@@ -131,18 +131,10 @@ const DetailPageFirstView: React.VFC<Props> = ({
     }
     const handleSubmit = () => {
         creatMovie.mutate({ title, poster_path, title_id });
-        // setTitle("");
     };
     const handleSubmitDel = () => {
         deleteMovieSamp.mutate(title_id);
     };
-    const deleteMovie = async () => {
-        const { data } = await axios.delete<any>(
-            `/api/movies/delete/${title_id}`
-        );
-        return data;
-    };
-
     return (
         <>
             <div
