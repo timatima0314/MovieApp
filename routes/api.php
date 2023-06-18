@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('singUp', 'RegisterController@register');
 Route::post('login', 'LoginController@login');
 Route::post('logout', 'LoginController@logout');
 

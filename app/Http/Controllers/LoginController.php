@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use App\Models\User;
+use \Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
@@ -13,15 +16,22 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+        // dd($request->email);
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            // $request->session()->regenerate();
+            $user = User::whereEmail($request->email)->first();
 
-            return response()->json(Auth::user());
+            $user->tokens()->delete();
+            $token = $user->createToken("login:user{$user->id}")->plainTextToken;
+
+
+            // return response()->json(Auth::user());
+            return response()->json(['token' => $token], Response::HTTP_OK);
         }
 
         return  response()->json([], 401);

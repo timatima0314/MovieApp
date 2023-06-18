@@ -16,6 +16,7 @@ import SearchPage from "./pages/search";
 import HomePage from "./pages/home";
 import MyPage from "./pages/mypage/index";
 import DetailPage from "./pages/detailPage";
+import SingnUpPage from "./pages/signUp";
 const Router = () => {
     const { isAuth, setIsAuth } = useAuth();
     const { data: authUser } = useUser();
@@ -37,9 +38,9 @@ const Router = () => {
             <Header />
             <div>
                 <Switch>
-                    <LoginRoute path="/login">
-                        <LoginPage />
-                    </LoginRoute>
+                    <LoginRoute path="/login" component={LoginPage}/>
+                    <Route path="/singUp" component={SingnUpPage} />
+
                     {/* <GuardRoute exact path="/">
                         <HomePage />
                     </GuardRoute> */}
@@ -51,13 +52,6 @@ const Router = () => {
                     </GuardRoute>
                     <GuardRoute path="/" component={HomePage}/>
 
-                    {/* <ul>
-                        <li>
-                            <NavLink activeClassName="active" to="/mypage">
-                                MyPage
-                            </NavLink>
-                        </li>
-                    </ul> */}
                     <Route path="/mypage" component={MyPage} />
                     <Route component={NotFoundPage} />
                 </Switch>
