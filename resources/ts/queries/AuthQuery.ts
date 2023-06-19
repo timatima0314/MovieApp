@@ -7,6 +7,20 @@ const useUser = () => {
     return useQuery("users", () => api.getUser()
     )
 }
+const useSingUp = () => {
+    const { setIsAuth } = useAuth()
+    return useMutation(api.singUp, {
+        onSuccess: (user) => {
+            if (user) {
+                setIsAuth(true)
+            }
+        },
+        onError: () => {
+            toast.error('新規登録に失敗しました。')
+        }
+
+    })
+}
 const useLogin = () => {
     const { setIsAuth } = useAuth()
     return useMutation(api.login, {
@@ -34,4 +48,4 @@ const useLogout = () => {
     })
 }
 
-export { useUser, useLogin, useLogout }
+export { useUser, useLogin, useLogout, useSingUp }

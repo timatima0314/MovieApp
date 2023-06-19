@@ -39,7 +39,7 @@ const Router = () => {
             <div>
                 <Switch>
                     <LoginRoute path="/login" component={LoginPage}/>
-                    <Route path="/singUp" component={SingnUpPage} />
+                    <LoginRoute path="/singUp" component={SingnUpPage} />
 
                     {/* <GuardRoute exact path="/">
                         <HomePage />

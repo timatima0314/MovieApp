@@ -1,21 +1,28 @@
 import React, { useState } from "react";
-import { useLogin } from "../../queries/AuthQuery";
+import { useLogin, useSingUp } from "../../queries/AuthQuery";
+import { singUp } from "../../api/AuthAPI";
 import { NavLink } from "react-router-dom";
 import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 const SingnUpPage: React.VFC = () => {
     // const login = useLogin();
-    const [name, setName] = useState<any>("takagi");
-    const [email, setEmail] = useState("test@example.com");
-    const [password, setPassword] = useState("43433434");
+    const singUp = useSingUp();
+    const [name, setName] = useState<any>("");
+    const [email, setEmail] = useState("@example.com");
+    const [password, setPassword] = useState("");
 
-    const singUp = async () => {
-        const { data } = await axios.post("/api/singUp", {
-            name: name,
-            email: email,
-            password: password,
-        });
-        return data;
+    // const singUp = async () => {
+    //     const { data } = await axios.post("/api/singUp", {
+    //         name: name,
+    //         email: email,
+    //         password: password,
+    //     });
+    //     return data;
+    // };
+    const handleSingUp = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        singUp.mutate({ name, email, password });
     };
+
     // const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     //     e.preventDefault();
     //     login.mutate({ email, password });
@@ -24,7 +31,7 @@ const SingnUpPage: React.VFC = () => {
         <main className="bg-green-50 flex justify-center items-center h-screen">
             <div className="w-full max-w-xs">
                 <form
-                    // onSubmit={handleLogin}
+                    onSubmit={handleSingUp}
                     className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
                 >
                     <h1 className="text-center text-xl font-bold mb-4">
@@ -68,14 +75,13 @@ const SingnUpPage: React.VFC = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
+                    <button
+                        className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit"
+                    >
+                        新規登録する
+                    </button>
                 </form>
-                <button
-                    className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit"
-                    onClick={() => singUp()}
-                >
-                    新規登録する
-                </button>
             </div>
         </main>
     );
