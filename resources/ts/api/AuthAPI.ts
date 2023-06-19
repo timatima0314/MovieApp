@@ -6,7 +6,7 @@ const getUser = async () => {
     return data;
 }
 const singUp = async ({ name, email, password }: { name: string, email: string, password: string }) => {
-    const { data } = await axios.post("/api/singUp", {
+    const { data } = await axios.post<User>("/api/singUp", {
         name: name,
         email: email,
         password: password,

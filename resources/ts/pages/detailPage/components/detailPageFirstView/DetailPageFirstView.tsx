@@ -1,11 +1,16 @@
 import React from "react";
-import axios from "axios";
 import {
     useCreateMovie,
     useMovies,
     useDeleteMovie,
 } from "../../../../queries/MovieQuery";
-import { Movie } from "../../../../types/Movie";
+import { DetailMovie } from "../../../../types/Movie";
+
+/**
+ * @param {any} dataJa 日本語訳された映画詳細データ
+ * @param {any} dataEn 日本語訳されてない映画詳細データ
+ * @param {number} title_id title_id 映画個々のタイトルid
+ */
 interface Props {
     dataJa: any;
     dataEn: any;
@@ -20,19 +25,17 @@ const DetailPageFirstView: React.VFC<Props> = ({
     dataEn: any;
     title_id: number;
 }) => {
-    interface Array {
-        id: number;
-        name: string;
-    }
     const creatMovie = useCreateMovie();
-    const deleteMovieSamp = useDeleteMovie();
-    const { data: movies, status: movStatus } = useMovies();
+    const deleteMovie = useDeleteMovie();
+    const { data: movies, status: movStatus }: { data: any; status: any } =
+        useMovies();
+
     if (movStatus === "loading") {
         return null;
     } else if (movStatus === "error") {
         return <h1>error</h1>;
+    } else if (!movies || movies.length <= 0) {
     }
-
     //登録ボタンを切り替える
     const changeRegister = () => {
         let result = movies.filter((item: any) => {
@@ -40,15 +43,15 @@ const DetailPageFirstView: React.VFC<Props> = ({
         });
         return result.length ? (
             <button
-                className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                className="deleteButton hover:underline text-white font-bold py-2 px-4 rounded-full"
                 onClick={() => handleSubmitDel()}
             >
                 登録解除
             </button>
         ) : (
             <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                onClick={() => handleSubmit()}
+                className="creatButton hover:underline text-white font-bold py-2 px-4 rounded-full"
+                onClick={() => handleSubmitCreat()}
             >
                 登録する
             </button>
@@ -56,8 +59,8 @@ const DetailPageFirstView: React.VFC<Props> = ({
     };
 
     /**
-     *@param {String} title タイトル
-     *@param {Array[]} genres  ジャンル
+     *@param {String} title 映画のタイトル
+     *@param {Array[{id: number; name: string}]} genres  ジャンル
      *@param {Any} poster_path ポスター画像のパス
      *@param {Number} vote_average TmdbAPIの総合評価
      *@param {string} overview 日本語訳された概要
@@ -74,16 +77,7 @@ const DetailPageFirstView: React.VFC<Props> = ({
         overview,
         original_title,
         status,
-    }: {
-        title: string;
-        genres: Array[];
-        poster_path: any;
-        backdrop_path: any;
-        vote_average: number;
-        overview: string;
-        original_title: string;
-        status: string;
-    } = dataJa;
+    }: DetailMovie = dataJa;
     /**
      * @param {string} overviewEn 英語の概要
      */
@@ -129,11 +123,13 @@ const DetailPageFirstView: React.VFC<Props> = ({
             comprehensive_evaluation = 5;
             break;
     }
-    const handleSubmit = () => {
+    // DB:moviesに映画を登録する
+    const handleSubmitCreat = () => {
         creatMovie.mutate({ title, poster_path, title_id });
     };
+    // DB:moviesの該当title_idのレコード削除
     const handleSubmitDel = () => {
-        deleteMovieSamp.mutate(title_id);
+        deleteMovie.mutate(title_id);
     };
     return (
         <>

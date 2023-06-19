@@ -3,12 +3,17 @@ import { useQuery } from "react-query";
 import { getTmdbDetailsJa, getTmdbDetails } from "../../api/TmdbApi";
 import DetailPageFirstView from "./components/detailPageFirstView/DetailPageFirstView";
 import DetailPageCast from "./components/detailPageCast/DetailPageCast";
+
+//映画の詳細ページ
 const DetailPage: React.VFC = (props: any) => {
+    /**
+     *@param {number} id title_id 映画個々のタイトルid
+     */
     const id: number = props.match.params.id;
 
     /**
-     * @param dataJa 日本語訳された詳細データ
-     * @param dataEn 日本語訳されてない詳細データ
+     * @param dataJa 日本語訳された映画詳細データ
+     * @param dataEn 日本語訳されてない映画詳細データ
      */
     const { data: dataJa, status: statusJa } = useQuery("detailsJa", () =>
         getTmdbDetailsJa(id)
@@ -22,7 +27,7 @@ const DetailPage: React.VFC = (props: any) => {
     if (statusEn === "loading") {
         return <h1 className="text-4xl font-bold">Loading...</h1>;
     }
-
+console.log(dataJa)
     return (
         <>
             <main className="main">

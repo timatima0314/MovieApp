@@ -169,3 +169,17 @@ img {
 .search-poster-img {
     border-radius: 5px 0 0 5px;
 }
+.creatButton {
+    background-image: linear-gradient(
+        90deg,
+        rgba(28, 134, 230, 1),
+        rgba(58, 217, 225, 1)
+    );
+}
+.deleteButton {
+    background-image: linear-gradient(
+        90deg,
+        rgba(181, 19, 1, 1) 28%,
+        rgba(242, 5, 39, 1)
+    );
+}

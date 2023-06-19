@@ -2294,6 +2294,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.deleteMovie = exports.updateMovie = exports.createMovie = exports.getMovies = void 0;
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+// DB:moviesTablesのデータ取得
 var getMovies = function getMovies() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var _yield$axios_1$defaul, data;
@@ -2314,6 +2315,12 @@ var getMovies = function getMovies() {
   }));
 };
 exports.getMovies = getMovies;
+/**
+ *映画情報を登録
+ *@param {string} title 映画タイトル
+ *@param {string} poster_path ポスターの画像path
+ *@param {number} title_id TmdbAPIの個々の映画のid
+ */
 var createMovie = function createMovie(_ref) {
   var title = _ref.title,
     poster_path = _ref.poster_path,
@@ -2341,6 +2348,10 @@ var createMovie = function createMovie(_ref) {
   }));
 };
 exports.createMovie = createMovie;
+/**
+ *登録した映画情報の更新
+ *@param {number} id DB:moviesTablesのid
+ */
 var updateMovie = function updateMovie(_ref2) {
   var id = _ref2.id,
     movie = _ref2.movie;
@@ -2363,6 +2374,10 @@ var updateMovie = function updateMovie(_ref2) {
   }));
 };
 exports.updateMovie = updateMovie;
+/**
+ *DB:moviesTablesのtitle_idを検索し削除
+ *@param {number} title_id TmdbAPIの個々の映画のid
+ */
 var deleteMovie = function deleteMovie(title_id) {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
     var _yield$axios_1$defaul4, data;
@@ -2434,7 +2449,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.getTmdbSearch = exports.getNowPlayingTmdbItem = exports.getTmdbDetails = exports.getTmdbDetailsJa = exports.getTopRatedTmdbItem = exports.getPopularTmdbItem = void 0;
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
-// 人気の映画
+// 人気の映画情報所得
 var getPopularTmdbItem = function getPopularTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var _yield$axios_1$defaul, data;
@@ -2455,7 +2470,7 @@ var getPopularTmdbItem = function getPopularTmdbItem() {
   }));
 };
 exports.getPopularTmdbItem = getPopularTmdbItem;
-// 評価の高い映画
+// 評価の高い映画情報所得
 var getTopRatedTmdbItem = function getTopRatedTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     var _yield$axios_1$defaul2, data;
@@ -2476,7 +2491,7 @@ var getTopRatedTmdbItem = function getTopRatedTmdbItem() {
   }));
 };
 exports.getTopRatedTmdbItem = getTopRatedTmdbItem;
-// 上映中の映画
+// 上映中の映画情報所得
 var getNowPlayingTmdbItem = function getNowPlayingTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
     var _yield$axios_1$defaul3, data;
@@ -2539,6 +2554,7 @@ var getTmdbDetails = function getTmdbDetails(id) {
   }));
 };
 exports.getTmdbDetails = getTmdbDetails;
+// タイトル検索し該当の映画情報所得
 var getTmdbSearch = function getTmdbSearch(searchTitle) {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
     var _yield$axios_1$defaul6, data;
@@ -2961,7 +2977,7 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
     dataEn = _ref.dataEn,
     title_id = _ref.title_id;
   var creatMovie = (0, MovieQuery_1.useCreateMovie)();
-  var deleteMovieSamp = (0, MovieQuery_1.useDeleteMovie)();
+  var deleteMovie = (0, MovieQuery_1.useDeleteMovie)();
   var _ref2 = (0, MovieQuery_1.useMovies)(),
     movies = _ref2.data,
     movStatus = _ref2.status;
@@ -2971,31 +2987,31 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
     return (0, jsx_runtime_1.jsx)("h1", {
       children: "error"
     });
-  }
+  } else if (!movies || movies.length <= 0) {}
   //登録ボタンを切り替える
   var changeRegister = function changeRegister() {
     var result = movies.filter(function (item) {
       return item.title_id == title_id;
     });
     return result.length ? (0, jsx_runtime_1.jsx)("button", Object.assign({
-      className: "bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
+      className: "deleteButton hover:underline text-white font-bold py-2 px-4 rounded-full",
       onClick: function onClick() {
         return handleSubmitDel();
       }
     }, {
       children: "\u767B\u9332\u89E3\u9664"
     })) : (0, jsx_runtime_1.jsx)("button", Object.assign({
-      className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
+      className: "creatButton hover:underline text-white font-bold py-2 px-4 rounded-full",
       onClick: function onClick() {
-        return handleSubmit();
+        return handleSubmitCreat();
       }
     }, {
       children: "\u767B\u9332\u3059\u308B"
     }));
   };
   /**
-   *@param {String} title タイトル
-   *@param {Array[]} genres  ジャンル
+   *@param {String} title 映画のタイトル
+   *@param {Array[{id: number; name: string}]} genres  ジャンル
    *@param {Any} poster_path ポスター画像のパス
    *@param {Number} vote_average TmdbAPIの総合評価
    *@param {string} overview 日本語訳された概要
@@ -3054,15 +3070,17 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
       comprehensive_evaluation = 5;
       break;
   }
-  var handleSubmit = function handleSubmit() {
+  // DB:moviesに映画を登録する
+  var handleSubmitCreat = function handleSubmitCreat() {
     creatMovie.mutate({
       title: title,
       poster_path: poster_path,
       title_id: title_id
     });
   };
+  // DB:moviesの該当title_idのレコード削除
   var handleSubmitDel = function handleSubmitDel() {
-    deleteMovieSamp.mutate(title_id);
+    deleteMovie.mutate(title_id);
   };
   return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
     children: (0, jsx_runtime_1.jsx)("div", Object.assign({
@@ -3227,11 +3245,15 @@ var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react
 var TmdbApi_1 = __webpack_require__(/*! ../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
 var DetailPageFirstView_1 = __importDefault(__webpack_require__(/*! ./components/detailPageFirstView/DetailPageFirstView */ "./resources/ts/pages/detailPage/components/detailPageFirstView/DetailPageFirstView.tsx"));
 var DetailPageCast_1 = __importDefault(__webpack_require__(/*! ./components/detailPageCast/DetailPageCast */ "./resources/ts/pages/detailPage/components/detailPageCast/DetailPageCast.tsx"));
+//映画の詳細ページ
 var DetailPage = function DetailPage(props) {
+  /**
+   *@param {number} id title_id 映画個々のタイトルid
+   */
   var id = props.match.params.id;
   /**
-   * @param dataJa 日本語訳された詳細データ
-   * @param dataEn 日本語訳されてない詳細データ
+   * @param dataJa 日本語訳された映画詳細データ
+   * @param dataEn 日本語訳されてない映画詳細データ
    */
   var _ref = (0, react_query_1.useQuery)("detailsJa", function () {
       return (0, TmdbApi_1.getTmdbDetailsJa)(id);
@@ -3257,6 +3279,7 @@ var DetailPage = function DetailPage(props) {
       children: "Loading..."
     }));
   }
+  console.log(dataJa);
   return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
     children: (0, jsx_runtime_1.jsxs)("main", Object.assign({
       className: "main"

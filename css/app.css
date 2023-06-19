@@ -155,4 +155,12 @@ img {
   border-radius: 5px 0 0 5px;
 }
 
+.creatButton {
+  background-image: linear-gradient(90deg, rgb(28, 134, 230), rgb(58, 217, 225));
+}
+
+.deleteButton {
+  background-image: linear-gradient(90deg, rgb(181, 19, 1) 28%, rgb(242, 5, 39));
+}
+
 /*# sourceMappingURL=app.css.map */
