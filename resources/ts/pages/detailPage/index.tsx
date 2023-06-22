@@ -27,7 +27,6 @@ const DetailPage: React.VFC = (props: any) => {
     if (statusEn === "loading") {
         return <h1 className="text-4xl font-bold">Loading...</h1>;
     }
-console.log(dataJa)
     return (
         <>
             <main className="main">

@@ -20,10 +20,6 @@ const DetailPageFirstView: React.VFC<Props> = ({
     dataJa,
     dataEn,
     title_id,
-}: {
-    dataJa: any;
-    dataEn: any;
-    title_id: number;
 }) => {
     const creatMovie = useCreateMovie();
     const deleteMovie = useDeleteMovie();
@@ -145,23 +141,23 @@ const DetailPageFirstView: React.VFC<Props> = ({
                             <img
                                 width="300"
                                 height="450"
-                                className="items-center max-w-none"
+                                className="items-center max-w-none first-view__poster_path_img"
                                 src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
                             />
                         ) : (
                             <img
                                 width="300"
                                 height="450"
-                                className="items-center max-w-none"
+                                className="items-center max-w-none first-view__poster_path_img"
                                 src={"/images/title_no_image.png"}
                             />
                         )}
                     </div>
-                    <div className="w-full flex flex-col justify-center ">
+                    <div className="w-full flex flex-col justify-center">
                         <div className="title-box">
                             <h2 className="text-4xl font-bold mb-2">{title}</h2>
                             <div className="flex mb-2">
-                                <div className="font-bold mr-3 text-xl 	">
+                                <div className="font-bold mr-3 text-xl">
                                     ジャンル
                                 </div>
                                 <ul className="flex items-center flex-wrap text-gray-300">

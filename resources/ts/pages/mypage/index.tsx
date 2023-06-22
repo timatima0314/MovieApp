@@ -1,5 +1,6 @@
 import React from "react";
 import MypageList from "./mypageList/mypageList";
+// マイページ
 const MyPage: React.VFC = () => {
     return (
         <>
