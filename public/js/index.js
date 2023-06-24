@@ -2207,7 +2207,7 @@ var login = function login(_ref2) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return axios_1["default"].post("api/login", {
+          return axios_1["default"].post("/api/login", {
             email: email,
             password: password
           });
@@ -2230,7 +2230,7 @@ var logout = function logout() {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
           _context4.next = 2;
-          return axios_1["default"].post("api/logout");
+          return axios_1["default"].post("/api/logout");
         case 2:
           _yield$axios_1$defaul4 = _context4.sent;
           data = _yield$axios_1$defaul4.data;
@@ -2537,7 +2537,7 @@ exports.getNowPlayingTmdbItem = getNowPlayingTmdbItem;
 // 詳細データ,日本語訳対応しているが、overviewなどは日本語訳がない場合がありその場合nullになる。
 var getTmdbDetailsJa = function getTmdbDetailsJa(id) {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-    var _yield$axios_1$defaul4, data;
+    var _yield$axios_1$defaul4, data, detailsJaPick;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
@@ -2546,8 +2546,30 @@ var getTmdbDetailsJa = function getTmdbDetailsJa(id) {
         case 2:
           _yield$axios_1$defaul4 = _context4.sent;
           data = _yield$axios_1$defaul4.data;
-          return _context4.abrupt("return", data);
-        case 5:
+          detailsJaPick = function (_ref) {
+            var title = _ref.title,
+              genres = _ref.genres,
+              poster_path = _ref.poster_path,
+              backdrop_path = _ref.backdrop_path,
+              vote_average = _ref.vote_average,
+              overview = _ref.overview,
+              original_title = _ref.original_title,
+              credits = _ref.credits,
+              status = _ref.status;
+            return {
+              title: title,
+              genres: genres,
+              poster_path: poster_path,
+              backdrop_path: backdrop_path,
+              vote_average: vote_average,
+              overview: overview,
+              original_title: original_title,
+              credits: credits,
+              status: status
+            };
+          }(data);
+          return _context4.abrupt("return", detailsJaPick);
+        case 6:
         case "end":
           return _context4.stop();
       }
@@ -2558,7 +2580,7 @@ exports.getTmdbDetailsJa = getTmdbDetailsJa;
 // 詳細データの英語バージョン。overview参照に用いる。
 var getTmdbDetails = function getTmdbDetails(id) {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-    var _yield$axios_1$defaul5, data;
+    var _yield$axios_1$defaul5, data, detailsEn;
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
@@ -2567,8 +2589,14 @@ var getTmdbDetails = function getTmdbDetails(id) {
         case 2:
           _yield$axios_1$defaul5 = _context5.sent;
           data = _yield$axios_1$defaul5.data;
-          return _context5.abrupt("return", data);
-        case 5:
+          detailsEn = function (_ref2) {
+            var overview = _ref2.overview;
+            return {
+              overview: overview
+            };
+          }(data);
+          return _context5.abrupt("return", detailsEn);
+        case 6:
         case "end":
           return _context5.stop();
       }
@@ -2636,11 +2664,11 @@ var Header = function Header() {
           children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
             className: "flex-shrink-0"
           }, {
-            children: (0, jsx_runtime_1.jsx)("img", {
-              className: "h-8 w-8",
-              src: "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500",
-              alt: "Your Company"
-            })
+            children: (0, jsx_runtime_1.jsx)("h1", Object.assign({
+              className: "headering"
+            }, {
+              children: "Movie"
+            }))
           })), (0, jsx_runtime_1.jsx)("div", Object.assign({
             className: "hidden md:block"
           }, {
@@ -2688,17 +2716,17 @@ var Header = function Header() {
           onClick: function onClick() {
             return logOut.mutate();
           },
-          className: "text-white"
+          className: "text-white cursor-pointer"
         }, {
           children: "logout"
         }))]
       }))
     }))
   }));
-  var loginNavigation = (0, jsx_runtime_1.jsxs)("nav", Object.assign({
+  var loginNavigation = (0, jsx_runtime_1.jsx)("nav", Object.assign({
     className: "bg-gray-800"
   }, {
-    children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
+    children: (0, jsx_runtime_1.jsx)("div", Object.assign({
       className: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
     }, {
       children: (0, jsx_runtime_1.jsx)("div", Object.assign({
@@ -2710,11 +2738,11 @@ var Header = function Header() {
           children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
             className: "flex-shrink-0"
           }, {
-            children: (0, jsx_runtime_1.jsx)("img", {
-              className: "h-8 w-8",
-              src: "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500",
-              alt: "Your Company"
-            })
+            children: (0, jsx_runtime_1.jsx)("h1", Object.assign({
+              className: "headering"
+            }, {
+              children: "Movie"
+            }))
           })), (0, jsx_runtime_1.jsx)("div", Object.assign({
             className: "hidden md:block"
           }, {
@@ -2731,111 +2759,7 @@ var Header = function Header() {
           }))]
         }))
       }))
-    })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-      className: "md:hidden",
-      id: "mobile-menu"
-    }, {
-      children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({
-        className: "space-y-1 px-2 pb-3 pt-2 sm:px-3"
-      }, {
-        children: [(0, jsx_runtime_1.jsx)("a", Object.assign({
-          href: "#",
-          className: "bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium",
-          "aria-current": "page"
-        }, {
-          children: "Dashboard"
-        })), (0, jsx_runtime_1.jsx)("a", Object.assign({
-          href: "#",
-          className: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-        }, {
-          children: "Team"
-        })), (0, jsx_runtime_1.jsx)("a", Object.assign({
-          href: "#",
-          className: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-        }, {
-          children: "Projects"
-        })), (0, jsx_runtime_1.jsx)("a", Object.assign({
-          href: "#",
-          className: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-        }, {
-          children: "Calendar"
-        })), (0, jsx_runtime_1.jsx)("a", Object.assign({
-          href: "#",
-          className: "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-        }, {
-          children: "Reports"
-        }))]
-      })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-        className: "border-t border-gray-700 pb-3 pt-4"
-      }, {
-        children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({
-          className: "flex items-center px-5"
-        }, {
-          children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-            className: "flex-shrink-0"
-          }, {
-            children: (0, jsx_runtime_1.jsx)("img", {
-              className: "h-10 w-10 rounded-full",
-              src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-              alt: ""
-            })
-          })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-            className: "ml-3"
-          }, {
-            children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-              className: "text-base font-medium leading-none text-white"
-            }, {
-              children: "Tom Cook"
-            })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-              className: "text-sm font-medium leading-none text-gray-400"
-            }, {
-              children: "tom@example.com"
-            }))]
-          })), (0, jsx_runtime_1.jsxs)("button", Object.assign({
-            type: "button",
-            className: "ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-          }, {
-            children: [(0, jsx_runtime_1.jsx)("span", Object.assign({
-              className: "sr-only"
-            }, {
-              children: "View notifications"
-            })), (0, jsx_runtime_1.jsx)("svg", Object.assign({
-              className: "h-6 w-6",
-              fill: "none",
-              viewBox: "0 0 24 24",
-              strokeWidth: "1.5",
-              stroke: "currentColor",
-              "aria-hidden": "true"
-            }, {
-              children: (0, jsx_runtime_1.jsx)("path", {
-                strokeLinecap: "round",
-                strokeLinejoin: "round",
-                d: "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-              })
-            }))]
-          }))]
-        })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-          className: "mt-3 space-y-1 px-2"
-        }, {
-          children: [(0, jsx_runtime_1.jsx)("a", Object.assign({
-            href: "#",
-            className: "block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-          }, {
-            children: "Your Profile"
-          })), (0, jsx_runtime_1.jsx)("a", Object.assign({
-            href: "#",
-            className: "block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-          }, {
-            children: "Settings"
-          })), (0, jsx_runtime_1.jsx)("a", Object.assign({
-            href: "#",
-            className: "block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-          }, {
-            children: "Sign out"
-          }))]
-        }))]
-      }))]
-    }))]
+    }))
   }));
   return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
     children: isAuth ? navigation : loginNavigation
@@ -3034,7 +2958,7 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
   /**
    *@param {String} title 映画のタイトル
    *@param {Array[{id: number; name: string}]} genres  ジャンル
-   *@param {Any} poster_path ポスター画像のパス
+   *@param {string} poster_path ポスター画像のパス
    *@param {Number} vote_average TmdbAPIの総合評価
    *@param {string} overview 日本語訳された概要
    *@param {string} original_title オリジナルタイトル
@@ -3269,9 +3193,6 @@ var DetailPageFirstView_1 = __importDefault(__webpack_require__(/*! ./components
 var DetailPageCast_1 = __importDefault(__webpack_require__(/*! ./components/detailPageCast/DetailPageCast */ "./resources/ts/pages/detailPage/components/detailPageCast/DetailPageCast.tsx"));
 //映画の詳細ページ
 var DetailPage = function DetailPage(props) {
-  /**
-   *@param {number} id title_id 映画個々のタイトルid
-   */
   var id = props.match.params.id;
   /**
    * @param dataJa 日本語訳された映画詳細データ

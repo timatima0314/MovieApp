@@ -10,6 +10,14 @@ img {
   max-width: none;
 }
 
+.headering {
+  display: inline-block;
+  background: linear-gradient(90deg, #4158d0, #c850c0 30%, #ffcc70);
+  background: -webkit-linear-gradient(0deg, #4158d0, #c850c0 30%, #ffcc70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .welcome-view {
   background-position: center 40%;
   background-repeat: no-repeat;

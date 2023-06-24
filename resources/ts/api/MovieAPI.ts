@@ -14,7 +14,7 @@ const getMovies = async () => {
  *@param {number} title_id TmdbAPIの個々の映画のid
  */
 const createMovie = async ({ title, poster_path, title_id }: { title: string, poster_path: string, title_id: number }) => {
-    const { data } = await axios.post<any>(`/api/movies`, { title: title, poster_path: poster_path, title_id: title_id });
+    const { data } = await axios.post<Movie>(`/api/movies`, { title: title, poster_path: poster_path, title_id: title_id });
     return data;
 }
 

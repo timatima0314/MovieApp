@@ -1,6 +1,6 @@
 import axios from "axios";
 import { pick } from "lodash";
-import { Thumbnail } from '../types/Movie';
+import { DetailMovie, Thumbnail } from '../types/Movie';
 
 /**
  * type Thumbnail
@@ -54,15 +54,35 @@ const getNowPlayingTmdbItem = async () => {
 };
 
 // 詳細データ,日本語訳対応しているが、overviewなどは日本語訳がない場合がありその場合nullになる。
-const getTmdbDetailsJa = async (id: any) => {
+const getTmdbDetailsJa = async (id: number) => {
     const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.MIX_TMDB_APP_KEY}&language=ja-JA&append_to_response=credits`)
-    return data
+    const detailsJaPick: DetailMovie = (({ title,
+        genres,
+        poster_path,
+        backdrop_path,
+        vote_average,
+        overview,
+        original_title,
+        credits,
+        status }) => ({
+            title,
+            genres,
+            poster_path,
+            backdrop_path,
+            vote_average,
+            overview,
+            original_title,
+            credits,
+            status
+        }))(data)
+    return detailsJaPick
 }
 
 // 詳細データの英語バージョン。overview参照に用いる。
-const getTmdbDetails = async (id: any) => {
+const getTmdbDetails = async (id: number) => {
     const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.MIX_TMDB_APP_KEY}&append_to_response=credits`)
-    return data
+    const detailsEn = (({ overview }: { overview: string }) => ({ overview }))(data)
+    return detailsEn
 }
 
 // タイトル検索し該当の映画情報所得

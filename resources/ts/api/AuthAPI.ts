@@ -15,12 +15,12 @@ const singUp = async ({ name, email, password }: { name: string, email: string, 
 };
 
 const login = async ({ email, password }: { email: string, password: string }) => {
-    const { data } = await axios.post<User>(`api/login`, { email, password });
+    const { data } = await axios.post<User>(`/api/login`, { email, password });
     return data;
 }
 
 const logout = async () => {
-    const { data } = await axios.post<User>(`api/logout`);
+    const { data } = await axios.post<User>(`/api/logout`);
     return data;
 }
 

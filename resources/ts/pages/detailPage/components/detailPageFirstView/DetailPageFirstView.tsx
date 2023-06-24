@@ -4,28 +4,24 @@ import {
     useMovies,
     useDeleteMovie,
 } from "../../../../queries/MovieQuery";
-import { DetailMovie } from "../../../../types/Movie";
+import { DetailMovie, Movie } from "../../../../types/Movie";
 
-/**
- * @param {any} dataJa 日本語訳された映画詳細データ
- * @param {any} dataEn 日本語訳されてない映画詳細データ
- * @param {number} title_id title_id 映画個々のタイトルid
- */
-interface Props {
-    dataJa: any;
-    dataEn: any;
-    title_id: number;
+interface overviewEn {
+    overview: string;
 }
-const DetailPageFirstView: React.VFC<Props> = ({
+const DetailPageFirstView: React.FC<any> = ({
     dataJa,
     dataEn,
     title_id,
+}: {
+    dataJa: DetailMovie;
+    dataEn: overviewEn;
+    title_id: number;
 }) => {
     const creatMovie = useCreateMovie();
     const deleteMovie = useDeleteMovie();
     const { data: movies, status: movStatus }: { data: any; status: any } =
         useMovies();
-
     if (movStatus === "loading") {
         return null;
     } else if (movStatus === "error") {
@@ -34,7 +30,7 @@ const DetailPageFirstView: React.VFC<Props> = ({
     }
     //登録ボタンを切り替える
     const changeRegister = () => {
-        let result = movies.filter((item: any) => {
+        let result = movies.filter((item: Movie) => {
             return item.title_id == title_id;
         });
         return result.length ? (
@@ -57,7 +53,7 @@ const DetailPageFirstView: React.VFC<Props> = ({
     /**
      *@param {String} title 映画のタイトル
      *@param {Array[{id: number; name: string}]} genres  ジャンル
-     *@param {Any} poster_path ポスター画像のパス
+     *@param {string} poster_path ポスター画像のパス
      *@param {Number} vote_average TmdbAPIの総合評価
      *@param {string} overview 日本語訳された概要
      *@param {string} original_title オリジナルタイトル
@@ -73,11 +69,11 @@ const DetailPageFirstView: React.VFC<Props> = ({
         overview,
         original_title,
         status,
-    }: DetailMovie = dataJa;
+    } = dataJa;
     /**
      * @param {string} overviewEn 英語の概要
      */
-    const { overview: overviewEn }: { overview: string } = dataEn;
+    const { overview: overviewEn } = dataEn;
 
     // TmdbAPIの評価が10段階のため2でわる
     let evaluation: number = vote_average / 2;
@@ -161,7 +157,7 @@ const DetailPageFirstView: React.VFC<Props> = ({
                                     ジャンル
                                 </div>
                                 <ul className="flex items-center flex-wrap text-gray-300">
-                                    {genres.map((item: any) => {
+                                    {genres.map((item) => {
                                         return (
                                             <li
                                                 className="mr-3"

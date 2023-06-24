@@ -3,8 +3,8 @@ import { useLogin, useSingUp } from "../../queries/AuthQuery";
 import { NavLink } from "react-router-dom";
 const SingnUpPage: React.VFC = () => {
     const singUp = useSingUp();
-    const [name, setName] = useState<any>("");
-    const [email, setEmail] = useState("@example.com");
+    const [name, setName] = useState<string>("");
+    const [email, setEmail] = useState<string>("@example.com");
     const [password, setPassword] = useState("");
 
     const handleSingUp = (e: React.FormEvent<HTMLFormElement>) => {

@@ -40,6 +40,7 @@ export type DetailMovie = {
     overview: string;
     original_title: string;
     status: string;
+    credits?: any
 }
 
 /**
