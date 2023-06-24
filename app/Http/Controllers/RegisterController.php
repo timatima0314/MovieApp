@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserCreateRequest;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +15,6 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         /** @var Illuminate\Validation\Validator $validator */
-        // dd($request);
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
