@@ -10,13 +10,15 @@ const PopularTmdbList: React.VFC = () => {
     }
 
     return (
-        <ul className="flex flex-row w-full overflow-x-scroll mb-5 ">
-            {data.map((movie: any) => {
-                // console.log(movie.id);
-                return <PopularTmdbItem key={movie.id} movie={movie} />;
-            })}
-        </ul>
+        <>
+            <h2 className="font-bold text-xl">人気の映画</h2>
+            <ul className="flex flex-row w-full overflow-x-scroll mb-5 ">
+                {data.map((movie: any) => {
+                    return <PopularTmdbItem key={movie.id} movie={movie} />;
+                })}
+            </ul>
+        </>
     );
 };
 
-export default PopularTmdbList
+export default PopularTmdbList;

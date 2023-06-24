@@ -1,3 +1,4 @@
+import HomePage from '../pages/home/index';
 /**
  * Movieの型  DB:moviesテーブルレコード
 *@param {number} id レコードid
@@ -57,3 +58,16 @@ export type SearchTitle = {
     release_date: Date
     overview: string
 };
+
+/**
+ * Thumbnailの型
+ * @param {number} id TmdbAPIから所得する映画個々のid
+ *@param {string} title 映画のタイトル
+ *@param {string} poster_path poster_path ポスター画像のパス
+*/
+export type  Thumbnail= {
+    id: number;
+    title: string;
+    poster_path: string;
+
+}

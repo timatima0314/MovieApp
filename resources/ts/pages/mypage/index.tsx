@@ -5,7 +5,7 @@ const MyPage: React.VFC = () => {
     return (
         <>
             <main className="w-10/12 m-auto">
-                <h1 className="text-red-400 text-4xl">あなたが登録した作品</h1>
+                <h1 className="font-bold text-xl mb-10">あなたが登録した作品</h1>
                 <MypageList />
             </main>
         </>

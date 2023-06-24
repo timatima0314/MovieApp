@@ -1,4 +1,14 @@
 import axios from "axios";
+import { pick } from "lodash";
+import { Thumbnail } from "../types/Movie";
+
+/**
+ * type Thumbnail
+ * @param {number} id TmdbAPIから所得する映画個々のid
+ *@param {string} title 映画のタイトル
+ *@param {string} poster_path poster_path ポスター画像のパス
+*/
+
 // 人気の映画情報所得
 const getPopularTmdbItem = async () => {
     const { data } = await axios.get(`${process.env.MIX_TMDB_ENDPOINT}movie/popular?api_key=${process.env.MIX_TMDB_APP_KEY}&language=ja-JA&page=1`)
@@ -11,9 +21,18 @@ const getTopRatedTmdbItem = async () => {
     return data.results
 };
 // 上映中の映画情報所得
+
 const getNowPlayingTmdbItem = async () => {
+    const nowPlayingTmdbItem: Thumbnail[] = []
     const { data } = await axios.get(`${process.env.MIX_TMDB_ENDPOINT}movie/now_playing?api_key=${process.env.MIX_TMDB_APP_KEY}&language=ja-JA&page=1`)
-    return data.results
+    data.results.map((item: any) => {
+        const pickItem = pick(item, [
+            "id",
+            "title",
+            "poster_path"])
+        nowPlayingTmdbItem.push(pickItem)
+    })
+    return nowPlayingTmdbItem
 };
 
 // 詳細データ,日本語訳対応しているが、overviewなどは日本語訳がない場合がありその場合nullになる。
@@ -29,8 +48,8 @@ const getTmdbDetails = async (id: any) => {
 }
 
 // タイトル検索し該当の映画情報所得
-const getTmdbSearch= async(searchTitle:string)=>{
-    const {data}=await axios.get(`https://api.themoviedb.org/3/search/movie?query=${searchTitle}&api_key=${process.env.MIX_TMDB_APP_KEY}&language=ja-JA`)
+const getTmdbSearch = async (searchTitle: string) => {
+    const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${searchTitle}&api_key=${process.env.MIX_TMDB_APP_KEY}&language=ja-JA`)
     return data.results
 }
-export { getPopularTmdbItem, getTopRatedTmdbItem, getTmdbDetailsJa, getTmdbDetails, getNowPlayingTmdbItem ,getTmdbSearch}
+export { getPopularTmdbItem, getTopRatedTmdbItem, getTmdbDetailsJa, getTmdbDetails, getNowPlayingTmdbItem, getTmdbSearch }

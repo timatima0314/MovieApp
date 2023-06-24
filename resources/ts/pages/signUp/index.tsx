@@ -1,32 +1,17 @@
 import React, { useState } from "react";
 import { useLogin, useSingUp } from "../../queries/AuthQuery";
-import { singUp } from "../../api/AuthAPI";
 import { NavLink } from "react-router-dom";
-import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 const SingnUpPage: React.VFC = () => {
-    // const login = useLogin();
     const singUp = useSingUp();
     const [name, setName] = useState<any>("");
     const [email, setEmail] = useState("@example.com");
     const [password, setPassword] = useState("");
 
-    // const singUp = async () => {
-    //     const { data } = await axios.post("/api/singUp", {
-    //         name: name,
-    //         email: email,
-    //         password: password,
-    //     });
-    //     return data;
-    // };
     const handleSingUp = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         singUp.mutate({ name, email, password });
     };
 
-    // const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     login.mutate({ email, password });
-    // };
     return (
         <main className="bg-green-50 flex justify-center items-center h-screen">
             <div className="w-full max-w-xs">
@@ -42,7 +27,6 @@ const SingnUpPage: React.VFC = () => {
                             ログインはこちらから
                         </h2>
                     </NavLink>
-
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
                             名前

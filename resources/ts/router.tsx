@@ -5,7 +5,6 @@ import {
     Route,
     RouteProps,
     Redirect,
-    NavLink,
 } from "react-router-dom";
 import LoginPage from "./pages/login";
 import Header from "./components/Header";
@@ -38,19 +37,17 @@ const Router = () => {
             <Header />
             <div>
                 <Switch>
-                    <LoginRoute path="/login" component={LoginPage}/>
+                    <LoginRoute path="/login" component={LoginPage} />
                     <LoginRoute path="/singUp" component={SingnUpPage} />
 
-                    {/* <GuardRoute exact path="/">
-                        <HomePage />
-                    </GuardRoute> */}
                     <GuardRoute path="/mypage" component={MyPage} />
-                    <GuardRoute path="/detail-page/:id" component={DetailPage} />
+                    <GuardRoute
+                        path="/detail-page/:id"
+                        component={DetailPage}
+                    />
 
-                    <GuardRoute path="/search">
-                        <SearchPage />
-                    </GuardRoute>
-                    <GuardRoute path="/" component={HomePage}/>
+                    <GuardRoute path="/search" component={SearchPage} />
+                    <GuardRoute path="/" component={HomePage} />
 
                     <Route path="/mypage" component={MyPage} />
                     <Route component={NotFoundPage} />

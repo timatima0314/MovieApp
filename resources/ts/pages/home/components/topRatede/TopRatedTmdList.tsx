@@ -9,12 +9,14 @@ const TopRatedTmdbList: React.VFC = () => {
     }
 
     return (
-        <ul className="flex flex-row w-full overflow-x-scroll mb-5 ">
-            {data.map((movie: any) => {
-                // console.log(movie.id);
-                return <TopRatedTmdbItem key={movie.id} movie={movie} />;
-            })}
-        </ul>
+        <>
+            <h2 className="font-bold text-xl">評価の高い映画</h2>
+            <ul className="flex flex-row w-full overflow-x-scroll mb-5 ">
+                {data.map((movie: any) => {
+                    return <TopRatedTmdbItem key={movie.id} movie={movie} />;
+                })}
+            </ul>
+        </>
     );
 };
 

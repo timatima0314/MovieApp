@@ -2,13 +2,23 @@ import React from "react";
 import { useQuery } from "react-query";
 import { getPopularTmdbItem } from "../../../../api/TmdbApi";
 const WelcomeView: React.VFC = () => {
-    const { data, isLoading } = useQuery("getWelcomeViewImg", getPopularTmdbItem);
-    if (isLoading) {
+    const { data, status } = useQuery("getWelcomeViewImg", getPopularTmdbItem);
+    if (status === "loading") {
         return <span>Loading...</span>;
+    } else if (status === "error") {
+        return (
+            <div className="text-center">
+                データの読み込みに失敗しました。ネット環境をお確かめの上、もう一度試してください。
+            </div>
+        );
     }
     // ランダムな整数をdataに入れ毎回welcome-viewの画像を変更する
-    let randomIndex = Math.floor(Math.random() * 20);
-    const { backdrop_path } = data[randomIndex];
+    let randomIndex: number = Math.floor(Math.random() * 20);
+
+    /**
+     * @param {string} backfdrop_path 映画の画像パス
+     */
+    const { backdrop_path }: { backdrop_path: string } = data[randomIndex];
     return (
         <div
             className="welcome-view "

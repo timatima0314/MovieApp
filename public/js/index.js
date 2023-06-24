@@ -2449,6 +2449,13 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.getTmdbSearch = exports.getNowPlayingTmdbItem = exports.getTmdbDetails = exports.getTmdbDetailsJa = exports.getTopRatedTmdbItem = exports.getPopularTmdbItem = void 0;
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+var lodash_1 = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/**
+ * type Thumbnail
+ * @param {number} id TmdbAPIから所得する映画個々のid
+ *@param {string} title 映画のタイトル
+ *@param {string} poster_path poster_path ポスター画像のパス
+*/
 // 人気の映画情報所得
 var getPopularTmdbItem = function getPopularTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -2494,17 +2501,22 @@ exports.getTopRatedTmdbItem = getTopRatedTmdbItem;
 // 上映中の映画情報所得
 var getNowPlayingTmdbItem = function getNowPlayingTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-    var _yield$axios_1$defaul3, data;
+    var nowPlayingTmdbItem, _yield$axios_1$defaul3, data;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.next = 2;
+          nowPlayingTmdbItem = [];
+          _context3.next = 3;
           return axios_1["default"].get("".concat("https://api.themoviedb.org/3/", "movie/now_playing?api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&language=ja-JA&page=1"));
-        case 2:
+        case 3:
           _yield$axios_1$defaul3 = _context3.sent;
           data = _yield$axios_1$defaul3.data;
-          return _context3.abrupt("return", data.results);
-        case 5:
+          data.results.map(function (item) {
+            var pickItem = (0, lodash_1.pick)(item, ["id", "title", "poster_path"]);
+            nowPlayingTmdbItem.push(pickItem);
+          });
+          return _context3.abrupt("return", nowPlayingTmdbItem);
+        case 7:
         case "end":
           return _context3.stop();
       }
@@ -3342,7 +3354,7 @@ Object.defineProperty(exports, "__esModule", ({
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 var NowPlayingTmdbItem = function NowPlayingTmdbItem(_ref) {
-  var movie = _ref.movie;
+  var movies = _ref.movies;
   return (0, jsx_runtime_1.jsx)("li", Object.assign({
     className: "mr-4",
     style: {
@@ -3351,7 +3363,7 @@ var NowPlayingTmdbItem = function NowPlayingTmdbItem(_ref) {
   }, {
     children: (0, jsx_runtime_1.jsxs)(react_router_dom_1.NavLink, Object.assign({
       className: "truncate text-xs",
-      to: "/detail-page/".concat(movie.id)
+      to: "/detail-page/".concat(movies.id)
     }, {
       children: [(0, jsx_runtime_1.jsx)("img", {
         width: 185,
@@ -3360,14 +3372,14 @@ var NowPlayingTmdbItem = function NowPlayingTmdbItem(_ref) {
           width: 185,
           height: 278
         },
-        src: "https://image.tmdb.org/t/p/w185/".concat(movie.poster_path)
+        src: "https://image.tmdb.org/t/p/w185/".concat(movies.poster_path)
       }), (0, jsx_runtime_1.jsx)("div", Object.assign({
         className: "text-base whitespace-normal my-auto"
       }, {
-        children: movie.title
+        children: movies.title
       }))]
     }))
-  }), movie.id);
+  }), movies.id);
 };
 exports["default"] = NowPlayingTmdbItem;
 
@@ -3397,22 +3409,31 @@ var NowPlayingTmdbItem_1 = __importDefault(__webpack_require__(/*! ./NowPlayingT
 var NowPlayingTmdbList = function NowPlayingTmdbList() {
   var _ref = (0, react_query_1.useQuery)("nowPlayingItem", TmdbApi_1.getNowPlayingTmdbItem),
     data = _ref.data,
-    isLoading = _ref.isLoading;
-  if (isLoading) {
+    status = _ref.status;
+  if (status === "loading") {
     return (0, jsx_runtime_1.jsx)("span", {
       children: "Loading..."
     });
+  } else if (!data || data.length <= 0) {
+    return (0, jsx_runtime_1.jsx)("span", {
+      children: "\u30C7\u30FC\u30BF\u3092\u6240\u5F97\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\u3002\u30CD\u30C3\u30C8\u74B0\u5883\u3092\u78BA\u8A8D\u306E\u4E0A\u3001\u3082\u3046\u4E00\u5EA6\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002"
+    });
   }
-  return (0, jsx_runtime_1.jsx)("ul", Object.assign({
-    className: "flex flex-row w-full overflow-x-scroll mb-5 "
-  }, {
-    children: data.map(function (movie) {
-      // console.log(movie.id);
-      return (0, jsx_runtime_1.jsx)(NowPlayingTmdbItem_1["default"], {
-        movie: movie
-      }, movie.id);
-    })
-  }));
+  return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
+    children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
+      className: "font-bold text-xl"
+    }, {
+      children: "\u4E0A\u6620\u4E2D\u306E\u6620\u753B"
+    })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+      className: "flex flex-row w-full overflow-x-scroll mb-5 "
+    }, {
+      children: data.map(function (movie) {
+        return (0, jsx_runtime_1.jsx)(NowPlayingTmdbItem_1["default"], {
+          movies: movie
+        }, movie.id);
+      })
+    }))]
+  });
 };
 exports["default"] = NowPlayingTmdbList;
 
@@ -3494,16 +3515,21 @@ var PopularTmdbList = function PopularTmdbList() {
       children: "Loading..."
     });
   }
-  return (0, jsx_runtime_1.jsx)("ul", Object.assign({
-    className: "flex flex-row w-full overflow-x-scroll mb-5 "
-  }, {
-    children: data.map(function (movie) {
-      // console.log(movie.id);
-      return (0, jsx_runtime_1.jsx)(PopularTmdbItem_1["default"], {
-        movie: movie
-      }, movie.id);
-    })
-  }));
+  return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
+    children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
+      className: "font-bold text-xl"
+    }, {
+      children: "\u4EBA\u6C17\u306E\u6620\u753B"
+    })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+      className: "flex flex-row w-full overflow-x-scroll mb-5 "
+    }, {
+      children: data.map(function (movie) {
+        return (0, jsx_runtime_1.jsx)(PopularTmdbItem_1["default"], {
+          movie: movie
+        }, movie.id);
+      })
+    }))]
+  });
 };
 exports["default"] = PopularTmdbList;
 
@@ -3585,16 +3611,21 @@ var TopRatedTmdbList = function TopRatedTmdbList() {
       children: "Loading..."
     });
   }
-  return (0, jsx_runtime_1.jsx)("ul", Object.assign({
-    className: "flex flex-row w-full overflow-x-scroll mb-5 "
-  }, {
-    children: data.map(function (movie) {
-      // console.log(movie.id);
-      return (0, jsx_runtime_1.jsx)(TopRatedTmdItem_1["default"], {
-        movie: movie
-      }, movie.id);
-    })
-  }));
+  return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
+    children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
+      className: "font-bold text-xl"
+    }, {
+      children: "\u8A55\u4FA1\u306E\u9AD8\u3044\u6620\u753B"
+    })), (0, jsx_runtime_1.jsx)("ul", Object.assign({
+      className: "flex flex-row w-full overflow-x-scroll mb-5 "
+    }, {
+      children: data.map(function (movie) {
+        return (0, jsx_runtime_1.jsx)(TopRatedTmdItem_1["default"], {
+          movie: movie
+        }, movie.id);
+      })
+    }))]
+  });
 };
 exports["default"] = TopRatedTmdbList;
 
@@ -3618,14 +3649,23 @@ var TmdbApi_1 = __webpack_require__(/*! ../../../../api/TmdbApi */ "./resources/
 var WelcomeView = function WelcomeView() {
   var _ref = (0, react_query_1.useQuery)("getWelcomeViewImg", TmdbApi_1.getPopularTmdbItem),
     data = _ref.data,
-    isLoading = _ref.isLoading;
-  if (isLoading) {
+    status = _ref.status;
+  if (status === "loading") {
     return (0, jsx_runtime_1.jsx)("span", {
       children: "Loading..."
     });
+  } else if (status === "error") {
+    return (0, jsx_runtime_1.jsx)("div", Object.assign({
+      className: "text-center"
+    }, {
+      children: "\u30C7\u30FC\u30BF\u306E\u8AAD\u307F\u8FBC\u307F\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002\u30CD\u30C3\u30C8\u74B0\u5883\u3092\u304A\u78BA\u304B\u3081\u306E\u4E0A\u3001\u3082\u3046\u4E00\u5EA6\u8A66\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+    }));
   }
   // ランダムな整数をdataに入れ毎回welcome-viewの画像を変更する
   var randomIndex = Math.floor(Math.random() * 20);
+  /**
+   * @param {string} backfdrop_path 映画の画像パス
+   */
   var backdrop_path = data[randomIndex].backdrop_path;
   return (0, jsx_runtime_1.jsx)("div", Object.assign({
     className: "welcome-view ",
@@ -3679,19 +3719,7 @@ var HomePage = function HomePage() {
     children: [(0, jsx_runtime_1.jsx)(WelcomeView_1["default"], {}), (0, jsx_runtime_1.jsxs)("main", Object.assign({
       className: "w-10/12 m-auto"
     }, {
-      children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
-        className: "font-bold text-xl"
-      }, {
-        children: "\u4EBA\u6C17\u306E\u6620\u753B"
-      })), (0, jsx_runtime_1.jsx)(PopularTmdbList_1["default"], {}), (0, jsx_runtime_1.jsx)("h2", Object.assign({
-        className: "font-bold text-xl"
-      }, {
-        children: "\u8A55\u4FA1\u306E\u9AD8\u3044\u6620\u753B"
-      })), (0, jsx_runtime_1.jsx)(TopRatedTmdList_1["default"], {}), (0, jsx_runtime_1.jsx)("h2", Object.assign({
-        className: "font-bold text-xl"
-      }, {
-        children: "\u4E0A\u6620\u4E2D\u306E\u6620\u753B"
-      })), (0, jsx_runtime_1.jsx)(NowPlayingTmdbList_1["default"], {})]
+      children: [(0, jsx_runtime_1.jsx)(PopularTmdbList_1["default"], {}), (0, jsx_runtime_1.jsx)(TopRatedTmdList_1["default"], {}), (0, jsx_runtime_1.jsx)(NowPlayingTmdbList_1["default"], {})]
     }))]
   });
 };
@@ -3828,7 +3856,7 @@ var MyPage = function MyPage() {
       className: "w-10/12 m-auto"
     }, {
       children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
-        className: "text-red-400 text-4xl"
+        className: "font-bold text-xl mb-10"
       }, {
         children: "\u3042\u306A\u305F\u304C\u767B\u9332\u3057\u305F\u4F5C\u54C1"
       })), (0, jsx_runtime_1.jsx)(mypageList_1["default"], {})]
@@ -3874,7 +3902,7 @@ var MypageList = function MypageList() {
     return (0, jsx_runtime_1.jsx)("div", Object.assign({
       className: "text-center"
     }, {
-      children: "\u767B\u9332\u3055\u308C\u305F\u30C7\u30FC\u30BF\u306F\u3042\u308A\u307E\u305B\u3093\u3002"
+      children: "\u767B\u9332\u3055\u308C\u305F\u30BF\u30A4\u30C8\u30EB\u306F\u3042\u308A\u307E\u305B\u3093\u3002\u597D\u304D\u306A\u6620\u753B\u3092\u767B\u9332\u3057\u3088\u3046\u3002"
     }));
   }
   return (0, jsx_runtime_1.jsx)("ul", Object.assign({
@@ -4206,7 +4234,6 @@ var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var AuthQuery_1 = __webpack_require__(/*! ../../queries/AuthQuery */ "./resources/ts/queries/AuthQuery.ts");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 var SingnUpPage = function SingnUpPage() {
-  // const login = useLogin();
   var singUp = (0, AuthQuery_1.useSingUp)();
   var _ref = (0, react_1.useState)(""),
     _ref2 = _slicedToArray(_ref, 2),
@@ -4220,14 +4247,6 @@ var SingnUpPage = function SingnUpPage() {
     _ref6 = _slicedToArray(_ref5, 2),
     password = _ref6[0],
     setPassword = _ref6[1];
-  // const singUp = async () => {
-  //     const { data } = await axios.post("/api/singUp", {
-  //         name: name,
-  //         email: email,
-  //         password: password,
-  //     });
-  //     return data;
-  // };
   var handleSingUp = function handleSingUp(e) {
     e.preventDefault();
     singUp.mutate({
@@ -4236,10 +4255,6 @@ var SingnUpPage = function SingnUpPage() {
       password: password
     });
   };
-  // const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-  //     login.mutate({ email, password });
-  // };
   return (0, jsx_runtime_1.jsx)("main", Object.assign({
     className: "bg-green-50 flex justify-center items-center h-screen"
   }, {
@@ -4598,11 +4613,10 @@ var Router = function Router() {
         }), (0, jsx_runtime_1.jsx)(GuardRoute, {
           path: "/detail-page/:id",
           component: detailPage_1["default"]
-        }), (0, jsx_runtime_1.jsx)(GuardRoute, Object.assign({
-          path: "/search"
-        }, {
-          children: (0, jsx_runtime_1.jsx)(search_1["default"], {})
-        })), (0, jsx_runtime_1.jsx)(GuardRoute, {
+        }), (0, jsx_runtime_1.jsx)(GuardRoute, {
+          path: "/search",
+          component: search_1["default"]
+        }), (0, jsx_runtime_1.jsx)(GuardRoute, {
           path: "/",
           component: home_1["default"]
         }), (0, jsx_runtime_1.jsx)(react_router_dom_1.Route, {

@@ -13,7 +13,7 @@ const MypageList: React.VFC = () => {
         );
     } else if (!movies || movies.length <= 0) {
         return (
-            <div className="text-center">登録されたデータはありません。</div>
+            <div className="text-center">登録されたタイトルはありません。好きな映画を登録しよう。</div>
         );
     }
     return (
