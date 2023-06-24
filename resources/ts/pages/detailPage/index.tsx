@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import { getTmdbDetailsJa, getTmdbDetails } from "../../api/TmdbApi";
 import DetailPageFirstView from "./components/detailPageFirstView/DetailPageFirstView";
 import DetailPageCast from "./components/detailPageCast/DetailPageCast";
-import { DetailMovie } from "../../types/Movie";
 /**
  *@param {number} id title_id 映画個々のタイトルid
  */

@@ -1,5 +1,5 @@
 import React from "react";
-import MypageList from "./mypageList/mypageList";
+import MypageList from "./components/mypageList/mypageList";
 // マイページ
 const MyPage: React.VFC = () => {
     return (

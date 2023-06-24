@@ -2667,7 +2667,7 @@ var Header = function Header() {
             children: (0, jsx_runtime_1.jsx)("h1", Object.assign({
               className: "headering"
             }, {
-              children: "Movie"
+              children: "Movie Love or Hate"
             }))
           })), (0, jsx_runtime_1.jsx)("div", Object.assign({
             className: "hidden md:block"
@@ -2739,9 +2739,9 @@ var Header = function Header() {
             className: "flex-shrink-0"
           }, {
             children: (0, jsx_runtime_1.jsx)("h1", Object.assign({
-              className: "headering"
+              className: "titleHeading"
             }, {
-              children: "Movie"
+              children: "Movie Love or Hate"
             }))
           })), (0, jsx_runtime_1.jsx)("div", Object.assign({
             className: "hidden md:block"
@@ -3694,11 +3694,11 @@ var AuthQuery_1 = __webpack_require__(/*! ../../queries/AuthQuery */ "./resource
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 var LoginPage = function LoginPage() {
   var login = (0, AuthQuery_1.useLogin)();
-  var _ref = (0, react_1.useState)("admin@example.com"),
+  var _ref = (0, react_1.useState)(""),
     _ref2 = _slicedToArray(_ref, 2),
     email = _ref2[0],
     setEmail = _ref2[1];
-  var _ref3 = (0, react_1.useState)("123456789"),
+  var _ref3 = (0, react_1.useState)(""),
     _ref4 = _slicedToArray(_ref3, 2),
     password = _ref4[0],
     setPassword = _ref4[1];
@@ -3720,14 +3720,14 @@ var LoginPage = function LoginPage() {
         className: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       }, {
         children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
-          className: "text-center text-xl font-bold mb-4"
+          className: "text-center text-xl font-bold mb-4 titleHeading"
         }, {
-          children: "\u4EEE\u30BF\u30A4\u30C8\u30EB"
+          children: "Movie Love or Hate"
         })), (0, jsx_runtime_1.jsx)(react_router_dom_1.NavLink, Object.assign({
           to: "/singUp"
         }, {
           children: (0, jsx_runtime_1.jsx)("h2", Object.assign({
-            className: "text-center mb-4"
+            className: "text-center text-blue-500 hover:underline mb-4"
           }, {
             children: "\u65B0\u898F\u767B\u9332\u306F\u3053\u3061\u3089\u304B\u3089"
           }))
@@ -3773,47 +3773,10 @@ exports["default"] = LoginPage;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/mypage/index.tsx":
-/*!*********************************************!*\
-  !*** ./resources/ts/pages/mypage/index.tsx ***!
-  \*********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var mypageList_1 = __importDefault(__webpack_require__(/*! ./mypageList/mypageList */ "./resources/ts/pages/mypage/mypageList/mypageList.tsx"));
-// マイページ
-var MyPage = function MyPage() {
-  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
-    children: (0, jsx_runtime_1.jsxs)("main", Object.assign({
-      className: "w-10/12 m-auto"
-    }, {
-      children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
-        className: "font-bold text-xl mb-10"
-      }, {
-        children: "\u3042\u306A\u305F\u304C\u767B\u9332\u3057\u305F\u4F5C\u54C1"
-      })), (0, jsx_runtime_1.jsx)(mypageList_1["default"], {})]
-    }))
-  });
-};
-exports["default"] = MyPage;
-
-/***/ }),
-
-/***/ "./resources/ts/pages/mypage/mypageList/mypageList.tsx":
-/*!*************************************************************!*\
-  !*** ./resources/ts/pages/mypage/mypageList/mypageList.tsx ***!
-  \*************************************************************/
+/***/ "./resources/ts/pages/mypage/components/mypageList/mypageList.tsx":
+/*!************************************************************************!*\
+  !*** ./resources/ts/pages/mypage/components/mypageList/mypageList.tsx ***!
+  \************************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -3823,7 +3786,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var MovieQuery_1 = __webpack_require__(/*! ../../../queries/MovieQuery */ "./resources/ts/queries/MovieQuery.ts");
+var MovieQuery_1 = __webpack_require__(/*! ../../../../queries/MovieQuery */ "./resources/ts/queries/MovieQuery.ts");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 var MypageList = function MypageList() {
   var _ref = (0, MovieQuery_1.useMovies)(),
@@ -3889,6 +3852,43 @@ var MypageList = function MypageList() {
   }));
 };
 exports["default"] = MypageList;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/mypage/index.tsx":
+/*!*********************************************!*\
+  !*** ./resources/ts/pages/mypage/index.tsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var mypageList_1 = __importDefault(__webpack_require__(/*! ./components/mypageList/mypageList */ "./resources/ts/pages/mypage/components/mypageList/mypageList.tsx"));
+// マイページ
+var MyPage = function MyPage() {
+  return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, {
+    children: (0, jsx_runtime_1.jsxs)("main", Object.assign({
+      className: "w-10/12 m-auto"
+    }, {
+      children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
+        className: "font-bold text-xl mb-10"
+      }, {
+        children: "\u3042\u306A\u305F\u304C\u767B\u9332\u3057\u305F\u4F5C\u54C1"
+      })), (0, jsx_runtime_1.jsx)(mypageList_1["default"], {})]
+    }))
+  });
+};
+exports["default"] = MyPage;
 
 /***/ }),
 
@@ -4182,7 +4182,7 @@ var SingnUpPage = function SingnUpPage() {
     _ref2 = _slicedToArray(_ref, 2),
     name = _ref2[0],
     setName = _ref2[1];
-  var _ref3 = (0, react_1.useState)("@example.com"),
+  var _ref3 = (0, react_1.useState)(""),
     _ref4 = _slicedToArray(_ref3, 2),
     email = _ref4[0],
     setEmail = _ref4[1];
@@ -4209,14 +4209,14 @@ var SingnUpPage = function SingnUpPage() {
         className: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       }, {
         children: [(0, jsx_runtime_1.jsx)("h1", Object.assign({
-          className: "text-center text-xl font-bold mb-4"
+          className: "titleHeading text-center text-xl font-bold mb-4"
         }, {
-          children: "\u4EEE\u30BF\u30A4\u30C8\u30EB"
+          children: "Movie Love or Hate"
         })), (0, jsx_runtime_1.jsx)(react_router_dom_1.NavLink, Object.assign({
           to: "/login"
         }, {
           children: (0, jsx_runtime_1.jsx)("h2", Object.assign({
-            className: "text-center mb-4"
+            className: "text-center  text-blue-500 hover:underline mb-4"
           }, {
             children: "\u30ED\u30B0\u30A4\u30F3\u306F\u3053\u3061\u3089\u304B\u3089"
           }))
@@ -4228,7 +4228,7 @@ var SingnUpPage = function SingnUpPage() {
           }, {
             children: "\u540D\u524D"
           })), (0, jsx_runtime_1.jsx)("input", {
-            className: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+            className: "shadow appearance-none mb-4 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
             type: "text",
             value: name,
             onChange: function onChange(e) {

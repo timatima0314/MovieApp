@@ -10,8 +10,7 @@ img {
   max-width: none;
 }
 
-.headering {
-  display: inline-block;
+.titleHeading {
   background: linear-gradient(90deg, #4158d0, #c850c0 30%, #ffcc70);
   background: -webkit-linear-gradient(0deg, #4158d0, #c850c0 30%, #ffcc70);
   -webkit-background-clip: text;

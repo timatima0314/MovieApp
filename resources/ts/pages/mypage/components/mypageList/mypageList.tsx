@@ -1,7 +1,7 @@
 import React from "react";
-import { useMovies } from "../../../queries/MovieQuery";
+import { useMovies } from "../../../../queries/MovieQuery";
 import { NavLink } from "react-router-dom";
-import { Movie } from "../../../types/Movie";
+import { Movie } from "../../../../types/Movie";
 
 const MypageList: React.VFC = () => {
     const { data: movies, status } = useMovies();

@@ -3,8 +3,8 @@ import { useLogin } from "../../queries/AuthQuery";
 import { NavLink } from "react-router-dom";
 const LoginPage: React.VFC = () => {
     const login = useLogin();
-    const [email, setEmail] = useState("admin@example.com");
-    const [password, setPassword] = useState("123456789");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         login.mutate({ email, password });
@@ -16,11 +16,11 @@ const LoginPage: React.VFC = () => {
                     onSubmit={handleLogin}
                     className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
                 >
-                    <h1 className="text-center text-xl font-bold mb-4">
-                        仮タイトル
+                    <h1 className="text-center text-xl font-bold mb-4 titleHeading">
+                        Movie Love or Hate
                     </h1>
                     <NavLink to={`/singUp`}>
-                        <h2 className="text-center mb-4">
+                        <h2 className="text-center text-blue-500 hover:underline mb-4">
                             新規登録はこちらから
                         </h2>
                     </NavLink>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useLogin, useSingUp } from "../../queries/AuthQuery";
+import { useSingUp } from "../../queries/AuthQuery";
 import { NavLink } from "react-router-dom";
 const SingnUpPage: React.VFC = () => {
     const singUp = useSingUp();
     const [name, setName] = useState<string>("");
-    const [email, setEmail] = useState<string>("@example.com");
+    const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState("");
 
     const handleSingUp = (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,11 +19,11 @@ const SingnUpPage: React.VFC = () => {
                     onSubmit={handleSingUp}
                     className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
                 >
-                    <h1 className="text-center text-xl font-bold mb-4">
-                        仮タイトル
+                    <h1 className="titleHeading text-center text-xl font-bold mb-4">
+                        Movie Love or Hate
                     </h1>
                     <NavLink to={`/login`}>
-                        <h2 className="text-center mb-4">
+                        <h2 className="text-center  text-blue-500 hover:underline mb-4">
                             ログインはこちらから
                         </h2>
                     </NavLink>
@@ -32,7 +32,7 @@ const SingnUpPage: React.VFC = () => {
                             名前
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none mb-4 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}

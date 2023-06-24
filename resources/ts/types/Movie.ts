@@ -1,4 +1,3 @@
-import HomePage from '../pages/home/index';
 /**
  * Movieの型  DB:moviesテーブルレコード
 *@param {number} id レコードid
