@@ -2459,17 +2459,22 @@ var lodash_1 = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
 // 人気の映画情報所得
 var getPopularTmdbItem = function getPopularTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var _yield$axios_1$defaul, data;
+    var popularTmdbItem, _yield$axios_1$defaul, data;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.next = 2;
+          popularTmdbItem = [];
+          _context.next = 3;
           return axios_1["default"].get("".concat("https://api.themoviedb.org/3/", "movie/popular?api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&language=ja-JA&page=1"));
-        case 2:
+        case 3:
           _yield$axios_1$defaul = _context.sent;
           data = _yield$axios_1$defaul.data;
-          return _context.abrupt("return", data.results);
-        case 5:
+          data.results.map(function (item) {
+            var pickItem = (0, lodash_1.pick)(item, ["id", "title", "poster_path", "backdrop_path"]);
+            popularTmdbItem.push(pickItem);
+          });
+          return _context.abrupt("return", popularTmdbItem);
+        case 7:
         case "end":
           return _context.stop();
       }
@@ -2480,17 +2485,22 @@ exports.getPopularTmdbItem = getPopularTmdbItem;
 // 評価の高い映画情報所得
 var getTopRatedTmdbItem = function getTopRatedTmdbItem() {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var _yield$axios_1$defaul2, data;
+    var topRatedTmdbItem, _yield$axios_1$defaul2, data;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
+          topRatedTmdbItem = [];
+          _context2.next = 3;
           return axios_1["default"].get("".concat("https://api.themoviedb.org/3/", "movie/top_rated?api_key=").concat("837304d654cf0a36c4bce744ca21baa3", "&language=ja-JA&page=1"));
-        case 2:
+        case 3:
           _yield$axios_1$defaul2 = _context2.sent;
           data = _yield$axios_1$defaul2.data;
-          return _context2.abrupt("return", data.results);
-        case 5:
+          data.results.map(function (item) {
+            var pickItem = (0, lodash_1.pick)(item, ["id", "title", "poster_path"]);
+            topRatedTmdbItem.push(pickItem);
+          });
+          return _context2.abrupt("return", topRatedTmdbItem);
+        case 7:
         case "end":
           return _context2.stop();
       }
@@ -3514,6 +3524,10 @@ var PopularTmdbList = function PopularTmdbList() {
     return (0, jsx_runtime_1.jsx)("span", {
       children: "Loading..."
     });
+  } else if (!data || data.length <= 0) {
+    return (0, jsx_runtime_1.jsx)("span", {
+      children: "\u30C7\u30FC\u30BF\u3092\u6240\u5F97\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\u3002\u30CD\u30C3\u30C8\u74B0\u5883\u3092\u78BA\u8A8D\u306E\u4E0A\u3001\u3082\u3046\u4E00\u5EA6\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002"
+    });
   }
   return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
     children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
@@ -3610,6 +3624,10 @@ var TopRatedTmdbList = function TopRatedTmdbList() {
     return (0, jsx_runtime_1.jsx)("span", {
       children: "Loading..."
     });
+  } else if (!data || data.length <= 0) {
+    return (0, jsx_runtime_1.jsx)("span", {
+      children: "\u30C7\u30FC\u30BF\u3092\u6240\u5F97\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\u3002\u30CD\u30C3\u30C8\u74B0\u5883\u3092\u78BA\u8A8D\u306E\u4E0A\u3001\u3082\u3046\u4E00\u5EA6\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002"
+    });
   }
   return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
     children: [(0, jsx_runtime_1.jsx)("h2", Object.assign({
@@ -3660,6 +3678,10 @@ var WelcomeView = function WelcomeView() {
     }, {
       children: "\u30C7\u30FC\u30BF\u306E\u8AAD\u307F\u8FBC\u307F\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002\u30CD\u30C3\u30C8\u74B0\u5883\u3092\u304A\u78BA\u304B\u3081\u306E\u4E0A\u3001\u3082\u3046\u4E00\u5EA6\u8A66\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
     }));
+  } else if (!data || data.length <= 0) {
+    return (0, jsx_runtime_1.jsx)("span", {
+      children: "\u30C7\u30FC\u30BF\u3092\u6240\u5F97\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\u3002\u30CD\u30C3\u30C8\u74B0\u5883\u3092\u78BA\u8A8D\u306E\u4E0A\u3001\u3082\u3046\u4E00\u5EA6\u304A\u8A66\u3057\u304F\u3060\u3055\u3044\u3002"
+    });
   }
   // ランダムな整数をdataに入れ毎回welcome-viewの画像を変更する
   var randomIndex = Math.floor(Math.random() * 20);

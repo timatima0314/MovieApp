@@ -63,11 +63,13 @@ export type SearchTitle = {
  * Thumbnailの型
  * @param {number} id TmdbAPIから所得する映画個々のid
  *@param {string} title 映画のタイトル
- *@param {string} poster_path poster_path ポスター画像のパス
+ *@param {string} poster_path  ポスター画像のパス
+ @param {string} backdrop_path WelcomeViewに使用 
 */
-export type  Thumbnail= {
+export type Thumbnail = {
     id: number;
     title: string;
     poster_path: string;
+    backdrop_path?: string
 
 }

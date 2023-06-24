@@ -1,6 +1,6 @@
 import axios from "axios";
 import { pick } from "lodash";
-import { Thumbnail } from "../types/Movie";
+import { Thumbnail } from '../types/Movie';
 
 /**
  * type Thumbnail
@@ -11,14 +11,32 @@ import { Thumbnail } from "../types/Movie";
 
 // 人気の映画情報所得
 const getPopularTmdbItem = async () => {
+    let popularTmdbItem: Thumbnail[] = []
     const { data } = await axios.get(`${process.env.MIX_TMDB_ENDPOINT}movie/popular?api_key=${process.env.MIX_TMDB_APP_KEY}&language=ja-JA&page=1`)
-    return data.results
+    data.results.map((item: any) => {
+        const pickItem = pick(item, [
+            "id",
+            "title",
+            "poster_path",
+            "backdrop_path"])
+        popularTmdbItem.push(pickItem)
+    })
+
+    return popularTmdbItem
 };
 
 // 評価の高い映画情報所得
 const getTopRatedTmdbItem = async () => {
+    let topRatedTmdbItem: Thumbnail[] = []
     const { data } = await axios.get(`${process.env.MIX_TMDB_ENDPOINT}movie/top_rated?api_key=${process.env.MIX_TMDB_APP_KEY}&language=ja-JA&page=1`)
-    return data.results
+    data.results.map((item: any) => {
+        const pickItem = pick(item, [
+            "id",
+            "title",
+            "poster_path"])
+        topRatedTmdbItem.push(pickItem)
+    })
+    return topRatedTmdbItem
 };
 // 上映中の映画情報所得
 

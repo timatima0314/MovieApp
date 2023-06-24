@@ -1,6 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-const PopularTmdbItem: React.VFC<any> = ({ movie }) => {
+import { Thumbnail } from "../../../../types/Movie";
+
+interface Props {
+    movie: Thumbnail;
+}
+const PopularTmdbItem: React.VFC<Props> = ({ movie }) => {
     return (
         <li className="mr-4" key={movie.id} style={{ width: 185 }}>
             <NavLink

@@ -11,6 +11,12 @@ const WelcomeView: React.VFC = () => {
                 データの読み込みに失敗しました。ネット環境をお確かめの上、もう一度試してください。
             </div>
         );
+    } else if (!data || data.length <= 0) {
+        return (
+            <span>
+                データを所得できませんでした。ネット環境を確認の上、もう一度お試しください。
+            </span>
+        );
     }
     // ランダムな整数をdataに入れ毎回welcome-viewの画像を変更する
     let randomIndex: number = Math.floor(Math.random() * 20);
@@ -18,7 +24,7 @@ const WelcomeView: React.VFC = () => {
     /**
      * @param {string} backfdrop_path 映画の画像パス
      */
-    const { backdrop_path }: { backdrop_path: string } = data[randomIndex];
+    const { backdrop_path } = data[randomIndex];
     return (
         <div
             className="welcome-view "

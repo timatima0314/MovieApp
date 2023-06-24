@@ -1,6 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-const TopRatedTmdbItem: React.VFC<any> = ({ movie }) => {
+import { Thumbnail } from "../../../../types/Movie";
+
+interface Props {
+    movie: Thumbnail;
+}
+const TopRatedTmdbItem: React.VFC<Props> = ({ movie }) => {
     return (
         <li className="mr-4" key={movie.id} style={{ width: 185 }}>
             <NavLink
@@ -10,7 +15,7 @@ const TopRatedTmdbItem: React.VFC<any> = ({ movie }) => {
                 <img
                     width={185}
                     height={278}
-                    style={{ width: 185 ,height:278}}
+                    style={{ width: 185, height: 278 }}
                     src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
                 />
                 <div className="text-base h-20 whitespace-normal my-auto">
