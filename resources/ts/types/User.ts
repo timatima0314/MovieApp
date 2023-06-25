@@ -3,5 +3,9 @@ type User = {
     name: string
     email: string
 }
+type Login = {
+    email: string;
+    password: string;
+};
 
-export { User }
+export { User, Login }

@@ -30,5 +30,8 @@
         "tailwindcss": "^3.3.2",
         "ts-loader": "^9.4.2",
         "typescript": "^5.0.4"
+    },
+    "dependencies": {
+        "react-hook-form": "^7.45.0"
     }
 }
