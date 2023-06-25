@@ -85,7 +85,7 @@ const SingnUpPage: React.VFC = () => {
                             htmlFor="password"
                             className="block text-gray-700 text-sm font-bold mb-2"
                         >
-                            パスワード
+                            パスワード(4文字以上入力しましょう)
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

@@ -2665,12 +2665,12 @@ var Header = function Header() {
             className: "flex-shrink-0"
           }, {
             children: (0, jsx_runtime_1.jsx)("h1", Object.assign({
-              className: "headering"
+              className: "titleHeading"
             }, {
               children: "Movie Love or Hate"
             }))
           })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-            className: "hidden md:block"
+            className: " md:block"
           }, {
             children: (0, jsx_runtime_1.jsx)("div", Object.assign({
               className: "ml-10 flex items-baseline space-x-4"
@@ -2684,7 +2684,7 @@ var Header = function Header() {
               }))
             }))
           })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-            className: "hidden md:block"
+            className: " md:block"
           }, {
             children: (0, jsx_runtime_1.jsx)("div", Object.assign({
               className: "ml-10 flex items-baseline space-x-4"
@@ -2698,7 +2698,7 @@ var Header = function Header() {
               }))
             }))
           })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-            className: "hidden md:block"
+            className: " md:block"
           }, {
             children: (0, jsx_runtime_1.jsx)("div", Object.assign({
               className: "ml-10 flex items-baseline space-x-4"
@@ -2744,7 +2744,7 @@ var Header = function Header() {
               children: "Movie Love or Hate"
             }))
           })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-            className: "hidden md:block"
+            className: " md:block"
           }, {
             children: (0, jsx_runtime_1.jsx)("div", Object.assign({
               className: "ml-10 flex items-baseline space-x-4"
@@ -3036,10 +3036,10 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
       }
     }, {
       children: (0, jsx_runtime_1.jsxs)("div", Object.assign({
-        className: "flex w-10/12 first-view__content text-white"
+        className: "flex xl:w-10/12 w-11/12 first-view__content text-white "
       }, {
         children: [(0, jsx_runtime_1.jsx)("div", Object.assign({
-          className: "mr-8 my-auto",
+          className: "mr-8 my-auto hidden xl:block",
           style: {
             width: 300
           }
@@ -3056,7 +3056,7 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
             src: "/images/title_no_image.png"
           })
         })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-          className: "w-full flex flex-col justify-center"
+          className: "w-full flex flex-col justify-center "
         }, {
           children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({
             className: "title-box"
@@ -3092,11 +3092,11 @@ var DetailPageFirstView = function DetailPageFirstView(_ref) {
             }, {
               children: "\u6982\u8981"
             })), (0, jsx_runtime_1.jsx)("p", Object.assign({
-              className: "summary-text text-gray-300"
+              className: "summary-text text-gray-300 xl:text-base text-sm"
             }, {
               children: overview ? function () {
-                if (overview.length > 400) {
-                  var modStr = overview.substr(0, 400) + "...";
+                if (overview.length > 300) {
+                  var modStr = overview.substr(0, 300) + "...";
                   return modStr;
                 } else {
                   return overview;
@@ -4270,7 +4270,7 @@ var SingnUpPage = function SingnUpPage() {
             htmlFor: "password",
             className: "block text-gray-700 text-sm font-bold mb-2"
           }, {
-            children: "\u30D1\u30B9\u30EF\u30FC\u30C9"
+            children: "\u30D1\u30B9\u30EF\u30FC\u30C9(4\u6587\u5B57\u4EE5\u4E0A\u5165\u529B\u3057\u307E\u3057\u3087\u3046)"
           })), (0, jsx_runtime_1.jsx)("input", Object.assign({
             className: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
             type: "text",

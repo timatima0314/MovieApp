@@ -56,6 +56,10 @@ img {
             rgba(85, 85, 85, 0.5)
         );
     }
+    @media screen and (max-width:1280px) {
+        background-position: center;
+
+      }
 }
 .first-view__content {
     height: inherit;

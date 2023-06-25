@@ -131,8 +131,8 @@ const DetailPageFirstView: React.FC<any> = ({
                     backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path})`,
                 }}
             >
-                <div className="flex w-10/12 first-view__content text-white">
-                    <div className="mr-8 my-auto" style={{ width: 300 }}>
+                <div className="flex xl:w-10/12 w-11/12 first-view__content text-white ">
+                    <div className="mr-8 my-auto hidden xl:block" style={{ width: 300 }}>
                         {poster_path ? (
                             <img
                                 width="300"
@@ -149,7 +149,7 @@ const DetailPageFirstView: React.FC<any> = ({
                             />
                         )}
                     </div>
-                    <div className="w-full flex flex-col justify-center">
+                    <div className="w-full flex flex-col justify-center ">
                         <div className="title-box">
                             <h2 className="text-4xl font-bold mb-2">{title}</h2>
                             <div className="flex mb-2">
@@ -174,12 +174,12 @@ const DetailPageFirstView: React.FC<any> = ({
                             <div className="summary-title font-bold text-xl	">
                                 概要
                             </div>
-                            <p className="summary-text text-gray-300">
+                            <p className="summary-text text-gray-300 xl:text-base text-sm">
                                 {overview
                                     ? (() => {
-                                          if (overview.length > 400) {
+                                          if (overview.length > 300) {
                                               const modStr =
-                                                  overview.substr(0, 400) +
+                                                  overview.substr(0, 300) +
                                                   "...";
                                               return modStr;
                                           } else {
