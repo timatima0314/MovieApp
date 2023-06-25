@@ -13,7 +13,7 @@ const SearchPage: React.VFC = () => {
     return (
         <>
             <SearchFirstView handleSetSearchTitle={handleSetSearchTitle} />
-            <main className="w-10/12 m-auto">
+            <main className="xl:w-10/12 w-11/12 m-auto">
                 <SearchList SearchTitle={searchTitle} />
             </main>
         </>

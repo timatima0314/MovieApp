@@ -4035,11 +4035,11 @@ var SearchList = function SearchList(props) {
                 }, {
                   children: item.title
                 })), (0, jsx_runtime_1.jsxs)("div", Object.assign({
-                  className: "text-gray-400 mb-4"
+                  className: "text-gray-400 mb-2 xl:mb-4"
                 }, {
                   children: ["\u516C\u958B\u65E5:", item.release_date]
                 })), (0, jsx_runtime_1.jsx)("div", Object.assign({
-                  className: ""
+                  className: "text-sm xl:text-base"
                 }, {
                   children: function () {
                     if (item.overview.length > 100) {
@@ -4155,7 +4155,7 @@ var SearchPage = function SearchPage() {
     children: [(0, jsx_runtime_1.jsx)(SearchFirstView_1["default"], {
       handleSetSearchTitle: handleSetSearchTitle
     }), (0, jsx_runtime_1.jsx)("main", Object.assign({
-      className: "w-10/12 m-auto"
+      className: "xl:w-10/12 w-11/12 m-auto"
     }, {
       children: (0, jsx_runtime_1.jsx)(SearchList_1["default"], {
         SearchTitle: searchTitle

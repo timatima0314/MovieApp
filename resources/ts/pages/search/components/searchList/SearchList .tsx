@@ -45,11 +45,11 @@ const SearchList: React.VFC<Props> = (props) => {
                                             <div className="font-bold text-xl">
                                                 {item.title}
                                             </div>
-                                            <div className="text-gray-400 mb-4">
+                                            <div className="text-gray-400 mb-2 xl:mb-4">
                                                 公開日:
                                                 {item.release_date}
                                             </div>
-                                            <div className="">
+                                            <div className="text-sm xl:text-base">
                                                 {(() => {
                                                     if (
                                                         item.overview.length >
