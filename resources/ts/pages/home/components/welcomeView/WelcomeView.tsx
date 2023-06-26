@@ -1,8 +1,11 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { getPopularTmdbItem } from "../../../../api/TmdbApi";
+import { useAuth } from '../../../../hooke/AuthContext';
+
 const WelcomeView: React.VFC = () => {
     const { data, status } = useQuery("getWelcomeViewImg", getPopularTmdbItem);
+    const { setIsAuth,isAuth } = useAuth()
     if (status === "loading") {
         return <span>Loading...</span>;
     } else if (status === "error") {

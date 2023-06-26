@@ -1,21 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-
-import { useSingUp } from "../../queries/AuthQuery";
+import { useSingUp, useLogin } from "../../queries/AuthQuery";
 import { NavLink } from "react-router-dom";
+import { SingUp } from "../../types/User";
+
 const SingnUpPage: React.VFC = () => {
     const singUp = useSingUp();
+    const login = useLogin();
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<any>({
+    } = useForm<SingUp>({
         reValidateMode: "onSubmit",
         criteriaMode: "all",
     });
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: SingUp) => {
         const { email, password, name } = data;
-        singUp.mutate({ email, password, name });
+        singUp.mutate(
+            { email, password, name },
+            {
+                onSuccess: () => {
+                    login.mutate({ email, password });
+                },
+            }
+        );
     };
 
     return (

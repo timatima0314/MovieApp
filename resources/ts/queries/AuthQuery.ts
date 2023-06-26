@@ -7,20 +7,6 @@ const useUser = () => {
     return useQuery("users", () => api.getUser()
     )
 }
-const useSingUp = () => {
-    const { setIsAuth } = useAuth()
-    return useMutation(api.singUp, {
-        onSuccess: (user) => {
-            if (user) {
-                setIsAuth(true)
-            }
-        },
-        onError: () => {
-            toast.error('新規登録に失敗しました。')
-        }
-
-    })
-}
 const useLogin = () => {
     const { setIsAuth } = useAuth()
     return useMutation(api.login, {
@@ -31,6 +17,18 @@ const useLogin = () => {
         },
         onError: () => {
             toast.error('ログインに失敗しました。')
+        }
+    })
+}
+const useSingUp = () => {
+    return useMutation(api.singUp, {
+        onSuccess: (user) => {
+            if (user) {
+                toast.success('登録に成功しました。')
+            }
+        },
+        onError: () => {
+            toast.error('新規登録に失敗しました。')
         }
     })
 }

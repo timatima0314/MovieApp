@@ -8,4 +8,9 @@ type Login = {
     password: string;
 };
 
-export { User, Login }
+type SingUp = {
+    name: string
+    email: string;
+    password: string;
+}
+export { User, Login, SingUp }

@@ -3585,10 +3585,14 @@ Object.defineProperty(exports, "__esModule", ({
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
 var TmdbApi_1 = __webpack_require__(/*! ../../../../api/TmdbApi */ "./resources/ts/api/TmdbApi.ts");
+var AuthContext_1 = __webpack_require__(/*! ../../../../hooke/AuthContext */ "./resources/ts/hooke/AuthContext.tsx");
 var WelcomeView = function WelcomeView() {
   var _ref = (0, react_query_1.useQuery)("getWelcomeViewImg", TmdbApi_1.getPopularTmdbItem),
     data = _ref.data,
     status = _ref.status;
+  var _ref2 = (0, AuthContext_1.useAuth)(),
+    setIsAuth = _ref2.setIsAuth,
+    isAuth = _ref2.isAuth;
   if (status === "loading") {
     return (0, jsx_runtime_1.jsx)("span", {
       children: "Loading..."
@@ -4186,6 +4190,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var SingnUpPage = function SingnUpPage() {
   var _a, _b, _c;
   var singUp = (0, AuthQuery_1.useSingUp)();
+  var login = (0, AuthQuery_1.useLogin)();
   var _ref = (0, react_hook_form_1.useForm)({
       reValidateMode: "onSubmit",
       criteriaMode: "all"
@@ -4201,6 +4206,13 @@ var SingnUpPage = function SingnUpPage() {
       email: email,
       password: password,
       name: name
+    }, {
+      onSuccess: function onSuccess() {
+        login.mutate({
+          email: email,
+          password: password
+        });
+      }
     });
   };
   return (0, jsx_runtime_1.jsx)("main", Object.assign({
@@ -4357,24 +4369,9 @@ var useUser = function useUser() {
   });
 };
 exports.useUser = useUser;
-var useSingUp = function useSingUp() {
+var useLogin = function useLogin() {
   var _ref = (0, AuthContext_1.useAuth)(),
     setIsAuth = _ref.setIsAuth;
-  return (0, react_query_1.useMutation)(api.singUp, {
-    onSuccess: function onSuccess(user) {
-      if (user) {
-        setIsAuth(true);
-      }
-    },
-    onError: function onError() {
-      react_toastify_1.toast.error('新規登録に失敗しました。');
-    }
-  });
-};
-exports.useSingUp = useSingUp;
-var useLogin = function useLogin() {
-  var _ref2 = (0, AuthContext_1.useAuth)(),
-    setIsAuth = _ref2.setIsAuth;
   return (0, react_query_1.useMutation)(api.login, {
     onSuccess: function onSuccess(user) {
       if (user) {
@@ -4387,9 +4384,22 @@ var useLogin = function useLogin() {
   });
 };
 exports.useLogin = useLogin;
+var useSingUp = function useSingUp() {
+  return (0, react_query_1.useMutation)(api.singUp, {
+    onSuccess: function onSuccess(user) {
+      if (user) {
+        react_toastify_1.toast.success('登録に成功しました。');
+      }
+    },
+    onError: function onError() {
+      react_toastify_1.toast.error('新規登録に失敗しました。');
+    }
+  });
+};
+exports.useSingUp = useSingUp;
 var useLogout = function useLogout() {
-  var _ref3 = (0, AuthContext_1.useAuth)(),
-    setIsAuth = _ref3.setIsAuth;
+  var _ref2 = (0, AuthContext_1.useAuth)(),
+    setIsAuth = _ref2.setIsAuth;
   return (0, react_query_1.useMutation)(api.logout, {
     onSuccess: function onSuccess(user) {
       if (user) {
